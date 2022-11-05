@@ -1,0 +1,9 @@
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\bin\Debug\netstandard2.0\controller.deps.json
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\bin\Debug\netstandard2.0\controller.dll
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\bin\Debug\netstandard2.0\controller.pdb
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\obj\Debug\netstandard2.0\controller.csprojAssemblyReference.cache
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\obj\Debug\netstandard2.0\controller.AssemblyInfoInputs.cache
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\obj\Debug\netstandard2.0\controller.AssemblyInfo.cs
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\obj\Debug\netstandard2.0\controller.csproj.CoreCompileInputs.cache
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\obj\Debug\netstandard2.0\controller.dll
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\DLL\controller\controller\obj\Debug\netstandard2.0\controller.pdb
