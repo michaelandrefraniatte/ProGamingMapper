@@ -4465,6 +4465,42 @@ namespace PGM
                         }
                     }
                 }
+                if (dinum < 2)
+                {
+                    foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Flight, DeviceEnumerationFlags.AllDevices))
+                    {
+                        joystickGuid[dinum] = deviceInstance.InstanceGuid;
+                        dinum++;
+                        if (dinum >= 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (dinum < 2)
+                {
+                    foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.FirstPerson, DeviceEnumerationFlags.AllDevices))
+                    {
+                        joystickGuid[dinum] = deviceInstance.InstanceGuid;
+                        dinum++;
+                        if (dinum >= 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (dinum < 2)
+                {
+                    foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Driving, DeviceEnumerationFlags.AllDevices))
+                    {
+                        joystickGuid[dinum] = deviceInstance.InstanceGuid;
+                        dinum++;
+                        if (dinum >= 2)
+                        {
+                            break;
+                        }
+                    }
+                }
             }
             catch { }
             if (joystickGuid[0] == Guid.Empty)
