@@ -4157,31 +4157,61 @@ namespace PGM
             Vector3 v2 = -new Vector3(j_Controller1.Z, i_Controller1.Z, k_Controller1.Z);
             return QuaternionLookRotationController1(v1, v2);
         }
-        public static Quaternion QuaternionLookRotationController1(Vector3 forward, Vector3 up)
+        private static Quaternion QuaternionLookRotationController1(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = forward;
-            Vector3 vector2 = Vector3.Cross(up, vector);
+            Vector3 vector = Vector3.Normalize(forward);
+            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            Quaternion quaternion = new Quaternion();
-            double m00 = vector2.X;
-            double m01 = vector2.Y;
-            double m02 = vector2.Z;
-            double m10 = vector3.X;
-            double m11 = vector3.Y;
-            double m12 = vector3.Z;
-            double m20 = vector.X;
-            double m21 = vector.Y;
-            double m22 = vector.Z;
-            double num8 = m00 + m11 + m22;
-            double num = Math.Sqrt(num8 + 1f);
-            quaternion.W = (float)num * 0.5f;
-            num = 0.5f / num;
-            quaternion.X = (float)(m12 - m21) * (float)num;
-            quaternion.Y = (float)(m20 - m02) * (float)num;
-            quaternion.Z = (float)(m01 - m10) * (float)num;
+            var m00 = vector2.X;
+            var m01 = vector2.Y;
+            var m02 = vector2.Z;
+            var m10 = vector3.X;
+            var m11 = vector3.Y;
+            var m12 = vector3.Z;
+            var m20 = vector.X;
+            var m21 = vector.Y;
+            var m22 = vector.Z;
+            double num8 = (m00 + m11) + m22;
+            var quaternion = new Quaternion();
+            if (num8 > 0f)
+            {
+                var num = (double)Math.Sqrt(num8 + 1f);
+                quaternion.W = (float)num * 0.5f;
+                num = 0.5f / num;
+                quaternion.X = (float)(m12 - m21) * (float)num;
+                quaternion.Y = (float)(m20 - m02) * (float)num;
+                quaternion.Z = (float)(m01 - m10) * (float)num;
+                return quaternion;
+            }
+            if ((m00 >= m11) && (m00 >= m22))
+            {
+                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
+                var num4 = 0.5f / num7;
+                quaternion.X = 0.5f * (float)num7;
+                quaternion.Y = (float)(m01 + m10) * (float)num4;
+                quaternion.Z = (float)(m02 + m20) * (float)num4;
+                quaternion.W = (float)(m12 - m21) * (float)num4;
+                return quaternion;
+            }
+            if (m11 > m22)
+            {
+                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
+                var num3 = 0.5f / num6;
+                quaternion.X = (float)(m10 + m01) * (float)num3;
+                quaternion.Y = 0.5f * (float)num6;
+                quaternion.Z = (float)(m21 + m12) * (float)num3;
+                quaternion.W = (float)(m20 - m02) * (float)num3;
+                return quaternion;
+            }
+            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
+            var num2 = 0.5f / num5;
+            quaternion.X = (float)(m20 + m02) * (float)num2;
+            quaternion.Y = (float)(m21 + m12) * (float)num2;
+            quaternion.Z = 0.5f * (float)num5;
+            quaternion.W = (float)(m01 - m10) * (float)num2;
             return quaternion;
         }
-        public static Vector3 ToEulerAnglesController1(Quaternion q)
+        private static Vector3 ToEulerAnglesController1(Quaternion q)
         {
             Vector3 pitchYawRoll = new Vector3();
             double sqw = q.W * q.W;
@@ -4190,9 +4220,26 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            if (test > 0.4999f * unit)
+            {
+                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = (float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else if (test < -0.4999f * unit)
+            {
+                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = -(float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else
+            {
+                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            }
             return pitchYawRoll;
         }
         private void Controller1ProcessIMU()
@@ -4217,15 +4264,18 @@ namespace PGM
                     EulerAnglesbController1 = Vector3.Normalize(ToEulerAnglesController1(GetVectorController1(Vector3.Normalize(i_bController1), Vector3.Normalize(j_bCrossController1), Vector3.Normalize(k_bController1)))) - InitEulerAnglesbController1;
                     Controller1GyroX = (EulerAnglesbController1.X - EulerAnglesbController1.Y) * 22222222f;
                     Controller1GyroY = EulerAnglesaController1.Z * 22222222f;
-                    if (Controller1GyroCenter | ((int)Controller1GyroX == 0 & (int)Controller1GyroY == 0))
+                    if (Controller1GyroCenter | (int)Controller1GyroX == 0)
                     {
-                        k_aCrossController1 = new Vector3(0, 0, 1);
-                        k_aController1.X = 0f;
-                        InitEulerAnglesaController1 = ToEulerAnglesController1(GetVectorController1(Vector3.Normalize(i_aController1), Vector3.Normalize(j_aController1), Vector3.Normalize(k_aCrossController1)));
                         j_bCrossController1 = new Vector3(0, 1, 0);
                         j_bController1.X = 0f;
                         j_bController1.Z = 0f;
                         InitEulerAnglesbController1 = Vector3.Normalize(ToEulerAnglesController1(GetVectorController1(Vector3.Normalize(i_bController1), Vector3.Normalize(j_bCrossController1), Vector3.Normalize(k_bController1))));
+                    }
+                    if (Controller1GyroCenter | (int)Controller1GyroY == 0)
+                    {
+                        k_aCrossController1 = new Vector3(0, 0, 1);
+                        k_aController1.X = 0f;
+                        InitEulerAnglesaController1 = ToEulerAnglesController1(GetVectorController1(Vector3.Normalize(i_aController1), Vector3.Normalize(j_aController1), Vector3.Normalize(k_aCrossController1)));
                     }
                 }
                 else if (gyromode == 2)
@@ -4236,15 +4286,18 @@ namespace PGM
                     EulerAnglesbController1 = (ToEulerAnglesController1(GetVectorController1((i_bController1), (j_bCrossController1), (k_bController1)))) - InitEulerAnglesbController1;
                     Controller1GyroX = (EulerAnglesbController1.X - EulerAnglesbController1.Y) * 22222222f;
                     Controller1GyroY = EulerAnglesaController1.Z * 22222222f;
-                    if (Controller1GyroCenter | ((int)Controller1GyroX == 0 & (int)Controller1GyroY == 0))
+                    if (Controller1GyroCenter | (int)Controller1GyroX == 0)
                     {
-                        k_aCrossController1 = new Vector3(0, 0, 1);
-                        k_aController1.X = 0f;
-                        InitEulerAnglesaController1 = ToEulerAnglesController1(GetVectorController1((i_aController1), (j_aController1), (k_aCrossController1)));
                         j_bCrossController1 = new Vector3(0, 1, 0);
                         j_bController1.X = 0f;
                         j_bController1.Z = 0f;
                         InitEulerAnglesbController1 = (ToEulerAnglesController1(GetVectorController1((i_bController1), (j_bCrossController1), (k_bController1))));
+                    }
+                    if (Controller1GyroCenter | (int)Controller1GyroY == 0)
+                    {
+                        k_aCrossController1 = new Vector3(0, 0, 1);
+                        k_aController1.X = 0f;
+                        InitEulerAnglesaController1 = ToEulerAnglesController1(GetVectorController1((i_aController1), (j_aController1), (k_aCrossController1)));
                     }
                 }
             }
@@ -4267,31 +4320,61 @@ namespace PGM
             Vector3 v2 = -new Vector3(j_Controller2.Z, i_Controller2.Z, k_Controller2.Z);
             return QuaternionLookRotationController2(v1, v2);
         }
-        public static Quaternion QuaternionLookRotationController2(Vector3 forward, Vector3 up)
+        private static Quaternion QuaternionLookRotationController2(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = forward;
-            Vector3 vector2 = Vector3.Cross(up, vector);
+            Vector3 vector = Vector3.Normalize(forward);
+            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            Quaternion quaternion = new Quaternion();
-            double m00 = vector2.X;
-            double m01 = vector2.Y;
-            double m02 = vector2.Z;
-            double m10 = vector3.X;
-            double m11 = vector3.Y;
-            double m12 = vector3.Z;
-            double m20 = vector.X;
-            double m21 = vector.Y;
-            double m22 = vector.Z;
-            double num8 = m00 + m11 + m22;
-            double num = Math.Sqrt(num8 + 1f);
-            quaternion.W = (float)num * 0.5f;
-            num = 0.5f / num;
-            quaternion.X = (float)(m12 - m21) * (float)num;
-            quaternion.Y = (float)(m20 - m02) * (float)num;
-            quaternion.Z = (float)(m01 - m10) * (float)num;
+            var m00 = vector2.X;
+            var m01 = vector2.Y;
+            var m02 = vector2.Z;
+            var m10 = vector3.X;
+            var m11 = vector3.Y;
+            var m12 = vector3.Z;
+            var m20 = vector.X;
+            var m21 = vector.Y;
+            var m22 = vector.Z;
+            double num8 = (m00 + m11) + m22;
+            var quaternion = new Quaternion();
+            if (num8 > 0f)
+            {
+                var num = (double)Math.Sqrt(num8 + 1f);
+                quaternion.W = (float)num * 0.5f;
+                num = 0.5f / num;
+                quaternion.X = (float)(m12 - m21) * (float)num;
+                quaternion.Y = (float)(m20 - m02) * (float)num;
+                quaternion.Z = (float)(m01 - m10) * (float)num;
+                return quaternion;
+            }
+            if ((m00 >= m11) && (m00 >= m22))
+            {
+                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
+                var num4 = 0.5f / num7;
+                quaternion.X = 0.5f * (float)num7;
+                quaternion.Y = (float)(m01 + m10) * (float)num4;
+                quaternion.Z = (float)(m02 + m20) * (float)num4;
+                quaternion.W = (float)(m12 - m21) * (float)num4;
+                return quaternion;
+            }
+            if (m11 > m22)
+            {
+                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
+                var num3 = 0.5f / num6;
+                quaternion.X = (float)(m10 + m01) * (float)num3;
+                quaternion.Y = 0.5f * (float)num6;
+                quaternion.Z = (float)(m21 + m12) * (float)num3;
+                quaternion.W = (float)(m20 - m02) * (float)num3;
+                return quaternion;
+            }
+            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
+            var num2 = 0.5f / num5;
+            quaternion.X = (float)(m20 + m02) * (float)num2;
+            quaternion.Y = (float)(m21 + m12) * (float)num2;
+            quaternion.Z = 0.5f * (float)num5;
+            quaternion.W = (float)(m01 - m10) * (float)num2;
             return quaternion;
         }
-        public static Vector3 ToEulerAnglesController2(Quaternion q)
+        private static Vector3 ToEulerAnglesController2(Quaternion q)
         {
             Vector3 pitchYawRoll = new Vector3();
             double sqw = q.W * q.W;
@@ -4300,9 +4383,26 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            if (test > 0.4999f * unit)
+            {
+                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = (float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else if (test < -0.4999f * unit)
+            {
+                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = -(float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else
+            {
+                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            }
             return pitchYawRoll;
         }
         private void Controller2ProcessIMU()
@@ -4327,15 +4427,18 @@ namespace PGM
                     EulerAnglesbController2 = Vector3.Normalize(ToEulerAnglesController2(GetVectorController2(Vector3.Normalize(i_bController2), Vector3.Normalize(j_bCrossController2), Vector3.Normalize(k_bController2)))) - InitEulerAnglesbController2;
                     Controller2GyroX = (EulerAnglesbController2.X - EulerAnglesbController2.Y) * 22222222f;
                     Controller2GyroY = EulerAnglesaController2.Z * 22222222f;
-                    if (Controller2GyroCenter | ((int)Controller2GyroX == 0 & (int)Controller2GyroY == 0))
+                    if (Controller2GyroCenter | (int)Controller2GyroX == 0)
                     {
-                        k_aCrossController2 = new Vector3(0, 0, 1);
-                        k_aController2.X = 0f;
-                        InitEulerAnglesaController2 = ToEulerAnglesController2(GetVectorController2(Vector3.Normalize(i_aController2), Vector3.Normalize(j_aController2), Vector3.Normalize(k_aCrossController2)));
                         j_bCrossController2 = new Vector3(0, 1, 0);
                         j_bController2.X = 0f;
                         j_bController2.Z = 0f;
                         InitEulerAnglesbController2 = Vector3.Normalize(ToEulerAnglesController2(GetVectorController2(Vector3.Normalize(i_bController2), Vector3.Normalize(j_bCrossController2), Vector3.Normalize(k_bController2))));
+                    }
+                    if (Controller2GyroCenter | (int)Controller2GyroY == 0)
+                    {
+                        k_aCrossController2 = new Vector3(0, 0, 1);
+                        k_aController2.X = 0f;
+                        InitEulerAnglesaController2 = ToEulerAnglesController2(GetVectorController2(Vector3.Normalize(i_aController2), Vector3.Normalize(j_aController2), Vector3.Normalize(k_aCrossController2)));
                     }
                 }
                 else if (gyromode == 2)
@@ -4346,15 +4449,18 @@ namespace PGM
                     EulerAnglesbController2 = (ToEulerAnglesController2(GetVectorController2((i_bController2), (j_bCrossController2), (k_bController2)))) - InitEulerAnglesbController2;
                     Controller2GyroX = (EulerAnglesbController2.X - EulerAnglesbController2.Y) * 22222222f;
                     Controller2GyroY = EulerAnglesaController2.Z * 22222222f;
-                    if (Controller2GyroCenter | ((int)Controller2GyroX == 0 & (int)Controller2GyroY == 0))
+                    if (Controller2GyroCenter | (int)Controller2GyroX == 0)
                     {
-                        k_aCrossController2 = new Vector3(0, 0, 1);
-                        k_aController2.X = 0f;
-                        InitEulerAnglesaController2 = ToEulerAnglesController2(GetVectorController2((i_aController2), (j_aController2), (k_aCrossController2)));
                         j_bCrossController2 = new Vector3(0, 1, 0);
                         j_bController2.X = 0f;
                         j_bController2.Z = 0f;
                         InitEulerAnglesbController2 = (ToEulerAnglesController2(GetVectorController2((i_bController2), (j_bCrossController2), (k_bController2))));
+                    }
+                    if (Controller2GyroCenter | (int)Controller2GyroY == 0)
+                    {
+                        k_aCrossController2 = new Vector3(0, 0, 1);
+                        k_aController2.X = 0f;
+                        InitEulerAnglesaController2 = ToEulerAnglesController2(GetVectorController2((i_aController2), (j_aController2), (k_aCrossController2)));
                     }
                 }
             }
@@ -8718,31 +8824,61 @@ namespace PGM
             Vector3 v2 = -new Vector3(j_Left.Z, i_Left.Z, k_Left.Z);
             return QuaternionLookRotationLeft(v1, v2);
         }
-        public static Quaternion QuaternionLookRotationLeft(Vector3 forward, Vector3 up)
+        private static Quaternion QuaternionLookRotationLeft(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = forward;
-            Vector3 vector2 = Vector3.Cross(up, vector);
+            Vector3 vector = Vector3.Normalize(forward);
+            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            Quaternion quaternion = new Quaternion();
-            double m00 = vector2.X;
-            double m01 = vector2.Y;
-            double m02 = vector2.Z;
-            double m10 = vector3.X;
-            double m11 = vector3.Y;
-            double m12 = vector3.Z;
-            double m20 = vector.X;
-            double m21 = vector.Y;
-            double m22 = vector.Z;
-            double num8 = m00 + m11 + m22;
-            double num = Math.Sqrt(num8 + 1f);
-            quaternion.W = (float)num * 0.5f;
-            num = 0.5f / num;
-            quaternion.X = (float)(m12 - m21) * (float)num;
-            quaternion.Y = (float)(m20 - m02) * (float)num;
-            quaternion.Z = (float)(m01 - m10) * (float)num;
+            var m00 = vector2.X;
+            var m01 = vector2.Y;
+            var m02 = vector2.Z;
+            var m10 = vector3.X;
+            var m11 = vector3.Y;
+            var m12 = vector3.Z;
+            var m20 = vector.X;
+            var m21 = vector.Y;
+            var m22 = vector.Z;
+            double num8 = (m00 + m11) + m22;
+            var quaternion = new Quaternion();
+            if (num8 > 0f)
+            {
+                var num = (double)Math.Sqrt(num8 + 1f);
+                quaternion.W = (float)num * 0.5f;
+                num = 0.5f / num;
+                quaternion.X = (float)(m12 - m21) * (float)num;
+                quaternion.Y = (float)(m20 - m02) * (float)num;
+                quaternion.Z = (float)(m01 - m10) * (float)num;
+                return quaternion;
+            }
+            if ((m00 >= m11) && (m00 >= m22))
+            {
+                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
+                var num4 = 0.5f / num7;
+                quaternion.X = 0.5f * (float)num7;
+                quaternion.Y = (float)(m01 + m10) * (float)num4;
+                quaternion.Z = (float)(m02 + m20) * (float)num4;
+                quaternion.W = (float)(m12 - m21) * (float)num4;
+                return quaternion;
+            }
+            if (m11 > m22)
+            {
+                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
+                var num3 = 0.5f / num6;
+                quaternion.X = (float)(m10 + m01) * (float)num3;
+                quaternion.Y = 0.5f * (float)num6;
+                quaternion.Z = (float)(m21 + m12) * (float)num3;
+                quaternion.W = (float)(m20 - m02) * (float)num3;
+                return quaternion;
+            }
+            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
+            var num2 = 0.5f / num5;
+            quaternion.X = (float)(m20 + m02) * (float)num2;
+            quaternion.Y = (float)(m21 + m12) * (float)num2;
+            quaternion.Z = 0.5f * (float)num5;
+            quaternion.W = (float)(m01 - m10) * (float)num2;
             return quaternion;
         }
-        public static Vector3 ToEulerAnglesLeft(Quaternion q)
+        private static Vector3 ToEulerAnglesLeft(Quaternion q)
         {
             Vector3 pitchYawRoll = new Vector3();
             double sqw = q.W * q.W;
@@ -8751,9 +8887,26 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            if (test > 0.4999f * unit)
+            {
+                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = (float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else if (test < -0.4999f * unit)
+            {
+                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = -(float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else
+            {
+                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            }
             return pitchYawRoll;
         }
         private void ExtractIMUValuesLeft()
@@ -8778,15 +8931,18 @@ namespace PGM
                     EulerAnglesbLeft = Vector3.Normalize(ToEulerAnglesLeft(GetVectorLeft(Vector3.Normalize(i_bLeft), Vector3.Normalize(j_bCrossLeft), Vector3.Normalize(k_bLeft)))) - InitEulerAnglesbLeft;
                     JoyconLeftGyroX = (EulerAnglesbLeft.X - EulerAnglesbLeft.Y) * 22222222f;
                     JoyconLeftGyroY = EulerAnglesaLeft.Z * 22222222f;
-                    if (JoyconLeftGyroCenter | ((int)JoyconLeftGyroX == 0 & (int)JoyconLeftGyroY == 0))
+                    if (JoyconLeftGyroCenter | (int)JoyconLeftGyroX == 0)
                     {
-                        k_aCrossLeft = new Vector3(0, 0, 1);
-                        k_aLeft.X = 0f;
-                        InitEulerAnglesaLeft = ToEulerAnglesLeft(GetVectorLeft(Vector3.Normalize(i_aLeft), Vector3.Normalize(j_aLeft), Vector3.Normalize(k_aCrossLeft)));
                         j_bCrossLeft = new Vector3(0, 1, 0);
                         j_bLeft.X = 0f;
                         j_bLeft.Z = 0f;
                         InitEulerAnglesbLeft = Vector3.Normalize(ToEulerAnglesLeft(GetVectorLeft(Vector3.Normalize(i_bLeft), Vector3.Normalize(j_bCrossLeft), Vector3.Normalize(k_bLeft))));
+                    }
+                    if (JoyconLeftGyroCenter | (int)JoyconLeftGyroY == 0)
+                    {
+                        k_aCrossLeft = new Vector3(0, 0, 1);
+                        k_aLeft.X = 0f;
+                        InitEulerAnglesaLeft = ToEulerAnglesLeft(GetVectorLeft(Vector3.Normalize(i_aLeft), Vector3.Normalize(j_aLeft), Vector3.Normalize(k_aCrossLeft)));
                     }
                 }
                 else if (gyromode == 2)
@@ -8797,15 +8953,18 @@ namespace PGM
                     EulerAnglesbLeft = (ToEulerAnglesLeft(GetVectorLeft((i_bLeft), (j_bCrossLeft), (k_bLeft)))) - InitEulerAnglesbLeft;
                     JoyconLeftGyroX = (EulerAnglesbLeft.X - EulerAnglesbLeft.Y) * 22222222f;
                     JoyconLeftGyroY = EulerAnglesaLeft.Z * 22222222f;
-                    if (JoyconLeftGyroCenter | ((int)JoyconLeftGyroX == 0 & (int)JoyconLeftGyroY == 0))
+                    if (JoyconLeftGyroCenter | (int)JoyconLeftGyroX == 0)
                     {
-                        k_aCrossLeft = new Vector3(0, 0, 1);
-                        k_aLeft.X = 0f;
-                        InitEulerAnglesaLeft = ToEulerAnglesLeft(GetVectorLeft((i_aLeft), (j_aLeft), (k_aCrossLeft)));
                         j_bCrossLeft = new Vector3(0, 1, 0);
                         j_bLeft.X = 0f;
                         j_bLeft.Z = 0f;
                         InitEulerAnglesbLeft = (ToEulerAnglesLeft(GetVectorLeft((i_bLeft), (j_bCrossLeft), (k_bLeft))));
+                    }
+                    if (JoyconLeftGyroCenter | (int)JoyconLeftGyroY == 0)
+                    {
+                        k_aCrossLeft = new Vector3(0, 0, 1);
+                        k_aLeft.X = 0f;
+                        InitEulerAnglesaLeft = ToEulerAnglesLeft(GetVectorLeft((i_aLeft), (j_aLeft), (k_aCrossLeft)));
                     }
                 }
             }
@@ -8973,31 +9132,61 @@ namespace PGM
             Vector3 v2 = -new Vector3(j_Right.Z, i_Right.Z, k_Right.Z);
             return QuaternionLookRotationRight(v1, v2);
         }
-        public static Quaternion QuaternionLookRotationRight(Vector3 forward, Vector3 up)
+        private static Quaternion QuaternionLookRotationRight(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = forward;
-            Vector3 vector2 = Vector3.Cross(up, vector);
+            Vector3 vector = Vector3.Normalize(forward);
+            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            Quaternion quaternion = new Quaternion();
-            double m00 = vector2.X;
-            double m01 = vector2.Y;
-            double m02 = vector2.Z;
-            double m10 = vector3.X;
-            double m11 = vector3.Y;
-            double m12 = vector3.Z;
-            double m20 = vector.X;
-            double m21 = vector.Y;
-            double m22 = vector.Z;
-            double num8 = m00 + m11 + m22;
-            double num = Math.Sqrt(num8 + 1f);
-            quaternion.W = (float)num * 0.5f;
-            num = 0.5f / num;
-            quaternion.X = (float)(m12 - m21) * (float)num;
-            quaternion.Y = (float)(m20 - m02) * (float)num;
-            quaternion.Z = (float)(m01 - m10) * (float)num;
+            var m00 = vector2.X;
+            var m01 = vector2.Y;
+            var m02 = vector2.Z;
+            var m10 = vector3.X;
+            var m11 = vector3.Y;
+            var m12 = vector3.Z;
+            var m20 = vector.X;
+            var m21 = vector.Y;
+            var m22 = vector.Z;
+            double num8 = (m00 + m11) + m22;
+            var quaternion = new Quaternion();
+            if (num8 > 0f)
+            {
+                var num = (double)Math.Sqrt(num8 + 1f);
+                quaternion.W = (float)num * 0.5f;
+                num = 0.5f / num;
+                quaternion.X = (float)(m12 - m21) * (float)num;
+                quaternion.Y = (float)(m20 - m02) * (float)num;
+                quaternion.Z = (float)(m01 - m10) * (float)num;
+                return quaternion;
+            }
+            if ((m00 >= m11) && (m00 >= m22))
+            {
+                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
+                var num4 = 0.5f / num7;
+                quaternion.X = 0.5f * (float)num7;
+                quaternion.Y = (float)(m01 + m10) * (float)num4;
+                quaternion.Z = (float)(m02 + m20) * (float)num4;
+                quaternion.W = (float)(m12 - m21) * (float)num4;
+                return quaternion;
+            }
+            if (m11 > m22)
+            {
+                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
+                var num3 = 0.5f / num6;
+                quaternion.X = (float)(m10 + m01) * (float)num3;
+                quaternion.Y = 0.5f * (float)num6;
+                quaternion.Z = (float)(m21 + m12) * (float)num3;
+                quaternion.W = (float)(m20 - m02) * (float)num3;
+                return quaternion;
+            }
+            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
+            var num2 = 0.5f / num5;
+            quaternion.X = (float)(m20 + m02) * (float)num2;
+            quaternion.Y = (float)(m21 + m12) * (float)num2;
+            quaternion.Z = 0.5f * (float)num5;
+            quaternion.W = (float)(m01 - m10) * (float)num2;
             return quaternion;
         }
-        public static Vector3 ToEulerAnglesRight(Quaternion q)
+        private static Vector3 ToEulerAnglesRight(Quaternion q)
         {
             Vector3 pitchYawRoll = new Vector3();
             double sqw = q.W * q.W;
@@ -9006,9 +9195,26 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            if (test > 0.4999f * unit)
+            {
+                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = (float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else if (test < -0.4999f * unit)
+            {
+                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = -(float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else
+            {
+                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            }
             return pitchYawRoll;
         }
         private void ExtractIMUValuesRight()
@@ -9033,15 +9239,18 @@ namespace PGM
                     EulerAnglesbRight = Vector3.Normalize(ToEulerAnglesRight(GetVectorRight(Vector3.Normalize(i_bRight), Vector3.Normalize(j_bCrossRight), Vector3.Normalize(k_bRight)))) - InitEulerAnglesbRight;
                     JoyconRightGyroX = (EulerAnglesbRight.X - EulerAnglesbRight.Y) * 22222222f;
                     JoyconRightGyroY = EulerAnglesaRight.Z * 22222222f;
-                    if (JoyconRightGyroCenter | ((int)JoyconRightGyroX == 0 & (int)JoyconRightGyroY == 0))
+                    if (JoyconRightGyroCenter | (int)JoyconRightGyroX == 0)
                     {
-                        k_aCrossRight = new Vector3(0, 0, 1);
-                        k_aRight.X = 0f;
-                        InitEulerAnglesaRight = ToEulerAnglesRight(GetVectorRight(Vector3.Normalize(i_aRight), Vector3.Normalize(j_aRight), Vector3.Normalize(k_aCrossRight)));
                         j_bCrossRight = new Vector3(0, 1, 0);
                         j_bRight.X = 0f;
                         j_bRight.Z = 0f;
                         InitEulerAnglesbRight = Vector3.Normalize(ToEulerAnglesRight(GetVectorRight(Vector3.Normalize(i_bRight), Vector3.Normalize(j_bCrossRight), Vector3.Normalize(k_bRight))));
+                    }
+                    if (JoyconRightGyroCenter | (int)JoyconRightGyroY == 0)
+                    {
+                        k_aCrossRight = new Vector3(0, 0, 1);
+                        k_aRight.X = 0f;
+                        InitEulerAnglesaRight = ToEulerAnglesRight(GetVectorRight(Vector3.Normalize(i_aRight), Vector3.Normalize(j_aRight), Vector3.Normalize(k_aCrossRight)));
                     }
                 }
                 else if (gyromode == 2)
@@ -9052,15 +9261,18 @@ namespace PGM
                     EulerAnglesbRight = (ToEulerAnglesRight(GetVectorRight((i_bRight), (j_bCrossRight), (k_bRight)))) - InitEulerAnglesbRight;
                     JoyconRightGyroX = (EulerAnglesbRight.X - EulerAnglesbRight.Y) * 22222222f;
                     JoyconRightGyroY = EulerAnglesaRight.Z * 22222222f;
-                    if (JoyconRightGyroCenter | ((int)JoyconRightGyroX == 0 & (int)JoyconRightGyroY == 0))
+                    if (JoyconRightGyroCenter | (int)JoyconRightGyroX == 0)
                     {
-                        k_aCrossRight = new Vector3(0, 0, 1);
-                        k_aRight.X = 0f;
-                        InitEulerAnglesaRight = ToEulerAnglesRight(GetVectorRight((i_aRight), (j_aRight), (k_aCrossRight)));
                         j_bCrossRight = new Vector3(0, 1, 0);
                         j_bRight.X = 0f;
                         j_bRight.Z = 0f;
                         InitEulerAnglesbRight = (ToEulerAnglesRight(GetVectorRight((i_bRight), (j_bCrossRight), (k_bRight))));
+                    }
+                    if (JoyconRightGyroCenter | (int)JoyconRightGyroY == 0)
+                    {
+                        k_aCrossRight = new Vector3(0, 0, 1);
+                        k_aRight.X = 0f;
+                        InitEulerAnglesaRight = ToEulerAnglesRight(GetVectorRight((i_aRight), (j_aRight), (k_aCrossRight)));
                     }
                 }
             }
@@ -9251,31 +9463,61 @@ namespace PGM
             Vector3 v2 = -new Vector3(j_Pro.Z, i_Pro.Z, k_Pro.Z);
             return QuaternionLookRotationPro(v1, v2);
         }
-        public static Quaternion QuaternionLookRotationPro(Vector3 forward, Vector3 up)
+        private static Quaternion QuaternionLookRotationPro(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = forward;
-            Vector3 vector2 = Vector3.Cross(up, vector);
+            Vector3 vector = Vector3.Normalize(forward);
+            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            Quaternion quaternion = new Quaternion();
-            double m00 = vector2.X;
-            double m01 = vector2.Y;
-            double m02 = vector2.Z;
-            double m10 = vector3.X;
-            double m11 = vector3.Y;
-            double m12 = vector3.Z;
-            double m20 = vector.X;
-            double m21 = vector.Y;
-            double m22 = vector.Z;
-            double num8 = m00 + m11 + m22;
-            double num = Math.Sqrt(num8 + 1f);
-            quaternion.W = (float)num * 0.5f;
-            num = 0.5f / num;
-            quaternion.X = (float)(m12 - m21) * (float)num;
-            quaternion.Y = (float)(m20 - m02) * (float)num;
-            quaternion.Z = (float)(m01 - m10) * (float)num;
+            var m00 = vector2.X;
+            var m01 = vector2.Y;
+            var m02 = vector2.Z;
+            var m10 = vector3.X;
+            var m11 = vector3.Y;
+            var m12 = vector3.Z;
+            var m20 = vector.X;
+            var m21 = vector.Y;
+            var m22 = vector.Z;
+            double num8 = (m00 + m11) + m22;
+            var quaternion = new Quaternion();
+            if (num8 > 0f)
+            {
+                var num = (double)Math.Sqrt(num8 + 1f);
+                quaternion.W = (float)num * 0.5f;
+                num = 0.5f / num;
+                quaternion.X = (float)(m12 - m21) * (float)num;
+                quaternion.Y = (float)(m20 - m02) * (float)num;
+                quaternion.Z = (float)(m01 - m10) * (float)num;
+                return quaternion;
+            }
+            if ((m00 >= m11) && (m00 >= m22))
+            {
+                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
+                var num4 = 0.5f / num7;
+                quaternion.X = 0.5f * (float)num7;
+                quaternion.Y = (float)(m01 + m10) * (float)num4;
+                quaternion.Z = (float)(m02 + m20) * (float)num4;
+                quaternion.W = (float)(m12 - m21) * (float)num4;
+                return quaternion;
+            }
+            if (m11 > m22)
+            {
+                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
+                var num3 = 0.5f / num6;
+                quaternion.X = (float)(m10 + m01) * (float)num3;
+                quaternion.Y = 0.5f * (float)num6;
+                quaternion.Z = (float)(m21 + m12) * (float)num3;
+                quaternion.W = (float)(m20 - m02) * (float)num3;
+                return quaternion;
+            }
+            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
+            var num2 = 0.5f / num5;
+            quaternion.X = (float)(m20 + m02) * (float)num2;
+            quaternion.Y = (float)(m21 + m12) * (float)num2;
+            quaternion.Z = 0.5f * (float)num5;
+            quaternion.W = (float)(m01 - m10) * (float)num2;
             return quaternion;
         }
-        public static Vector3 ToEulerAnglesPro(Quaternion q)
+        private static Vector3 ToEulerAnglesPro(Quaternion q)
         {
             Vector3 pitchYawRoll = new Vector3();
             double sqw = q.W * q.W;
@@ -9284,9 +9526,26 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            if (test > 0.4999f * unit)
+            {
+                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = (float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else if (test < -0.4999f * unit)
+            {
+                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = -(float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else
+            {
+                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            }
             return pitchYawRoll;
         }
         private void ExtractIMUValuesPro()
@@ -9311,15 +9570,18 @@ namespace PGM
                     EulerAnglesbPro = Vector3.Normalize(ToEulerAnglesPro(GetVectorPro(Vector3.Normalize(i_bPro), Vector3.Normalize(j_bCrossPro), Vector3.Normalize(k_bPro)))) - InitEulerAnglesbPro;
                     ProControllerGyroX = (EulerAnglesbPro.X - EulerAnglesbPro.Y) * 22222222f;
                     ProControllerGyroY = EulerAnglesaPro.Z * 22222222f;
-                    if (ProControllerGyroCenter | ((int)ProControllerGyroX == 0 & (int)ProControllerGyroY == 0))
+                    if (ProControllerGyroCenter | (int)ProControllerGyroX == 0)
                     {
-                        k_aCrossPro = new Vector3(0, 0, 1);
-                        k_aPro.X = 0f;
-                        InitEulerAnglesaPro = ToEulerAnglesPro(GetVectorPro(Vector3.Normalize(i_aPro), Vector3.Normalize(j_aPro), Vector3.Normalize(k_aCrossPro)));
                         j_bCrossPro = new Vector3(0, 1, 0);
                         j_bPro.X = 0f;
                         j_bPro.Z = 0f;
                         InitEulerAnglesbPro = Vector3.Normalize(ToEulerAnglesPro(GetVectorPro(Vector3.Normalize(i_bPro), Vector3.Normalize(j_bCrossPro), Vector3.Normalize(k_bPro))));
+                    }
+                    if (ProControllerGyroCenter | (int)ProControllerGyroY == 0)
+                    {
+                        k_aCrossPro = new Vector3(0, 0, 1);
+                        k_aPro.X = 0f;
+                        InitEulerAnglesaPro = ToEulerAnglesPro(GetVectorPro(Vector3.Normalize(i_aPro), Vector3.Normalize(j_aPro), Vector3.Normalize(k_aCrossPro)));
                     }
                 }
                 else if (gyromode == 2)
@@ -9330,15 +9592,18 @@ namespace PGM
                     EulerAnglesbPro = (ToEulerAnglesPro(GetVectorPro((i_bPro), (j_bCrossPro), (k_bPro)))) - InitEulerAnglesbPro;
                     ProControllerGyroX = (EulerAnglesbPro.X - EulerAnglesbPro.Y) * 22222222f;
                     ProControllerGyroY = EulerAnglesaPro.Z * 22222222f;
-                    if (ProControllerGyroCenter | ((int)ProControllerGyroX == 0 & (int)ProControllerGyroY == 0))
+                    if (ProControllerGyroCenter | (int)ProControllerGyroX == 0)
                     {
-                        k_aCrossPro = new Vector3(0, 0, 1);
-                        k_aPro.X = 0f;
-                        InitEulerAnglesaPro = ToEulerAnglesPro(GetVectorPro((i_aPro), (j_aPro), (k_aCrossPro)));
                         j_bCrossPro = new Vector3(0, 1, 0);
                         j_bPro.X = 0f;
                         j_bPro.Z = 0f;
                         InitEulerAnglesbPro = (ToEulerAnglesPro(GetVectorPro((i_bPro), (j_bCrossPro), (k_bPro))));
+                    }
+                    if (ProControllerGyroCenter | (int)ProControllerGyroY == 0)
+                    {
+                        k_aCrossPro = new Vector3(0, 0, 1);
+                        k_aPro.X = 0f;
+                        InitEulerAnglesaPro = ToEulerAnglesPro(GetVectorPro((i_aPro), (j_aPro), (k_aCrossPro)));
                     }
                 }
             }
@@ -9750,31 +10015,61 @@ namespace PGM
             Vector3 v2 = -new Vector3(j_PS5.Z, i_PS5.Z, k_PS5.Z);
             return QuaternionLookRotationPS5(v1, v2);
         }
-        public static Quaternion QuaternionLookRotationPS5(Vector3 forward, Vector3 up)
+        private static Quaternion QuaternionLookRotationPS5(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = forward;
-            Vector3 vector2 = Vector3.Cross(up, vector);
+            Vector3 vector = Vector3.Normalize(forward);
+            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            Quaternion quaternion = new Quaternion();
-            double m00 = vector2.X;
-            double m01 = vector2.Y;
-            double m02 = vector2.Z;
-            double m10 = vector3.X;
-            double m11 = vector3.Y;
-            double m12 = vector3.Z;
-            double m20 = vector.X;
-            double m21 = vector.Y;
-            double m22 = vector.Z;
-            double num8 = m00 + m11 + m22;
-            double num = Math.Sqrt(num8 + 1f);
-            quaternion.W = (float)num * 0.5f;
-            num = 0.5f / num;
-            quaternion.X = (float)(m12 - m21) * (float)num;
-            quaternion.Y = (float)(m20 - m02) * (float)num;
-            quaternion.Z = (float)(m01 - m10) * (float)num;
+            var m00 = vector2.X;
+            var m01 = vector2.Y;
+            var m02 = vector2.Z;
+            var m10 = vector3.X;
+            var m11 = vector3.Y;
+            var m12 = vector3.Z;
+            var m20 = vector.X;
+            var m21 = vector.Y;
+            var m22 = vector.Z;
+            double num8 = (m00 + m11) + m22;
+            var quaternion = new Quaternion();
+            if (num8 > 0f)
+            {
+                var num = (double)Math.Sqrt(num8 + 1f);
+                quaternion.W = (float)num * 0.5f;
+                num = 0.5f / num;
+                quaternion.X = (float)(m12 - m21) * (float)num;
+                quaternion.Y = (float)(m20 - m02) * (float)num;
+                quaternion.Z = (float)(m01 - m10) * (float)num;
+                return quaternion;
+            }
+            if ((m00 >= m11) && (m00 >= m22))
+            {
+                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
+                var num4 = 0.5f / num7;
+                quaternion.X = 0.5f * (float)num7;
+                quaternion.Y = (float)(m01 + m10) * (float)num4;
+                quaternion.Z = (float)(m02 + m20) * (float)num4;
+                quaternion.W = (float)(m12 - m21) * (float)num4;
+                return quaternion;
+            }
+            if (m11 > m22)
+            {
+                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
+                var num3 = 0.5f / num6;
+                quaternion.X = (float)(m10 + m01) * (float)num3;
+                quaternion.Y = 0.5f * (float)num6;
+                quaternion.Z = (float)(m21 + m12) * (float)num3;
+                quaternion.W = (float)(m20 - m02) * (float)num3;
+                return quaternion;
+            }
+            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
+            var num2 = 0.5f / num5;
+            quaternion.X = (float)(m20 + m02) * (float)num2;
+            quaternion.Y = (float)(m21 + m12) * (float)num2;
+            quaternion.Z = 0.5f * (float)num5;
+            quaternion.W = (float)(m01 - m10) * (float)num2;
             return quaternion;
         }
-        public static Vector3 ToEulerAnglesPS5(Quaternion q)
+        private static Vector3 ToEulerAnglesPS5(Quaternion q)
         {
             Vector3 pitchYawRoll = new Vector3();
             double sqw = q.W * q.W;
@@ -9783,9 +10078,26 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            if (test > 0.4999f * unit)
+            {
+                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = (float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else if (test < -0.4999f * unit)
+            {
+                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
+                pitchYawRoll.X = -(float)Math.PI * 0.5f;
+                pitchYawRoll.Z = 0f;
+                return pitchYawRoll;
+            }
+            else
+            {
+                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
+            }
             return pitchYawRoll;
         }
         private void ExtractIMUValuesPS5()
@@ -9807,15 +10119,18 @@ namespace PGM
                     EulerAnglesbPS5 = Vector3.Normalize(ToEulerAnglesPS5(GetVectorPS5(Vector3.Normalize(i_bPS5), Vector3.Normalize(j_bCrossPS5), Vector3.Normalize(k_bPS5)))) - InitEulerAnglesbPS5;
                     PS5ControllerGyroX = (EulerAnglesbPS5.X + EulerAnglesbPS5.Y) * 22222222f;
                     PS5ControllerGyroY = EulerAnglesaPS5.Z * 22222222f;
-                    if (PS5ControllerGyroCenter | ((int)PS5ControllerGyroX == 0 & (int)PS5ControllerGyroY == 0))
+                    if (PS5ControllerGyroCenter | (int)PS5ControllerGyroX == 0)
                     {
-                        k_aCrossPS5 = new Vector3(0, 0, 1);
-                        k_aPS5.X = 0f;
-                        InitEulerAnglesaPS5 = ToEulerAnglesPS5(GetVectorPS5(Vector3.Normalize(i_aPS5), Vector3.Normalize(j_aPS5), Vector3.Normalize(k_aCrossPS5)));
                         j_bCrossPS5 = new Vector3(0, 1, 0);
                         j_bPS5.X = 0f;
                         j_bPS5.Z = 0f;
                         InitEulerAnglesbPS5 = Vector3.Normalize(ToEulerAnglesPS5(GetVectorPS5(Vector3.Normalize(i_bPS5), Vector3.Normalize(j_bCrossPS5), Vector3.Normalize(k_bPS5))));
+                    }
+                    if (PS5ControllerGyroCenter | (int)PS5ControllerGyroY == 0)
+                    {
+                        k_aCrossPS5 = new Vector3(0, 0, 1);
+                        k_aPS5.X = 0f;
+                        InitEulerAnglesaPS5 = ToEulerAnglesPS5(GetVectorPS5(Vector3.Normalize(i_aPS5), Vector3.Normalize(j_aPS5), Vector3.Normalize(k_aCrossPS5)));
                     }
                 }
                 else if (gyromode == 2)
@@ -9826,15 +10141,18 @@ namespace PGM
                     EulerAnglesbPS5 = (ToEulerAnglesPS5(GetVectorPS5((i_bPS5), (j_bCrossPS5), (k_bPS5)))) - InitEulerAnglesbPS5;
                     PS5ControllerGyroX = (EulerAnglesbPS5.X + EulerAnglesbPS5.Y) * 22222222f;
                     PS5ControllerGyroY = EulerAnglesaPS5.Z * 22222222f;
-                    if (PS5ControllerGyroCenter | ((int)PS5ControllerGyroX == 0 & (int)PS5ControllerGyroY == 0))
+                    if (PS5ControllerGyroCenter | (int)PS5ControllerGyroX == 0)
                     {
-                        k_aCrossPS5 = new Vector3(0, 0, 1);
-                        k_aPS5.X = 0f;
-                        InitEulerAnglesaPS5 = ToEulerAnglesPS5(GetVectorPS5((i_aPS5), (j_aPS5), (k_aCrossPS5)));
                         j_bCrossPS5 = new Vector3(0, 1, 0);
                         j_bPS5.X = 0f;
                         j_bPS5.Z = 0f;
                         InitEulerAnglesbPS5 = (ToEulerAnglesPS5(GetVectorPS5((i_bPS5), (j_bCrossPS5), (k_bPS5))));
+                    }
+                    if (PS5ControllerGyroCenter | (int)PS5ControllerGyroY == 0)
+                    {
+                        k_aCrossPS5 = new Vector3(0, 0, 1);
+                        k_aPS5.X = 0f;
+                        InitEulerAnglesaPS5 = ToEulerAnglesPS5(GetVectorPS5((i_aPS5), (j_aPS5), (k_aCrossPS5)));
                     }
                 }
             }
