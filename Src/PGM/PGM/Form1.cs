@@ -4159,56 +4159,26 @@ namespace PGM
         }
         private static Quaternion QuaternionLookRotationController1(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = Vector3.Normalize(forward);
-            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
+            Vector3 vector = forward;
+            Vector3 vector2 = Vector3.Cross(up, vector);
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            var m00 = vector2.X;
-            var m01 = vector2.Y;
-            var m02 = vector2.Z;
-            var m10 = vector3.X;
-            var m11 = vector3.Y;
-            var m12 = vector3.Z;
-            var m20 = vector.X;
-            var m21 = vector.Y;
-            var m22 = vector.Z;
-            double num8 = (m00 + m11) + m22;
-            var quaternion = new Quaternion();
-            if (num8 > 0f)
-            {
-                var num = (double)Math.Sqrt(num8 + 1f);
-                quaternion.W = (float)num * 0.5f;
-                num = 0.5f / num;
-                quaternion.X = (float)(m12 - m21) * (float)num;
-                quaternion.Y = (float)(m20 - m02) * (float)num;
-                quaternion.Z = (float)(m01 - m10) * (float)num;
-                return quaternion;
-            }
-            if ((m00 >= m11) && (m00 >= m22))
-            {
-                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
-                var num4 = 0.5f / num7;
-                quaternion.X = 0.5f * (float)num7;
-                quaternion.Y = (float)(m01 + m10) * (float)num4;
-                quaternion.Z = (float)(m02 + m20) * (float)num4;
-                quaternion.W = (float)(m12 - m21) * (float)num4;
-                return quaternion;
-            }
-            if (m11 > m22)
-            {
-                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
-                var num3 = 0.5f / num6;
-                quaternion.X = (float)(m10 + m01) * (float)num3;
-                quaternion.Y = 0.5f * (float)num6;
-                quaternion.Z = (float)(m21 + m12) * (float)num3;
-                quaternion.W = (float)(m20 - m02) * (float)num3;
-                return quaternion;
-            }
-            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
-            var num2 = 0.5f / num5;
-            quaternion.X = (float)(m20 + m02) * (float)num2;
-            quaternion.Y = (float)(m21 + m12) * (float)num2;
-            quaternion.Z = 0.5f * (float)num5;
-            quaternion.W = (float)(m01 - m10) * (float)num2;
+            Quaternion quaternion = new Quaternion();
+            double m00 = vector2.X;
+            double m01 = vector2.Y;
+            double m02 = vector2.Z;
+            double m10 = vector3.X;
+            double m11 = vector3.Y;
+            double m12 = vector3.Z;
+            double m20 = vector.X;
+            double m21 = vector.Y;
+            double m22 = vector.Z;
+            double num8 = m00 + m11 + m22;
+            double num = Math.Sqrt(num8 + 1f);
+            quaternion.W = (float)num * 0.5f;
+            num = 0.5f / num;
+            quaternion.X = (float)(m12 - m21) * (float)num;
+            quaternion.Y = (float)(m20 - m02) * (float)num;
+            quaternion.Z = (float)(m01 - m10) * (float)num;
             return quaternion;
         }
         private static Vector3 ToEulerAnglesController1(Quaternion q)
@@ -4220,26 +4190,9 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            if (test > 0.4999f * unit)
-            {
-                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = (float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else if (test < -0.4999f * unit)
-            {
-                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = -(float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else
-            {
-                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
-            }
+            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
             return pitchYawRoll;
         }
         private void Controller1ProcessIMU()
@@ -4322,56 +4275,26 @@ namespace PGM
         }
         private static Quaternion QuaternionLookRotationController2(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = Vector3.Normalize(forward);
-            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
+            Vector3 vector = forward;
+            Vector3 vector2 = Vector3.Cross(up, vector);
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            var m00 = vector2.X;
-            var m01 = vector2.Y;
-            var m02 = vector2.Z;
-            var m10 = vector3.X;
-            var m11 = vector3.Y;
-            var m12 = vector3.Z;
-            var m20 = vector.X;
-            var m21 = vector.Y;
-            var m22 = vector.Z;
-            double num8 = (m00 + m11) + m22;
-            var quaternion = new Quaternion();
-            if (num8 > 0f)
-            {
-                var num = (double)Math.Sqrt(num8 + 1f);
-                quaternion.W = (float)num * 0.5f;
-                num = 0.5f / num;
-                quaternion.X = (float)(m12 - m21) * (float)num;
-                quaternion.Y = (float)(m20 - m02) * (float)num;
-                quaternion.Z = (float)(m01 - m10) * (float)num;
-                return quaternion;
-            }
-            if ((m00 >= m11) && (m00 >= m22))
-            {
-                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
-                var num4 = 0.5f / num7;
-                quaternion.X = 0.5f * (float)num7;
-                quaternion.Y = (float)(m01 + m10) * (float)num4;
-                quaternion.Z = (float)(m02 + m20) * (float)num4;
-                quaternion.W = (float)(m12 - m21) * (float)num4;
-                return quaternion;
-            }
-            if (m11 > m22)
-            {
-                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
-                var num3 = 0.5f / num6;
-                quaternion.X = (float)(m10 + m01) * (float)num3;
-                quaternion.Y = 0.5f * (float)num6;
-                quaternion.Z = (float)(m21 + m12) * (float)num3;
-                quaternion.W = (float)(m20 - m02) * (float)num3;
-                return quaternion;
-            }
-            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
-            var num2 = 0.5f / num5;
-            quaternion.X = (float)(m20 + m02) * (float)num2;
-            quaternion.Y = (float)(m21 + m12) * (float)num2;
-            quaternion.Z = 0.5f * (float)num5;
-            quaternion.W = (float)(m01 - m10) * (float)num2;
+            Quaternion quaternion = new Quaternion();
+            double m00 = vector2.X;
+            double m01 = vector2.Y;
+            double m02 = vector2.Z;
+            double m10 = vector3.X;
+            double m11 = vector3.Y;
+            double m12 = vector3.Z;
+            double m20 = vector.X;
+            double m21 = vector.Y;
+            double m22 = vector.Z;
+            double num8 = m00 + m11 + m22;
+            double num = Math.Sqrt(num8 + 1f);
+            quaternion.W = (float)num * 0.5f;
+            num = 0.5f / num;
+            quaternion.X = (float)(m12 - m21) * (float)num;
+            quaternion.Y = (float)(m20 - m02) * (float)num;
+            quaternion.Z = (float)(m01 - m10) * (float)num;
             return quaternion;
         }
         private static Vector3 ToEulerAnglesController2(Quaternion q)
@@ -4383,26 +4306,9 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            if (test > 0.4999f * unit)
-            {
-                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = (float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else if (test < -0.4999f * unit)
-            {
-                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = -(float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else
-            {
-                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
-            }
+            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
             return pitchYawRoll;
         }
         private void Controller2ProcessIMU()
@@ -8826,56 +8732,26 @@ namespace PGM
         }
         private static Quaternion QuaternionLookRotationLeft(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = Vector3.Normalize(forward);
-            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
+            Vector3 vector = forward;
+            Vector3 vector2 = Vector3.Cross(up, vector);
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            var m00 = vector2.X;
-            var m01 = vector2.Y;
-            var m02 = vector2.Z;
-            var m10 = vector3.X;
-            var m11 = vector3.Y;
-            var m12 = vector3.Z;
-            var m20 = vector.X;
-            var m21 = vector.Y;
-            var m22 = vector.Z;
-            double num8 = (m00 + m11) + m22;
-            var quaternion = new Quaternion();
-            if (num8 > 0f)
-            {
-                var num = (double)Math.Sqrt(num8 + 1f);
-                quaternion.W = (float)num * 0.5f;
-                num = 0.5f / num;
-                quaternion.X = (float)(m12 - m21) * (float)num;
-                quaternion.Y = (float)(m20 - m02) * (float)num;
-                quaternion.Z = (float)(m01 - m10) * (float)num;
-                return quaternion;
-            }
-            if ((m00 >= m11) && (m00 >= m22))
-            {
-                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
-                var num4 = 0.5f / num7;
-                quaternion.X = 0.5f * (float)num7;
-                quaternion.Y = (float)(m01 + m10) * (float)num4;
-                quaternion.Z = (float)(m02 + m20) * (float)num4;
-                quaternion.W = (float)(m12 - m21) * (float)num4;
-                return quaternion;
-            }
-            if (m11 > m22)
-            {
-                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
-                var num3 = 0.5f / num6;
-                quaternion.X = (float)(m10 + m01) * (float)num3;
-                quaternion.Y = 0.5f * (float)num6;
-                quaternion.Z = (float)(m21 + m12) * (float)num3;
-                quaternion.W = (float)(m20 - m02) * (float)num3;
-                return quaternion;
-            }
-            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
-            var num2 = 0.5f / num5;
-            quaternion.X = (float)(m20 + m02) * (float)num2;
-            quaternion.Y = (float)(m21 + m12) * (float)num2;
-            quaternion.Z = 0.5f * (float)num5;
-            quaternion.W = (float)(m01 - m10) * (float)num2;
+            Quaternion quaternion = new Quaternion();
+            double m00 = vector2.X;
+            double m01 = vector2.Y;
+            double m02 = vector2.Z;
+            double m10 = vector3.X;
+            double m11 = vector3.Y;
+            double m12 = vector3.Z;
+            double m20 = vector.X;
+            double m21 = vector.Y;
+            double m22 = vector.Z;
+            double num8 = m00 + m11 + m22;
+            double num = Math.Sqrt(num8 + 1f);
+            quaternion.W = (float)num * 0.5f;
+            num = 0.5f / num;
+            quaternion.X = (float)(m12 - m21) * (float)num;
+            quaternion.Y = (float)(m20 - m02) * (float)num;
+            quaternion.Z = (float)(m01 - m10) * (float)num;
             return quaternion;
         }
         private static Vector3 ToEulerAnglesLeft(Quaternion q)
@@ -8887,26 +8763,9 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            if (test > 0.4999f * unit)
-            {
-                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = (float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else if (test < -0.4999f * unit)
-            {
-                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = -(float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else
-            {
-                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
-            }
+            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
             return pitchYawRoll;
         }
         private void ExtractIMUValuesLeft()
@@ -9134,56 +8993,26 @@ namespace PGM
         }
         private static Quaternion QuaternionLookRotationRight(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = Vector3.Normalize(forward);
-            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
+            Vector3 vector = forward;
+            Vector3 vector2 = Vector3.Cross(up, vector);
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            var m00 = vector2.X;
-            var m01 = vector2.Y;
-            var m02 = vector2.Z;
-            var m10 = vector3.X;
-            var m11 = vector3.Y;
-            var m12 = vector3.Z;
-            var m20 = vector.X;
-            var m21 = vector.Y;
-            var m22 = vector.Z;
-            double num8 = (m00 + m11) + m22;
-            var quaternion = new Quaternion();
-            if (num8 > 0f)
-            {
-                var num = (double)Math.Sqrt(num8 + 1f);
-                quaternion.W = (float)num * 0.5f;
-                num = 0.5f / num;
-                quaternion.X = (float)(m12 - m21) * (float)num;
-                quaternion.Y = (float)(m20 - m02) * (float)num;
-                quaternion.Z = (float)(m01 - m10) * (float)num;
-                return quaternion;
-            }
-            if ((m00 >= m11) && (m00 >= m22))
-            {
-                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
-                var num4 = 0.5f / num7;
-                quaternion.X = 0.5f * (float)num7;
-                quaternion.Y = (float)(m01 + m10) * (float)num4;
-                quaternion.Z = (float)(m02 + m20) * (float)num4;
-                quaternion.W = (float)(m12 - m21) * (float)num4;
-                return quaternion;
-            }
-            if (m11 > m22)
-            {
-                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
-                var num3 = 0.5f / num6;
-                quaternion.X = (float)(m10 + m01) * (float)num3;
-                quaternion.Y = 0.5f * (float)num6;
-                quaternion.Z = (float)(m21 + m12) * (float)num3;
-                quaternion.W = (float)(m20 - m02) * (float)num3;
-                return quaternion;
-            }
-            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
-            var num2 = 0.5f / num5;
-            quaternion.X = (float)(m20 + m02) * (float)num2;
-            quaternion.Y = (float)(m21 + m12) * (float)num2;
-            quaternion.Z = 0.5f * (float)num5;
-            quaternion.W = (float)(m01 - m10) * (float)num2;
+            Quaternion quaternion = new Quaternion();
+            double m00 = vector2.X;
+            double m01 = vector2.Y;
+            double m02 = vector2.Z;
+            double m10 = vector3.X;
+            double m11 = vector3.Y;
+            double m12 = vector3.Z;
+            double m20 = vector.X;
+            double m21 = vector.Y;
+            double m22 = vector.Z;
+            double num8 = m00 + m11 + m22;
+            double num = Math.Sqrt(num8 + 1f);
+            quaternion.W = (float)num * 0.5f;
+            num = 0.5f / num;
+            quaternion.X = (float)(m12 - m21) * (float)num;
+            quaternion.Y = (float)(m20 - m02) * (float)num;
+            quaternion.Z = (float)(m01 - m10) * (float)num;
             return quaternion;
         }
         private static Vector3 ToEulerAnglesRight(Quaternion q)
@@ -9195,26 +9024,9 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            if (test > 0.4999f * unit)
-            {
-                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = (float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else if (test < -0.4999f * unit)
-            {
-                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = -(float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else
-            {
-                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
-            }
+            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
             return pitchYawRoll;
         }
         private void ExtractIMUValuesRight()
@@ -9465,56 +9277,26 @@ namespace PGM
         }
         private static Quaternion QuaternionLookRotationPro(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = Vector3.Normalize(forward);
-            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
+            Vector3 vector = forward;
+            Vector3 vector2 = Vector3.Cross(up, vector);
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            var m00 = vector2.X;
-            var m01 = vector2.Y;
-            var m02 = vector2.Z;
-            var m10 = vector3.X;
-            var m11 = vector3.Y;
-            var m12 = vector3.Z;
-            var m20 = vector.X;
-            var m21 = vector.Y;
-            var m22 = vector.Z;
-            double num8 = (m00 + m11) + m22;
-            var quaternion = new Quaternion();
-            if (num8 > 0f)
-            {
-                var num = (double)Math.Sqrt(num8 + 1f);
-                quaternion.W = (float)num * 0.5f;
-                num = 0.5f / num;
-                quaternion.X = (float)(m12 - m21) * (float)num;
-                quaternion.Y = (float)(m20 - m02) * (float)num;
-                quaternion.Z = (float)(m01 - m10) * (float)num;
-                return quaternion;
-            }
-            if ((m00 >= m11) && (m00 >= m22))
-            {
-                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
-                var num4 = 0.5f / num7;
-                quaternion.X = 0.5f * (float)num7;
-                quaternion.Y = (float)(m01 + m10) * (float)num4;
-                quaternion.Z = (float)(m02 + m20) * (float)num4;
-                quaternion.W = (float)(m12 - m21) * (float)num4;
-                return quaternion;
-            }
-            if (m11 > m22)
-            {
-                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
-                var num3 = 0.5f / num6;
-                quaternion.X = (float)(m10 + m01) * (float)num3;
-                quaternion.Y = 0.5f * (float)num6;
-                quaternion.Z = (float)(m21 + m12) * (float)num3;
-                quaternion.W = (float)(m20 - m02) * (float)num3;
-                return quaternion;
-            }
-            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
-            var num2 = 0.5f / num5;
-            quaternion.X = (float)(m20 + m02) * (float)num2;
-            quaternion.Y = (float)(m21 + m12) * (float)num2;
-            quaternion.Z = 0.5f * (float)num5;
-            quaternion.W = (float)(m01 - m10) * (float)num2;
+            Quaternion quaternion = new Quaternion();
+            double m00 = vector2.X;
+            double m01 = vector2.Y;
+            double m02 = vector2.Z;
+            double m10 = vector3.X;
+            double m11 = vector3.Y;
+            double m12 = vector3.Z;
+            double m20 = vector.X;
+            double m21 = vector.Y;
+            double m22 = vector.Z;
+            double num8 = m00 + m11 + m22;
+            double num = Math.Sqrt(num8 + 1f);
+            quaternion.W = (float)num * 0.5f;
+            num = 0.5f / num;
+            quaternion.X = (float)(m12 - m21) * (float)num;
+            quaternion.Y = (float)(m20 - m02) * (float)num;
+            quaternion.Z = (float)(m01 - m10) * (float)num;
             return quaternion;
         }
         private static Vector3 ToEulerAnglesPro(Quaternion q)
@@ -9526,26 +9308,9 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            if (test > 0.4999f * unit)
-            {
-                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = (float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else if (test < -0.4999f * unit)
-            {
-                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = -(float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else
-            {
-                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
-            }
+            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
             return pitchYawRoll;
         }
         private void ExtractIMUValuesPro()
@@ -10017,56 +9782,26 @@ namespace PGM
         }
         private static Quaternion QuaternionLookRotationPS5(Vector3 forward, Vector3 up)
         {
-            Vector3 vector = Vector3.Normalize(forward);
-            Vector3 vector2 = Vector3.Normalize(Vector3.Cross(up, vector));
+            Vector3 vector = forward;
+            Vector3 vector2 = Vector3.Cross(up, vector);
             Vector3 vector3 = Vector3.Cross(vector, vector2);
-            var m00 = vector2.X;
-            var m01 = vector2.Y;
-            var m02 = vector2.Z;
-            var m10 = vector3.X;
-            var m11 = vector3.Y;
-            var m12 = vector3.Z;
-            var m20 = vector.X;
-            var m21 = vector.Y;
-            var m22 = vector.Z;
-            double num8 = (m00 + m11) + m22;
-            var quaternion = new Quaternion();
-            if (num8 > 0f)
-            {
-                var num = (double)Math.Sqrt(num8 + 1f);
-                quaternion.W = (float)num * 0.5f;
-                num = 0.5f / num;
-                quaternion.X = (float)(m12 - m21) * (float)num;
-                quaternion.Y = (float)(m20 - m02) * (float)num;
-                quaternion.Z = (float)(m01 - m10) * (float)num;
-                return quaternion;
-            }
-            if ((m00 >= m11) && (m00 >= m22))
-            {
-                var num7 = (double)Math.Sqrt(((1f + m00) - m11) - m22);
-                var num4 = 0.5f / num7;
-                quaternion.X = 0.5f * (float)num7;
-                quaternion.Y = (float)(m01 + m10) * (float)num4;
-                quaternion.Z = (float)(m02 + m20) * (float)num4;
-                quaternion.W = (float)(m12 - m21) * (float)num4;
-                return quaternion;
-            }
-            if (m11 > m22)
-            {
-                var num6 = (double)Math.Sqrt(((1f + m11) - m00) - m22);
-                var num3 = 0.5f / num6;
-                quaternion.X = (float)(m10 + m01) * (float)num3;
-                quaternion.Y = 0.5f * (float)num6;
-                quaternion.Z = (float)(m21 + m12) * (float)num3;
-                quaternion.W = (float)(m20 - m02) * (float)num3;
-                return quaternion;
-            }
-            var num5 = (double)Math.Sqrt(((1f + m22) - m00) - m11);
-            var num2 = 0.5f / num5;
-            quaternion.X = (float)(m20 + m02) * (float)num2;
-            quaternion.Y = (float)(m21 + m12) * (float)num2;
-            quaternion.Z = 0.5f * (float)num5;
-            quaternion.W = (float)(m01 - m10) * (float)num2;
+            Quaternion quaternion = new Quaternion();
+            double m00 = vector2.X;
+            double m01 = vector2.Y;
+            double m02 = vector2.Z;
+            double m10 = vector3.X;
+            double m11 = vector3.Y;
+            double m12 = vector3.Z;
+            double m20 = vector.X;
+            double m21 = vector.Y;
+            double m22 = vector.Z;
+            double num8 = m00 + m11 + m22;
+            double num = Math.Sqrt(num8 + 1f);
+            quaternion.W = (float)num * 0.5f;
+            num = 0.5f / num;
+            quaternion.X = (float)(m12 - m21) * (float)num;
+            quaternion.Y = (float)(m20 - m02) * (float)num;
+            quaternion.Z = (float)(m01 - m10) * (float)num;
             return quaternion;
         }
         private static Vector3 ToEulerAnglesPS5(Quaternion q)
@@ -10078,26 +9813,9 @@ namespace PGM
             double sqz = q.Z * q.Z;
             double unit = sqx + sqy + sqz + sqw;
             double test = q.X * q.Y + q.Z * q.W;
-            if (test > 0.4999f * unit)
-            {
-                pitchYawRoll.Y = 2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = (float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else if (test < -0.4999f * unit)
-            {
-                pitchYawRoll.Y = -2f * (float)Math.Atan2(q.X, q.W);
-                pitchYawRoll.X = -(float)Math.PI * 0.5f;
-                pitchYawRoll.Z = 0f;
-                return pitchYawRoll;
-            }
-            else
-            {
-                pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
-                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
-                pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
-            }
+            pitchYawRoll.X = (float)Math.Asin(2f * test / unit);
+            pitchYawRoll.Y = (float)Math.Atan2(2f * q.Y * q.W - 2f * q.X * q.Z, sqx - sqy - sqz + sqw);
+            pitchYawRoll.Z = (float)Math.Atan2(2f * q.X * q.W - 2f * q.Y * q.Z, -sqx + sqy - sqz + sqw);
             return pitchYawRoll;
         }
         private void ExtractIMUValuesPS5()
