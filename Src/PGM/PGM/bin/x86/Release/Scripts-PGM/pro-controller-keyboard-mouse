@@ -74,10 +74,10 @@ if (getstate[0])
     SendQ          = ProControllerLeftStickX < -0.35f;
     SendZ          = ProControllerLeftStickY > 0.35f;
     SendS          = ProControllerLeftStickY < -0.35f;
-    Send8          = ProControllerButtonDPAD_DOWN;
-    Send7          = ProControllerButtonDPAD_LEFT;
-    Send9          = ProControllerButtonDPAD_RIGHT;
-    Send6          = ProControllerButtonDPAD_UP;
+    Send0          = ProControllerButtonDPAD_DOWN;
+    Send1          = ProControllerButtonDPAD_LEFT;
+    Send2          = ProControllerButtonDPAD_RIGHT;
+    Send3          = ProControllerButtonDPAD_UP;
     SendSpace      = ProControllerButtonSHOULDER_Left_1;
     SendLeftShift  = ProControllerButtonSHOULDER_Right_1;
     SendE          = ProControllerButtonMINUS;

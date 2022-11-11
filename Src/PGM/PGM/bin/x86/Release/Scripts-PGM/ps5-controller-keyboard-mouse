@@ -1,10 +1,10 @@
 UsersAllowedList        = new string[] { "michael113b" };
 EnableKM                = true;
-EnableXI                = true;
+EnablePI                = true;
 KeyboardMouseDriverType = "kmevent";
 sleeptime               = 21;
 double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower05x = 0f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, viewpower05y = 0f, dzx = 35.0f, dzy = 35.0f, limit = 127f;
-valchanged(0, Controller1ButtonBackPressed);
+valchanged(0, PS5ControllerButtonCreatePressed);
 if (wd[0] == 1 & !getstate[0]) 
 {
     getstate[0] = true;
@@ -54,8 +54,8 @@ else
 }
 if (getstate[0]) 
 {
-    statex = Math.Abs(Controller1ThumbRightX / 32767f * limit) <= limit ? Controller1ThumbRightX / 32767f * limit : Math.Sign(Controller1ThumbRightX) * limit;
-    statey = Math.Abs(Controller1ThumbRightY / 32767f * limit) <= limit ? Controller1ThumbRightY / 32767f * limit : Math.Sign(Controller1ThumbRightY) * limit;
+    statex = Math.Abs(PS5ControllerRightStickX * 50f) <= limit ? PS5ControllerRightStickX * 50f : Math.Sign(PS5ControllerRightStickX) * limit;
+    statey = Math.Abs(PS5ControllerRightStickY * 50f) <= limit ? PS5ControllerRightStickY * 50f : Math.Sign(PS5ControllerRightStickY) * limit;
     if (statex >= (dzx / 100f) * limit & statex <= limit)
         mousex = Scale(statex, (dzx / 100f) * limit, limit, 0f, limit);
     if (statex <= -(dzx / 100f) * limit & statex >= -limit)
@@ -68,25 +68,25 @@ if (getstate[0])
         mousey = Scale(statey, -limit, -(dzy / 100f) * limit, -limit, 0f);
     if (statey <= (dzy / 100f) * limit & statey >= -(dzy / 100f) * limit)
         mousey = 0f;
-    MouseMoveX     = Math.Sign(Controller1ThumbRightX) * (Math.Abs(statex * statex * statex) / limit / limit * viewpower3x + Math.Abs(statex * statex) / limit * viewpower2x + Math.Abs(statex) * viewpower1x);
-    MouseMoveY     = -Math.Sign(Controller1ThumbRightY) * (Math.Abs(statey * statey * statey) / limit / limit * viewpower3y + Math.Abs(statey * statey) / limit * viewpower2y + Math.Abs(statey) * viewpower1y);
-    SendD          = Controller1ThumbLeftX > 32767f / 5f;
-    SendQ          = Controller1ThumbLeftX < -32767f / 5f;
-    SendZ          = Controller1ThumbLeftY > 32767f / 5f;
-    SendS          = Controller1ThumbLeftY < -32767f / 5f;
-    Send0          = Controller1ButtonDownPressed;
-    Send1          = Controller1ButtonLeftPressed;
-    Send2          = Controller1ButtonRightPressed;
-    Send3          = Controller1ButtonUpPressed;
-    SendSpace      = Controller1ButtonShoulderLeftPressed;
-    SendLeftShift  = Controller1ButtonShoulderRightPressed;
-    SendB          = Controller1ThumbpadRightPressed;  
-    SendR          = Controller1ButtonXPressed;
-    SendF          = Controller1ButtonYPressed;
-    SendX          = Controller1ButtonAPressed;
-    SendC          = Controller1ButtonBPressed;
-    SendRightClick = Controller1TriggerLeftPosition >= 250f;
-    SendLeftClick  = Controller1TriggerRightPosition >= 250f;
-    SendH          = Controller1ThumbpadLeftPressed;
-    SendEscape     = Controller1ButtonStartPressed;
+    MouseMoveX     = -Math.Sign(PS5ControllerRightStickX) * (Math.Abs(statex * statex * statex) / limit / limit * viewpower3x + Math.Abs(statex * statex) / limit * viewpower2x + Math.Abs(statex) * viewpower1x);
+    MouseMoveY     = Math.Sign(PS5ControllerRightStickY) * (Math.Abs(statey * statey * statey) / limit / limit * viewpower3y + Math.Abs(statey * statey) / limit * viewpower2y + Math.Abs(statey) * viewpower1y);
+    SendD          = PS5ControllerLeftStickX > 0.35f;
+    SendQ          = PS5ControllerLeftStickX < -0.35f;
+    SendZ          = PS5ControllerLeftStickY > 0.35f;
+    SendS          = PS5ControllerLeftStickY < -0.35f;
+    Send0          = PS5ControllerButtonDPadLeftPressed;
+    Send1          = PS5ControllerButtonDPadDownPressed;
+    Send2          = PS5ControllerButtonDPadRightPressed;
+    Send3          = PS5ControllerButtonDPadUpPressed;
+    SendSpace      = PS5ControllerButtonL1Pressed;
+    SendLeftShift  = PS5ControllerButtonR1Pressed;
+    SendB          = PS5ControllerButtonL3Pressed;  
+    SendH          = PS5ControllerButtonR3Pressed;
+    SendR          = PS5ControllerButtonSquarePressed;
+    SendF          = PS5ControllerButtonCrossPressed;
+    SendX          = PS5ControllerButtonTrianglePressed;
+    SendC          = PS5ControllerButtonCirclePressed;
+    SendRightClick = PS5ControllerButtonL2Pressed;
+    SendLeftClick  = PS5ControllerButtonR2Pressed;
+    SendEscape     = PS5ControllerButtonMenuPressed;
 }

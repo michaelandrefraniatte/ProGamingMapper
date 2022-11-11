@@ -1,10 +1,10 @@
-UsersAllowedList         = new string[] { "michael113b" };
-EnableXC                 = true;
-gyromode                 = 2;
-PS5ControllerAccelCenter = PS5ControllerButtonMenuPressed;
-double statex            = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 15.0f, dzy = 15.0f;
-statex                   = PS5ControllerGyroX * 15f;
-statey                   = PS5ControllerGyroY * 15f;
+UsersAllowedList        = new string[] { "michael113b" };
+EnableXC                = true;
+gyromode                = 2;
+PS5ControllerGyroCenter = PS5ControllerButtonMenuPressed;
+double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 15.0f, dzy = 15.0f;
+statex                  = PS5ControllerGyroX * 15f;
+statey                  = PS5ControllerGyroY * 15f;
 if (statex > 0f)
     mousestatex = Scale(statex, 0f, 32767f, dzx / 100f * 32767f, 32767f);
 if (statex < 0f)
