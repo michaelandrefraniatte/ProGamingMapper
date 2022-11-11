@@ -4,55 +4,107 @@ EnableXI                = true;
 KeyboardMouseDriverType = "kmevent";
 sleeptime               = 1;
 double statex, statey, stickmousestatex = 0f, stickmousestatey = 0f, stickstatex, stickstatey, mousex, mousey, viewpower1x = 1f, viewpower2x = 0f, viewpower3x = 0f, viewpower1y = 1f, viewpower2y = 0f, viewpower3y = 0f, dzx = 0f, dzy = 0f, mousedzx = 0f, mousedzy = 0f, limit = 32767f;
-width       = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-height      = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
-mousex      = -Controller1ThumbRightX / 32767f * 1024f;
-mousey      = -Controller1ThumbRightY / 32767f * 1024f;
-stickstatex = Math.Abs(mousex) <= 1024f ? mousex : Math.Sign(mousex) * 1024f;
-stickstatey = Math.Abs(mousey) <= 1024f ? mousey : Math.Sign(mousey) * 1024f;
-if (stickstatex >= 0f)
-    stickmousestatex = Scale(stickstatex * stickstatex * stickstatex / 1024f / 1024f * viewpower3x + stickstatex * stickstatex / 1024f * viewpower2x + stickstatex * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
-if (stickstatex <= 0f)
-    stickmousestatex = Scale(-(-stickstatex * -stickstatex * -stickstatex) / 1024f / 1024f * viewpower3x - (-stickstatex * -stickstatex) / 1024f * viewpower2x - (-stickstatex) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
-if (stickstatey >= 0f)
-    stickmousestatey = Scale(stickstatey * stickstatey * stickstatey / 1024f / 1024f * viewpower3y + stickstatey * stickstatey / 1024f * viewpower2y + stickstatey * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
-if (stickstatey <= 0f)
-    stickmousestatey = Scale(-(-stickstatey * -stickstatey * -stickstatey) / 1024f / 1024f * viewpower3y - (-stickstatey * -stickstatey) / 1024f * viewpower2y - (-stickstatey) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
-mousex = stickmousestatex * 32767f / 1024f;
-mousey = stickmousestatey * 32767f / 1024f;
-statex = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
-statey = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
-if (statex >= (mousedzx / 100f) * limit & statex <= limit)
-    mousex = Scale(statex, (mousedzx / 100f) * limit, limit, 0f, limit);
-if (statex <= -(mousedzx / 100f) * limit & statex >= -limit)
-    mousex = Scale(statex, -limit, -(mousedzx / 100f) * limit, -limit, 0f);
-if (statex <= (mousedzx / 100f) * limit & statex >= -(mousedzx / 100f) * limit)
-    mousex = 0f;
-if (statey >= (mousedzy / 100f) * limit & statey <= limit)
-    mousey = Scale(statey, (mousedzy / 100f) * limit, limit, 0f, limit);
-if (statey <= -(mousedzy / 100f) * limit & statey >= -limit)
-    mousey = Scale(statey, -limit, -(mousedzy / 100f) * limit, -limit, 0f);
-if (statey <= (mousedzy / 100f) * limit & statey >= -(mousedzy / 100f) * limit)
-    mousey = 0f;
-MouseDesktopX  = width / 2f - mousex * width / 2f / 32767f * 2f;
-MouseDesktopY  = height / 2f + mousey * height / 2f / 32767f * 2f;
-SendD          = Controller1ThumbLeftX > 32767f / 5f;
-SendQ          = Controller1ThumbLeftX < -32767f / 5f;
-SendZ          = Controller1ThumbLeftY > 32767f / 5f;
-SendS          = Controller1ThumbLeftY < -32767f / 5f;
-Send1          = Controller1ButtonUpPressed;
-Send2          = Controller1ButtonLeftPressed;
-Send3          = Controller1ButtonDownPressed;
-Send4          = Controller1ButtonRightPressed;
-SendR          = Controller1ButtonXPressed;
-SendF          = Controller1ButtonYPressed;
-SendX          = Controller1ButtonAPressed;
-SendC          = Controller1ButtonBPressed;
-SendA          = Controller1ThumbpadLeftPressed;
-SendE          = Controller1ThumbpadRightPressed;
-SendSpace      = Controller1ButtonShoulderLeftPressed;
-SendLeftShift  = Controller1ButtonShoulderRightPressed;
-SendRightClick = Controller1TriggerLeftPosition >= 1f;
-SendLeftClick  = Controller1TriggerRightPosition >= 1f;
-SendTab        = Controller1ButtonBackPressed;
-SendEscape     = Controller1ButtonStartPressed;        
+valchanged(0, Controller1ButtonBackPressed);
+if (wd[0] == 1 & !getstate[0]) 
+{
+    width  = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+    height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+    getstate[0] = true;
+}
+else 
+{ 
+    if (wd[0] == 1 & getstate[0]) 
+    {
+        MouseMoveX     = 0;
+        MouseMoveY     = 0;
+        MouseDesktopX  = 0;
+        MouseDesktopY  = 0;
+        MouseAbsX      = 0;
+        MouseAbsY      = 0;
+        SendD          = false;
+        SendQ          = false;
+        SendZ          = false;
+        SendS          = false;
+        Send8          = false;
+        Send7          = false;
+        Send9          = false;
+        Send6          = false;
+        SendB          = false;  
+        Send1          = false;
+        Send2          = false;
+        Send3          = false;
+        Send4          = false;
+        SendSpace      = false;
+        SendLeftShift  = false;
+        SendE          = false;
+        SendA          = false;
+        SendV          = false;
+        SendEscape     = false;
+        SendTab        = false;
+        SendR          = false;
+        SendF          = false;
+        SendT          = false;
+        SendG          = false;
+        SendY          = false; 
+        SendU          = false;
+        SendX          = false;
+        SendC          = false;
+        SendRightClick = false;
+        SendLeftClick  = false;
+        getstate[0]    = false;
+    }
+}
+if (getstate[0]) 
+{
+    Controller1GyroCenter = Controller1ButtonStartPressed;
+    mousex                = -Controller1GyroX / 32767f * 1024f;
+    mousey                = -Controller1GyroY / 32767f * 1024f;
+    stickstatex           = Math.Abs(mousex) <= 1024f ? mousex : Math.Sign(mousex) * 1024f;
+    stickstatey           = Math.Abs(mousey) <= 1024f ? mousey : Math.Sign(mousey) * 1024f;
+    if (stickstatex >= 0f)
+        stickmousestatex = Scale(stickstatex * stickstatex * stickstatex / 1024f / 1024f * viewpower3x + stickstatex * stickstatex / 1024f * viewpower2x + stickstatex * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+    if (stickstatex <= 0f)
+        stickmousestatex = Scale(-(-stickstatex * -stickstatex * -stickstatex) / 1024f / 1024f * viewpower3x - (-stickstatex * -stickstatex) / 1024f * viewpower2x - (-stickstatex) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+    if (stickstatey >= 0f)
+        stickmousestatey = Scale(stickstatey * stickstatey * stickstatey / 1024f / 1024f * viewpower3y + stickstatey * stickstatey / 1024f * viewpower2y + stickstatey * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+    if (stickstatey <= 0f)
+        stickmousestatey = Scale(-(-stickstatey * -stickstatey * -stickstatey) / 1024f / 1024f * viewpower3y - (-stickstatey * -stickstatey) / 1024f * viewpower2y - (-stickstatey) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+    mousex = stickmousestatex * 32767f / 1024f;
+    mousey = stickmousestatey * 32767f / 1024f;
+    statex = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
+    statey = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
+    if (statex >= (mousedzx / 100f) * limit & statex <= limit)
+        mousex = Scale(statex, (mousedzx / 100f) * limit, limit, 0f, limit);
+    if (statex <= -(mousedzx / 100f) * limit & statex >= -limit)
+        mousex = Scale(statex, -limit, -(mousedzx / 100f) * limit, -limit, 0f);
+    if (statex <= (mousedzx / 100f) * limit & statex >= -(mousedzx / 100f) * limit)
+        mousex = 0f;
+    if (statey >= (mousedzy / 100f) * limit & statey <= limit)
+        mousey = Scale(statey, (mousedzy / 100f) * limit, limit, 0f, limit);
+    if (statey <= -(mousedzy / 100f) * limit & statey >= -limit)
+        mousey = Scale(statey, -limit, -(mousedzy / 100f) * limit, -limit, 0f);
+    if (statey <= (mousedzy / 100f) * limit & statey >= -(mousedzy / 100f) * limit)
+        mousey = 0f;
+    MouseDesktopX  = width / 2f - mousex * width / 2f / 32767f * 2f;
+    MouseDesktopY  = height / 2f + mousey * height / 2f / 32767f * 2f;
+    SendD          = Controller1ThumbLeftX > 32767f / 5f;
+    SendQ          = Controller1ThumbLeftX < -32767f / 5f;
+    SendZ          = Controller1ThumbLeftY > 32767f / 5f;
+    SendS          = Controller1ThumbLeftY < -32767f / 5f;
+    Send1          = Controller1ButtonUpPressed;
+    Send2          = Controller1ButtonLeftPressed;
+    Send3          = Controller1ButtonDownPressed;
+    Send4          = Controller1ButtonRightPressed;
+    SendR          = Controller1ButtonXPressed;
+    SendF          = Controller1ButtonYPressed;
+    SendX          = Controller1ButtonAPressed;
+    SendC          = Controller1ButtonBPressed;
+    SendA          = Controller1ThumbpadLeftPressed;
+    SendE          = Controller1ThumbpadRightPressed;
+    SendSpace      = Controller1ButtonShoulderLeftPressed;
+    SendLeftShift  = Controller1ButtonShoulderRightPressed;
+    SendRightClick = Controller1TriggerLeftPosition >= 1f;
+    SendLeftClick  = Controller1TriggerRightPosition >= 1f;
+    SendTab        = Controller1ButtonBackPressed;
+    SendEscape     = Controller1ButtonStartPressed;  
+}
