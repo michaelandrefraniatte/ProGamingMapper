@@ -9701,15 +9701,15 @@ namespace PGM
             PS5ControllerTouchOn = dss.Touchpad1.IsDown;
             if (gyromode == 1 | gyromode == 2)
             {
-                gyr_gPS5.X = (float)Math.Round((dss.Gyro.Z - 1) / 366666666f, 7);
-                gyr_gPS5.Y = -(float)Math.Round((dss.Gyro.X - 6) / 366666666f, 7);
-                gyr_gPS5.Z = -(float)Math.Round((dss.Gyro.Y - 5) / 366666666f, 7);
+                gyr_gPS5.X = (float)Math.Round(dss.Gyro.Z / 2222222222f, 7);
+                gyr_gPS5.Y = -(float)Math.Round(dss.Gyro.X / 2222222222f, 7);
+                gyr_gPS5.Z = -(float)Math.Round(dss.Gyro.Y / 2222222222f, 7);
             }
             else
             {
-                gyr_gPS5.X = dss.Gyro.Z - 1;
-                gyr_gPS5.Y = -(dss.Gyro.X - 6);
-                gyr_gPS5.Z = -(dss.Gyro.Y - 5);
+                gyr_gPS5.X = dss.Gyro.Z;
+                gyr_gPS5.Y = -dss.Gyro.X;
+                gyr_gPS5.Z = -dss.Gyro.Y;
                 PS5ControllerGyroX = gyr_gPS5.Z;
                 PS5ControllerGyroY = gyr_gPS5.Y;
             }
