@@ -23,15 +23,10 @@ using AForge.Imaging;
 using Quaternion = System.Numerics.Quaternion;
 using Vector3 = System.Numerics.Vector3;
 using controller;
-using DualSenseAPI;
 using DualSenseAPI.State;
-using static System.Net.Mime.MediaTypeNames;
-using System.Numerics;
 using Device.Net;
 using DualSenseAPI.Util;
 using System.Reactive.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Globalization;
 
 namespace PGM
 {
@@ -160,7 +155,7 @@ namespace PGM
         private int pollcount = 0, keys12345 = 0, keys54321 = 0;
         private bool getstate = false, testbool = false;
         private double mousexp, mouseyp, testdouble;
-        private static bool ps5controllerconneced = false, procontrollerconnected = false, wiimoteconnected = false, joyconleftconnected = false, joyconrightconnected = false, wiimotejoyconrightconnected = false, wiimotejoyconleftconnected = false, joyconsconnected = false, controllerconnected = false, gamepadconnected = false, mouseconnected = false, keyboardconnected = false, EnableXC = false, EnableKM = false, EnableRI = false, EnableDI = false, EnableXI = false, EnableJI = false, EnablePI = false;
+        private static bool ps5controllerconneced = false, procontrollerconnected = false, wiimoteconnected = false, joyconleftconnected = false, joyconrightconnected = false, wiimotejoyconrightconnected = false, wiimotejoyconleftconnected = false, wiimotejoyconsconnected = false, joyconsconnected = false, controllerconnected = false, gamepadconnected = false, mouseconnected = false, keyboardconnected = false, EnableXC = false, EnableKM = false, EnableRI = false, EnableDI = false, EnableXI = false, EnableJI = false, EnablePI = false;
         private string KeyboardMouseDriverType; double MouseMoveX; double MouseMoveY; double MouseAbsX; double MouseAbsY; double MouseDesktopX; double MouseDesktopY; bool SendLeftClick; bool SendRightClick; bool SendMiddleClick; bool SendWheelUp; bool SendWheelDown; bool SendLeft; bool SendRight; bool SendUp; bool SendDown; bool SendLButton; bool SendRButton; bool SendCancel; bool SendMBUTTON; bool SendXBUTTON1; bool SendXBUTTON2; bool SendBack; bool SendTab; bool SendClear; bool SendReturn; bool SendSHIFT; bool SendCONTROL; bool SendMENU; bool SendPAUSE; bool SendCAPITAL; bool SendKANA; bool SendHANGEUL; bool SendHANGUL; bool SendJUNJA; bool SendFINAL; bool SendHANJA; bool SendKANJI; bool SendEscape; bool SendCONVERT; bool SendNONCONVERT; bool SendACCEPT; bool SendMODECHANGE; bool SendSpace; bool SendPRIOR; bool SendNEXT; bool SendEND; bool SendHOME; bool SendLEFT; bool SendUP; bool SendRIGHT; bool SendDOWN; bool SendSELECT; bool SendPRINT; bool SendEXECUTE; bool SendSNAPSHOT; bool SendINSERT; bool SendDELETE; bool SendHELP; bool SendAPOSTROPHE; bool Send0; bool Send1; bool Send2; bool Send3; bool Send4; bool Send5; bool Send6; bool Send7; bool Send8; bool Send9; bool SendA; bool SendB; bool SendC; bool SendD; bool SendE; bool SendF; bool SendG; bool SendH; bool SendI; bool SendJ; bool SendK; bool SendL; bool SendM; bool SendN; bool SendO; bool SendP; bool SendQ; bool SendR; bool SendS; bool SendT; bool SendU; bool SendV; bool SendW; bool SendX; bool SendY; bool SendZ; bool SendLWIN; bool SendRWIN; bool SendAPPS; bool SendSLEEP; bool SendNUMPAD0; bool SendNUMPAD1; bool SendNUMPAD2; bool SendNUMPAD3; bool SendNUMPAD4; bool SendNUMPAD5; bool SendNUMPAD6; bool SendNUMPAD7; bool SendNUMPAD8; bool SendNUMPAD9; bool SendMULTIPLY; bool SendADD; bool SendSEPARATOR; bool SendSUBTRACT; bool SendDECIMAL; bool SendDIVIDE; bool SendF1; bool SendF2; bool SendF3; bool SendF4; bool SendF5; bool SendF6; bool SendF7; bool SendF8; bool SendF9; bool SendF10; bool SendF11; bool SendF12; bool SendF13; bool SendF14; bool SendF15; bool SendF16; bool SendF17; bool SendF18; bool SendF19; bool SendF20; bool SendF21; bool SendF22; bool SendF23; bool SendF24; bool SendNUMLOCK; bool SendSCROLL; bool SendLeftShift; bool SendRightShift; bool SendLeftControl; bool SendRightControl; bool SendLMENU; bool SendRMENU;
         private bool controller1_send_back; bool controller1_send_start; bool controller1_send_A; bool controller1_send_B; bool controller1_send_X; bool controller1_send_Y; bool controller1_send_up; bool controller1_send_left; bool controller1_send_down; bool controller1_send_right; bool controller1_send_leftstick; bool controller1_send_rightstick; bool controller1_send_leftbumper; bool controller1_send_rightbumper; bool controller1_send_lefttrigger; bool controller1_send_righttrigger; double controller1_send_leftstickx; double controller1_send_leftsticky; double controller1_send_rightstickx; double controller1_send_rightsticky; bool controller2_send_back; bool controller2_send_start; bool controller2_send_A; bool controller2_send_B; bool controller2_send_X; bool controller2_send_Y; bool controller2_send_up; bool controller2_send_left; bool controller2_send_down; bool controller2_send_right; bool controller2_send_leftstick; bool controller2_send_rightstick; bool controller2_send_leftbumper; bool controller2_send_rightbumper; bool controller2_send_lefttrigger; bool controller2_send_righttrigger; double controller2_send_leftstickx; double controller2_send_leftsticky; double controller2_send_rightstickx; double controller2_send_rightsticky; double controller1_send_lefttriggerposition; double controller1_send_righttriggerposition; double controller2_send_lefttriggerposition; double controller2_send_righttriggerposition;
         public static int[] wd = { 2 };
@@ -3431,6 +3426,26 @@ namespace PGM
                 }
             });
         }
+        private void connectWiimoteJoyconsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StopScript();
+            Task.Run(() =>
+            {
+                do
+                {
+                    wiimotejoyconsconnected = wiimotejoyconsconnect();
+                    Thread.Sleep(1);
+                }
+                while (!wiimotejoyconsconnected & !scriptrunning);
+                if (wiimotejoyconsconnected)
+                {
+                    wiimoteconnected = true;
+                    joyconrightconnected = true;
+                    joyconleftconnected = true;
+                    MessageBox.Show("Wiimote Joycons");
+                }
+            });
+        }
         private void connectProControllerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StopScript();
@@ -3499,6 +3514,22 @@ namespace PGM
         private void disconnectWiimoteJoyconRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StopScript();
+            if (joyconrightconnected)
+            {
+                Task.Run(() => { FormCloseRight(); });
+            }
+            if (wiimoteconnected)
+            {
+                Task.Run(() => { FormCloseWiimoteNunchuck(); });
+            }
+        }
+        private void disconnectWiimoteJoyconsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StopScript();
+            if (joyconleftconnected)
+            {
+                Task.Run(() => { FormCloseLeft(); });
+            }
             if (joyconrightconnected)
             {
                 Task.Run(() => { FormCloseRight(); });
@@ -4156,8 +4187,8 @@ namespace PGM
             if (gyromode == 1 | gyromode == 2)
             {
                 gyr_gController1.X = 0;
-                gyr_gController1.Y = -(float)Math.Round((Int16)Controller1ThumbRightY / 666666666f, 7);
-                gyr_gController1.Z = -(float)Math.Round((Int16)Controller1ThumbRightX / 666666666f, 7);
+                gyr_gController1.Y = -(float)Math.Round((Int16)Controller1ThumbRightY / 2222222222f, 7);
+                gyr_gController1.Z = -(float)Math.Round((Int16)Controller1ThumbRightX / 2222222222f, 7);
                 i_aController1 = new Vector3(1, 0, 0);
                 j_aController1 = new Vector3(0, 1, 0);
                 k_aController1.Y = 0f;
@@ -4167,24 +4198,24 @@ namespace PGM
                 k_bController1 = new Vector3(0, 0, 1);
                 if (gyromode == 1)
                 {
-                    k_aCrossController1 += Vector3.Cross(gyr_gController1, Vector3.Normalize(k_aController1));
-                    j_bCrossController1 += Vector3.Cross(gyr_gController1, Vector3.Normalize(j_bController1));
-                    EulerAnglesaController1 = ToEulerAngles(GetVector(Vector3.Normalize(i_aController1), Vector3.Normalize(j_aController1), Vector3.Normalize(k_aCrossController1))) - InitEulerAnglesaController1;
-                    EulerAnglesbController1 = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bController1), Vector3.Normalize(j_bCrossController1), Vector3.Normalize(k_bController1)))) - InitEulerAnglesbController1;
-                    Controller1GyroX = (EulerAnglesbController1.X - EulerAnglesbController1.Y) * 22222222f;
-                    Controller1GyroY = EulerAnglesaController1.Z * 22222222f;
+                    k_aCrossController1 += Vector3.Cross(gyr_gController1, (k_aController1));
+                    j_bCrossController1 += Vector3.Cross(gyr_gController1, (j_bController1));
+                    EulerAnglesaController1 = ToEulerAngles(GetVector((i_aController1), (j_aController1), (k_aCrossController1))) - InitEulerAnglesaController1;
+                    EulerAnglesbController1 = (ToEulerAngles(GetVector((i_bController1), (j_bCrossController1), (k_bController1)))) - InitEulerAnglesbController1;
+                    Controller1GyroX = (EulerAnglesbController1.X - EulerAnglesbController1.Y) * 66666666f;
+                    Controller1GyroY = EulerAnglesaController1.Z * 66666666f;
                     if (Controller1GyroCenter | (int)Controller1GyroX == 0)
                     {
                         j_bCrossController1 = new Vector3(0, 1, 0);
                         j_bController1.X = 0f;
                         j_bController1.Z = 0f;
-                        InitEulerAnglesbController1 = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bController1), Vector3.Normalize(j_bCrossController1), Vector3.Normalize(k_bController1))));
+                        InitEulerAnglesbController1 = (ToEulerAngles(GetVector((i_bController1), (j_bCrossController1), (k_bController1))));
                     }
                     if (Controller1GyroCenter | (int)Controller1GyroY == 0)
                     {
                         k_aCrossController1 = new Vector3(0, 0, 1);
                         k_aController1.X = 0f;
-                        InitEulerAnglesaController1 = ToEulerAngles(GetVector(Vector3.Normalize(i_aController1), Vector3.Normalize(j_aController1), Vector3.Normalize(k_aCrossController1)));
+                        InitEulerAnglesaController1 = ToEulerAngles(GetVector((i_aController1), (j_aController1), (k_aCrossController1)));
                     }
                 }
                 else if (gyromode == 2)
@@ -4193,8 +4224,8 @@ namespace PGM
                     j_bCrossController1 = Vector3.Cross(gyr_gController1, (j_bController1)) * 10f;
                     EulerAnglesaController1 = ToEulerAngles(GetVector((i_aController1), (j_aController1), (k_aCrossController1))) - InitEulerAnglesaController1;
                     EulerAnglesbController1 = (ToEulerAngles(GetVector((i_bController1), (j_bCrossController1), (k_bController1)))) - InitEulerAnglesbController1;
-                    Controller1GyroX = (EulerAnglesbController1.X - EulerAnglesbController1.Y) * 22222222f;
-                    Controller1GyroY = EulerAnglesaController1.Z * 22222222f;
+                    Controller1GyroX = (EulerAnglesbController1.X - EulerAnglesbController1.Y) * 66666666f;
+                    Controller1GyroY = EulerAnglesaController1.Z * 66666666f;
                     if (Controller1GyroCenter | (int)Controller1GyroX == 0)
                     {
                         j_bCrossController1 = new Vector3(0, 1, 0);
@@ -4228,8 +4259,8 @@ namespace PGM
             if (gyromode == 1 | gyromode == 2)
             {
                 gyr_gController2.X = 0;
-                gyr_gController2.Y = -(float)Math.Round((Int16)Controller2ThumbRightY / 666666666f, 7);
-                gyr_gController2.Z = -(float)Math.Round((Int16)Controller2ThumbRightX / 666666666f, 7);
+                gyr_gController2.Y = -(float)Math.Round((Int16)Controller2ThumbRightY / 2222222222f, 7);
+                gyr_gController2.Z = -(float)Math.Round((Int16)Controller2ThumbRightX / 2222222222f, 7);
                 i_aController2 = new Vector3(1, 0, 0);
                 j_aController2 = new Vector3(0, 1, 0);
                 k_aController2.Y = 0f;
@@ -4239,24 +4270,24 @@ namespace PGM
                 k_bController2 = new Vector3(0, 0, 1);
                 if (gyromode == 1)
                 {
-                    k_aCrossController2 += Vector3.Cross(gyr_gController2, Vector3.Normalize(k_aController2));
-                    j_bCrossController2 += Vector3.Cross(gyr_gController2, Vector3.Normalize(j_bController2));
-                    EulerAnglesaController2 = ToEulerAngles(GetVector(Vector3.Normalize(i_aController2), Vector3.Normalize(j_aController2), Vector3.Normalize(k_aCrossController2))) - InitEulerAnglesaController2;
-                    EulerAnglesbController2 = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bController2), Vector3.Normalize(j_bCrossController2), Vector3.Normalize(k_bController2)))) - InitEulerAnglesbController2;
-                    Controller2GyroX = (EulerAnglesbController2.X - EulerAnglesbController2.Y) * 22222222f;
-                    Controller2GyroY = EulerAnglesaController2.Z * 22222222f;
+                    k_aCrossController2 += Vector3.Cross(gyr_gController2, (k_aController2));
+                    j_bCrossController2 += Vector3.Cross(gyr_gController2, (j_bController2));
+                    EulerAnglesaController2 = ToEulerAngles(GetVector((i_aController2), (j_aController2), (k_aCrossController2))) - InitEulerAnglesaController2;
+                    EulerAnglesbController2 = (ToEulerAngles(GetVector((i_bController2), (j_bCrossController2), (k_bController2)))) - InitEulerAnglesbController2;
+                    Controller2GyroX = (EulerAnglesbController2.X - EulerAnglesbController2.Y) * 66666666f;
+                    Controller2GyroY = EulerAnglesaController2.Z * 66666666f;
                     if (Controller2GyroCenter | (int)Controller2GyroX == 0)
                     {
                         j_bCrossController2 = new Vector3(0, 1, 0);
                         j_bController2.X = 0f;
                         j_bController2.Z = 0f;
-                        InitEulerAnglesbController2 = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bController2), Vector3.Normalize(j_bCrossController2), Vector3.Normalize(k_bController2))));
+                        InitEulerAnglesbController2 = (ToEulerAngles(GetVector((i_bController2), (j_bCrossController2), (k_bController2))));
                     }
                     if (Controller2GyroCenter | (int)Controller2GyroY == 0)
                     {
                         k_aCrossController2 = new Vector3(0, 0, 1);
                         k_aController2.X = 0f;
-                        InitEulerAnglesaController2 = ToEulerAngles(GetVector(Vector3.Normalize(i_aController2), Vector3.Normalize(j_aController2), Vector3.Normalize(k_aCrossController2)));
+                        InitEulerAnglesaController2 = ToEulerAngles(GetVector((i_aController2), (j_aController2), (k_aCrossController2)));
                     }
                 }
                 else if (gyromode == 2)
@@ -4265,8 +4296,8 @@ namespace PGM
                     j_bCrossController2 = Vector3.Cross(gyr_gController2, (j_bController2)) * 10f;
                     EulerAnglesaController2 = ToEulerAngles(GetVector((i_aController2), (j_aController2), (k_aCrossController2))) - InitEulerAnglesaController2;
                     EulerAnglesbController2 = (ToEulerAngles(GetVector((i_bController2), (j_bCrossController2), (k_bController2)))) - InitEulerAnglesbController2;
-                    Controller2GyroX = (EulerAnglesbController2.X - EulerAnglesbController2.Y) * 22222222f;
-                    Controller2GyroY = EulerAnglesaController2.Z * 22222222f;
+                    Controller2GyroX = (EulerAnglesbController2.X - EulerAnglesbController2.Y) * 66666666f;
+                    Controller2GyroY = EulerAnglesaController2.Z * 66666666f;
                     if (Controller2GyroCenter | (int)Controller2GyroX == 0)
                     {
                         j_bCrossController2 = new Vector3(0, 1, 0);
@@ -8482,6 +8513,8 @@ namespace PGM
         public static extern bool wiimotejoyconleftconnect();
         [DllImport("MotionInputPairing.dll", EntryPoint = "wiimotejoyconrightconnect")]
         public static extern bool wiimotejoyconrightconnect();
+        [DllImport("MotionInputPairing.dll", EntryPoint = "wiimotejoyconsconnect")]
+        public static extern bool wiimotejoyconsconnect();
         [DllImport("MotionInputPairing.dll", EntryPoint = "joyconleftdisconnect")]
         public static extern bool joyconleftdisconnect();
         [DllImport("MotionInputPairing.dll", EntryPoint = "joyconrightdisconnect")]
@@ -8671,9 +8704,9 @@ namespace PGM
                 JoyconLeftAccelY = -DirectAnglesLeft.Y * 1350f;
                 if (gyromode != 1 & gyromode != 2)
                 {
-                    gyr_gLeft.X = ((Int16)(report_bufLeft[19 + 0 * 12] | ((report_bufLeft[20 + 0 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufLeft[19 + 1 * 12] | ((report_bufLeft[20 + 1 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufLeft[19 + 2 * 12] | ((report_bufLeft[20 + 2 * 12] << 8) & 0xff00)) - 20);
-                    gyr_gLeft.Y = ((Int16)(report_bufLeft[21 + 0 * 12] | ((report_bufLeft[22 + 0 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufLeft[21 + 1 * 12] | ((report_bufLeft[22 + 1 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufLeft[21 + 2 * 12] | ((report_bufLeft[22 + 2 * 12] << 8) & 0xff00)) - 4);
-                    gyr_gLeft.Z = ((Int16)(report_bufLeft[23 + 0 * 12] | ((report_bufLeft[24 + 0 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufLeft[23 + 1 * 12] | ((report_bufLeft[24 + 1 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufLeft[23 + 2 * 12] | ((report_bufLeft[24 + 2 * 12] << 8) & 0xff00)) - 18);
+                    gyr_gLeft.X = ((Int16)(report_bufLeft[19 + 0 * 12] | ((report_bufLeft[20 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[19 + 1 * 12] | ((report_bufLeft[20 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[19 + 2 * 12] | ((report_bufLeft[20 + 2 * 12] << 8) & 0xff00)));
+                    gyr_gLeft.Y = ((Int16)(report_bufLeft[21 + 0 * 12] | ((report_bufLeft[22 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[21 + 1 * 12] | ((report_bufLeft[22 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[21 + 2 * 12] | ((report_bufLeft[22 + 2 * 12] << 8) & 0xff00)));
+                    gyr_gLeft.Z = ((Int16)(report_bufLeft[23 + 0 * 12] | ((report_bufLeft[24 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[23 + 1 * 12] | ((report_bufLeft[24 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[23 + 2 * 12] | ((report_bufLeft[24 + 2 * 12] << 8) & 0xff00)));
                     JoyconLeftGyroX = gyr_gLeft.Z;
                     JoyconLeftGyroY = gyr_gLeft.Y;
                 }
@@ -8684,9 +8717,9 @@ namespace PGM
         {
             if (gyromode == 1 | gyromode == 2)
             {
-                gyr_gLeft.X = (float)Math.Round(((Int16)(report_bufLeft[19 + 0 * 12] | ((report_bufLeft[20 + 0 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufLeft[19 + 1 * 12] | ((report_bufLeft[20 + 1 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufLeft[19 + 2 * 12] | ((report_bufLeft[20 + 2 * 12] << 8) & 0xff00)) - 20) / 666666666f, 7);
-                gyr_gLeft.Y = (float)Math.Round(((Int16)(report_bufLeft[21 + 0 * 12] | ((report_bufLeft[22 + 0 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufLeft[21 + 1 * 12] | ((report_bufLeft[22 + 1 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufLeft[21 + 2 * 12] | ((report_bufLeft[22 + 2 * 12] << 8) & 0xff00)) - 4) / 666666666f, 7);
-                gyr_gLeft.Z = (float)Math.Round(((Int16)(report_bufLeft[23 + 0 * 12] | ((report_bufLeft[24 + 0 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufLeft[23 + 1 * 12] | ((report_bufLeft[24 + 1 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufLeft[23 + 2 * 12] | ((report_bufLeft[24 + 2 * 12] << 8) & 0xff00)) - 18) / 666666666f, 7);
+                gyr_gLeft.X = (float)Math.Round(((Int16)(report_bufLeft[19 + 0 * 12] | ((report_bufLeft[20 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[19 + 1 * 12] | ((report_bufLeft[20 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[19 + 2 * 12] | ((report_bufLeft[20 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
+                gyr_gLeft.Y = (float)Math.Round(((Int16)(report_bufLeft[21 + 0 * 12] | ((report_bufLeft[22 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[21 + 1 * 12] | ((report_bufLeft[22 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[21 + 2 * 12] | ((report_bufLeft[22 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
+                gyr_gLeft.Z = (float)Math.Round(((Int16)(report_bufLeft[23 + 0 * 12] | ((report_bufLeft[24 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[23 + 1 * 12] | ((report_bufLeft[24 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufLeft[23 + 2 * 12] | ((report_bufLeft[24 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
                 i_aLeft = new Vector3(1, 0, 0);
                 j_aLeft = new Vector3(0, 1, 0);
                 k_aLeft.Y = 0f;
@@ -8696,24 +8729,24 @@ namespace PGM
                 k_bLeft = new Vector3(0, 0, 1);
                 if (gyromode == 1)
                 {
-                    k_aCrossLeft += Vector3.Cross(gyr_gLeft, Vector3.Normalize(k_aLeft));
-                    j_bCrossLeft += Vector3.Cross(gyr_gLeft, Vector3.Normalize(j_bLeft));
-                    EulerAnglesaLeft = ToEulerAngles(GetVector(Vector3.Normalize(i_aLeft), Vector3.Normalize(j_aLeft), Vector3.Normalize(k_aCrossLeft))) - InitEulerAnglesaLeft;
-                    EulerAnglesbLeft = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bLeft), Vector3.Normalize(j_bCrossLeft), Vector3.Normalize(k_bLeft)))) - InitEulerAnglesbLeft;
-                    JoyconLeftGyroX = (EulerAnglesbLeft.X - EulerAnglesbLeft.Y) * 22222222f;
-                    JoyconLeftGyroY = EulerAnglesaLeft.Z * 22222222f;
+                    k_aCrossLeft += Vector3.Cross(gyr_gLeft, (k_aLeft));
+                    j_bCrossLeft += Vector3.Cross(gyr_gLeft, (j_bLeft));
+                    EulerAnglesaLeft = ToEulerAngles(GetVector((i_aLeft), (j_aLeft), (k_aCrossLeft))) - InitEulerAnglesaLeft;
+                    EulerAnglesbLeft = (ToEulerAngles(GetVector((i_bLeft), (j_bCrossLeft), (k_bLeft)))) - InitEulerAnglesbLeft;
+                    JoyconLeftGyroX = (EulerAnglesbLeft.X - EulerAnglesbLeft.Y) * 66666666f;
+                    JoyconLeftGyroY = EulerAnglesaLeft.Z * 66666666f;
                     if (JoyconLeftGyroCenter | (int)JoyconLeftGyroX == 0)
                     {
                         j_bCrossLeft = new Vector3(0, 1, 0);
                         j_bLeft.X = 0f;
                         j_bLeft.Z = 0f;
-                        InitEulerAnglesbLeft = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bLeft), Vector3.Normalize(j_bCrossLeft), Vector3.Normalize(k_bLeft))));
+                        InitEulerAnglesbLeft = (ToEulerAngles(GetVector((i_bLeft), (j_bCrossLeft), (k_bLeft))));
                     }
                     if (JoyconLeftGyroCenter | (int)JoyconLeftGyroY == 0)
                     {
                         k_aCrossLeft = new Vector3(0, 0, 1);
                         k_aLeft.X = 0f;
-                        InitEulerAnglesaLeft = ToEulerAngles(GetVector(Vector3.Normalize(i_aLeft), Vector3.Normalize(j_aLeft), Vector3.Normalize(k_aCrossLeft)));
+                        InitEulerAnglesaLeft = ToEulerAngles(GetVector((i_aLeft), (j_aLeft), (k_aCrossLeft)));
                     }
                 }
                 else if (gyromode == 2)
@@ -8722,8 +8755,8 @@ namespace PGM
                     j_bCrossLeft = Vector3.Cross(gyr_gLeft, (j_bLeft)) * 10f;
                     EulerAnglesaLeft = ToEulerAngles(GetVector((i_aLeft), (j_aLeft), (k_aCrossLeft))) - InitEulerAnglesaLeft;
                     EulerAnglesbLeft = (ToEulerAngles(GetVector((i_bLeft), (j_bCrossLeft), (k_bLeft)))) - InitEulerAnglesbLeft;
-                    JoyconLeftGyroX = (EulerAnglesbLeft.X - EulerAnglesbLeft.Y) * 22222222f;
-                    JoyconLeftGyroY = EulerAnglesaLeft.Z * 22222222f;
+                    JoyconLeftGyroX = (EulerAnglesbLeft.X - EulerAnglesbLeft.Y) * 66666666f;
+                    JoyconLeftGyroY = EulerAnglesaLeft.Z * 66666666f;
                     if (JoyconLeftGyroCenter | (int)JoyconLeftGyroX == 0)
                     {
                         j_bCrossLeft = new Vector3(0, 1, 0);
@@ -8888,9 +8921,9 @@ namespace PGM
                 JoyconRightAccelY = -DirectAnglesRight.Y * 1350f;
                 if (gyromode != 1 & gyromode != 2)
                 {
-                    gyr_gRight.X = ((Int16)(report_bufRight[19 + 0 * 12] | ((report_bufRight[20 + 0 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufRight[19 + 1 * 12] | ((report_bufRight[20 + 1 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufRight[19 + 2 * 12] | ((report_bufRight[20 + 2 * 12] << 8) & 0xff00)) - 20);
-                    gyr_gRight.Y = ((Int16)(report_bufRight[21 + 0 * 12] | ((report_bufRight[22 + 0 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufRight[21 + 1 * 12] | ((report_bufRight[22 + 1 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufRight[21 + 2 * 12] | ((report_bufRight[22 + 2 * 12] << 8) & 0xff00)) - 4);
-                    gyr_gRight.Z = ((Int16)(report_bufRight[23 + 0 * 12] | ((report_bufRight[24 + 0 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufRight[23 + 1 * 12] | ((report_bufRight[24 + 1 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufRight[23 + 2 * 12] | ((report_bufRight[24 + 2 * 12] << 8) & 0xff00)) - 18);
+                    gyr_gRight.X = ((Int16)(report_bufRight[19 + 0 * 12] | ((report_bufRight[20 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[19 + 1 * 12] | ((report_bufRight[20 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[19 + 2 * 12] | ((report_bufRight[20 + 2 * 12] << 8) & 0xff00)));
+                    gyr_gRight.Y = ((Int16)(report_bufRight[21 + 0 * 12] | ((report_bufRight[22 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[21 + 1 * 12] | ((report_bufRight[22 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[21 + 2 * 12] | ((report_bufRight[22 + 2 * 12] << 8) & 0xff00)));
+                    gyr_gRight.Z = ((Int16)(report_bufRight[23 + 0 * 12] | ((report_bufRight[24 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[23 + 1 * 12] | ((report_bufRight[24 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[23 + 2 * 12] | ((report_bufRight[24 + 2 * 12] << 8) & 0xff00)));
                     JoyconRightGyroX = gyr_gRight.Z;
                     JoyconRightGyroY = gyr_gRight.Y;
                 }
@@ -8901,9 +8934,9 @@ namespace PGM
         {
             if (gyromode == 1 | gyromode == 2)
             {
-                gyr_gRight.X = (float)Math.Round(((Int16)(report_bufRight[19 + 0 * 12] | ((report_bufRight[20 + 0 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufRight[19 + 1 * 12] | ((report_bufRight[20 + 1 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufRight[19 + 2 * 12] | ((report_bufRight[20 + 2 * 12] << 8) & 0xff00)) - 20) / 666666666f, 7);
-                gyr_gRight.Y = (float)Math.Round(((Int16)(report_bufRight[21 + 0 * 12] | ((report_bufRight[22 + 0 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufRight[21 + 1 * 12] | ((report_bufRight[22 + 1 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufRight[21 + 2 * 12] | ((report_bufRight[22 + 2 * 12] << 8) & 0xff00)) - 4) / 666666666f, 7);
-                gyr_gRight.Z = (float)Math.Round(((Int16)(report_bufRight[23 + 0 * 12] | ((report_bufRight[24 + 0 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufRight[23 + 1 * 12] | ((report_bufRight[24 + 1 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufRight[23 + 2 * 12] | ((report_bufRight[24 + 2 * 12] << 8) & 0xff00)) - 18) / 666666666f, 7);
+                gyr_gRight.X = (float)Math.Round(((Int16)(report_bufRight[19 + 0 * 12] | ((report_bufRight[20 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[19 + 1 * 12] | ((report_bufRight[20 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[19 + 2 * 12] | ((report_bufRight[20 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
+                gyr_gRight.Y = (float)Math.Round(((Int16)(report_bufRight[21 + 0 * 12] | ((report_bufRight[22 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[21 + 1 * 12] | ((report_bufRight[22 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[21 + 2 * 12] | ((report_bufRight[22 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
+                gyr_gRight.Z = (float)Math.Round(((Int16)(report_bufRight[23 + 0 * 12] | ((report_bufRight[24 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[23 + 1 * 12] | ((report_bufRight[24 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufRight[23 + 2 * 12] | ((report_bufRight[24 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
                 i_aRight = new Vector3(1, 0, 0);
                 j_aRight = new Vector3(0, 1, 0);
                 k_aRight.Y = 0f;
@@ -8913,24 +8946,24 @@ namespace PGM
                 k_bRight = new Vector3(0, 0, 1);
                 if (gyromode == 1)
                 {
-                    k_aCrossRight += Vector3.Cross(gyr_gRight, Vector3.Normalize(k_aRight));
-                    j_bCrossRight += Vector3.Cross(gyr_gRight, Vector3.Normalize(j_bRight));
-                    EulerAnglesaRight = ToEulerAngles(GetVector(Vector3.Normalize(i_aRight), Vector3.Normalize(j_aRight), Vector3.Normalize(k_aCrossRight))) - InitEulerAnglesaRight;
-                    EulerAnglesbRight = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bRight), Vector3.Normalize(j_bCrossRight), Vector3.Normalize(k_bRight)))) - InitEulerAnglesbRight;
-                    JoyconRightGyroX = (EulerAnglesbRight.X - EulerAnglesbRight.Y) * 22222222f;
-                    JoyconRightGyroY = EulerAnglesaRight.Z * 22222222f;
+                    k_aCrossRight += Vector3.Cross(gyr_gRight, (k_aRight));
+                    j_bCrossRight += Vector3.Cross(gyr_gRight, (j_bRight));
+                    EulerAnglesaRight = ToEulerAngles(GetVector((i_aRight), (j_aRight), (k_aCrossRight))) - InitEulerAnglesaRight;
+                    EulerAnglesbRight = (ToEulerAngles(GetVector((i_bRight), (j_bCrossRight), (k_bRight)))) - InitEulerAnglesbRight;
+                    JoyconRightGyroX = (EulerAnglesbRight.X - EulerAnglesbRight.Y) * 66666666f;
+                    JoyconRightGyroY = EulerAnglesaRight.Z * 66666666f;
                     if (JoyconRightGyroCenter | (int)JoyconRightGyroX == 0)
                     {
                         j_bCrossRight = new Vector3(0, 1, 0);
                         j_bRight.X = 0f;
                         j_bRight.Z = 0f;
-                        InitEulerAnglesbRight = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bRight), Vector3.Normalize(j_bCrossRight), Vector3.Normalize(k_bRight))));
+                        InitEulerAnglesbRight = (ToEulerAngles(GetVector((i_bRight), (j_bCrossRight), (k_bRight))));
                     }
                     if (JoyconRightGyroCenter | (int)JoyconRightGyroY == 0)
                     {
                         k_aCrossRight = new Vector3(0, 0, 1);
                         k_aRight.X = 0f;
-                        InitEulerAnglesaRight = ToEulerAngles(GetVector(Vector3.Normalize(i_aRight), Vector3.Normalize(j_aRight), Vector3.Normalize(k_aCrossRight)));
+                        InitEulerAnglesaRight = ToEulerAngles(GetVector((i_aRight), (j_aRight), (k_aCrossRight)));
                     }
                 }
                 else if (gyromode == 2)
@@ -8939,8 +8972,8 @@ namespace PGM
                     j_bCrossRight = Vector3.Cross(gyr_gRight, (j_bRight)) * 10f;
                     EulerAnglesaRight = ToEulerAngles(GetVector((i_aRight), (j_aRight), (k_aCrossRight))) - InitEulerAnglesaRight;
                     EulerAnglesbRight = (ToEulerAngles(GetVector((i_bRight), (j_bCrossRight), (k_bRight)))) - InitEulerAnglesbRight;
-                    JoyconRightGyroX = (EulerAnglesbRight.X - EulerAnglesbRight.Y) * 22222222f;
-                    JoyconRightGyroY = EulerAnglesaRight.Z * 22222222f;
+                    JoyconRightGyroX = (EulerAnglesbRight.X - EulerAnglesbRight.Y) * 66666666f;
+                    JoyconRightGyroY = EulerAnglesaRight.Z * 66666666f;
                     if (JoyconRightGyroCenter | (int)JoyconRightGyroX == 0)
                     {
                         j_bCrossRight = new Vector3(0, 1, 0);
@@ -9128,9 +9161,9 @@ namespace PGM
                 ProControllerAccelY = -DirectAnglesPro.Y * 1350f;
                 if (gyromode != 1 & gyromode != 2)
                 {
-                    gyr_gPro.X = ((Int16)(report_bufPro[19 + 0 * 12] | ((report_bufPro[20 + 0 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufPro[19 + 1 * 12] | ((report_bufPro[20 + 1 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufPro[19 + 2 * 12] | ((report_bufPro[20 + 2 * 12] << 8) & 0xff00)) - 20);
-                    gyr_gPro.Y = ((Int16)(report_bufPro[21 + 0 * 12] | ((report_bufPro[22 + 0 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufPro[21 + 1 * 12] | ((report_bufPro[22 + 1 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufPro[21 + 2 * 12] | ((report_bufPro[22 + 2 * 12] << 8) & 0xff00)) - 4);
-                    gyr_gPro.Z = ((Int16)(report_bufPro[23 + 0 * 12] | ((report_bufPro[24 + 0 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufPro[23 + 1 * 12] | ((report_bufPro[24 + 1 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufPro[23 + 2 * 12] | ((report_bufPro[24 + 2 * 12] << 8) & 0xff00)) - 18);
+                    gyr_gPro.X = ((Int16)(report_bufPro[19 + 0 * 12] | ((report_bufPro[20 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[19 + 1 * 12] | ((report_bufPro[20 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[19 + 2 * 12] | ((report_bufPro[20 + 2 * 12] << 8) & 0xff00)));
+                    gyr_gPro.Y = ((Int16)(report_bufPro[21 + 0 * 12] | ((report_bufPro[22 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[21 + 1 * 12] | ((report_bufPro[22 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[21 + 2 * 12] | ((report_bufPro[22 + 2 * 12] << 8) & 0xff00)));
+                    gyr_gPro.Z = ((Int16)(report_bufPro[23 + 0 * 12] | ((report_bufPro[24 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[23 + 1 * 12] | ((report_bufPro[24 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[23 + 2 * 12] | ((report_bufPro[24 + 2 * 12] << 8) & 0xff00)));
                     ProControllerGyroX = gyr_gPro.Z;
                     ProControllerGyroY = gyr_gPro.Y;
                 }
@@ -9141,9 +9174,9 @@ namespace PGM
         {
             if (gyromode == 1 | gyromode == 2)
             {
-                gyr_gPro.X = (float)Math.Round(((Int16)(report_bufPro[19 + 0 * 12] | ((report_bufPro[20 + 0 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufPro[19 + 1 * 12] | ((report_bufPro[20 + 1 * 12] << 8) & 0xff00)) - 20 + (Int16)(report_bufPro[19 + 2 * 12] | ((report_bufPro[20 + 2 * 12] << 8) & 0xff00)) - 20) / 666666666f, 7);
-                gyr_gPro.Y = (float)Math.Round(((Int16)(report_bufPro[21 + 0 * 12] | ((report_bufPro[22 + 0 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufPro[21 + 1 * 12] | ((report_bufPro[22 + 1 * 12] << 8) & 0xff00)) - 4 + (Int16)(report_bufPro[21 + 2 * 12] | ((report_bufPro[22 + 2 * 12] << 8) & 0xff00)) - 4) / 666666666f, 7);
-                gyr_gPro.Z = (float)Math.Round(((Int16)(report_bufPro[23 + 0 * 12] | ((report_bufPro[24 + 0 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufPro[23 + 1 * 12] | ((report_bufPro[24 + 1 * 12] << 8) & 0xff00)) - 18 + (Int16)(report_bufPro[23 + 2 * 12] | ((report_bufPro[24 + 2 * 12] << 8) & 0xff00)) - 18) / 666666666f, 7);
+                gyr_gPro.X = (float)Math.Round(((Int16)(report_bufPro[19 + 0 * 12] | ((report_bufPro[20 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[19 + 1 * 12] | ((report_bufPro[20 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[19 + 2 * 12] | ((report_bufPro[20 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
+                gyr_gPro.Y = (float)Math.Round(((Int16)(report_bufPro[21 + 0 * 12] | ((report_bufPro[22 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[21 + 1 * 12] | ((report_bufPro[22 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[21 + 2 * 12] | ((report_bufPro[22 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
+                gyr_gPro.Z = (float)Math.Round(((Int16)(report_bufPro[23 + 0 * 12] | ((report_bufPro[24 + 0 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[23 + 1 * 12] | ((report_bufPro[24 + 1 * 12] << 8) & 0xff00)) + (Int16)(report_bufPro[23 + 2 * 12] | ((report_bufPro[24 + 2 * 12] << 8) & 0xff00))) / 2222222222f, 7);
                 i_aPro = new Vector3(1, 0, 0);
                 j_aPro = new Vector3(0, 1, 0);
                 k_aPro.Y = 0f;
@@ -9153,24 +9186,24 @@ namespace PGM
                 k_bPro = new Vector3(0, 0, 1);
                 if (gyromode == 1)
                 {
-                    k_aCrossPro += Vector3.Cross(gyr_gPro, Vector3.Normalize(k_aPro));
-                    j_bCrossPro += Vector3.Cross(gyr_gPro, Vector3.Normalize(j_bPro));
-                    EulerAnglesaPro = ToEulerAngles(GetVector(Vector3.Normalize(i_aPro), Vector3.Normalize(j_aPro), Vector3.Normalize(k_aCrossPro))) - InitEulerAnglesaPro;
-                    EulerAnglesbPro = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bPro), Vector3.Normalize(j_bCrossPro), Vector3.Normalize(k_bPro)))) - InitEulerAnglesbPro;
-                    ProControllerGyroX = (EulerAnglesbPro.X - EulerAnglesbPro.Y) * 22222222f;
-                    ProControllerGyroY = EulerAnglesaPro.Z * 22222222f;
+                    k_aCrossPro += Vector3.Cross(gyr_gPro, (k_aPro));
+                    j_bCrossPro += Vector3.Cross(gyr_gPro, (j_bPro));
+                    EulerAnglesaPro = ToEulerAngles(GetVector((i_aPro), (j_aPro), (k_aCrossPro))) - InitEulerAnglesaPro;
+                    EulerAnglesbPro = (ToEulerAngles(GetVector((i_bPro), (j_bCrossPro), (k_bPro)))) - InitEulerAnglesbPro;
+                    ProControllerGyroX = (EulerAnglesbPro.X - EulerAnglesbPro.Y) * 66666666f;
+                    ProControllerGyroY = EulerAnglesaPro.Z * 66666666f;
                     if (ProControllerGyroCenter | (int)ProControllerGyroX == 0)
                     {
                         j_bCrossPro = new Vector3(0, 1, 0);
                         j_bPro.X = 0f;
                         j_bPro.Z = 0f;
-                        InitEulerAnglesbPro = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bPro), Vector3.Normalize(j_bCrossPro), Vector3.Normalize(k_bPro))));
+                        InitEulerAnglesbPro = (ToEulerAngles(GetVector((i_bPro), (j_bCrossPro), (k_bPro))));
                     }
                     if (ProControllerGyroCenter | (int)ProControllerGyroY == 0)
                     {
                         k_aCrossPro = new Vector3(0, 0, 1);
                         k_aPro.X = 0f;
-                        InitEulerAnglesaPro = ToEulerAngles(GetVector(Vector3.Normalize(i_aPro), Vector3.Normalize(j_aPro), Vector3.Normalize(k_aCrossPro)));
+                        InitEulerAnglesaPro = ToEulerAngles(GetVector((i_aPro), (j_aPro), (k_aCrossPro)));
                     }
                 }
                 else if (gyromode == 2)
@@ -9179,8 +9212,8 @@ namespace PGM
                     j_bCrossPro = Vector3.Cross(gyr_gPro, (j_bPro)) * 10f;
                     EulerAnglesaPro = ToEulerAngles(GetVector((i_aPro), (j_aPro), (k_aCrossPro))) - InitEulerAnglesaPro;
                     EulerAnglesbPro = (ToEulerAngles(GetVector((i_bPro), (j_bCrossPro), (k_bPro)))) - InitEulerAnglesbPro;
-                    ProControllerGyroX = (EulerAnglesbPro.X - EulerAnglesbPro.Y) * 22222222f;
-                    ProControllerGyroY = EulerAnglesaPro.Z * 22222222f;
+                    ProControllerGyroX = (EulerAnglesbPro.X - EulerAnglesbPro.Y) * 66666666f;
+                    ProControllerGyroY = EulerAnglesaPro.Z * 66666666f;
                     if (ProControllerGyroCenter | (int)ProControllerGyroX == 0)
                     {
                         j_bCrossPro = new Vector3(0, 1, 0);
@@ -9611,24 +9644,24 @@ namespace PGM
                 k_bPS5 = new Vector3(0, 0, 1);
                 if (gyromode == 1)
                 {
-                    k_aCrossPS5 += Vector3.Cross(gyr_gPS5, Vector3.Normalize(k_aPS5));
-                    j_bCrossPS5 += Vector3.Cross(gyr_gPS5, Vector3.Normalize(j_bPS5));
-                    EulerAnglesaPS5 = ToEulerAngles(GetVector(Vector3.Normalize(i_aPS5), Vector3.Normalize(j_aPS5), Vector3.Normalize(k_aCrossPS5))) - InitEulerAnglesaPS5;
-                    EulerAnglesbPS5 = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bPS5), Vector3.Normalize(j_bCrossPS5), Vector3.Normalize(k_bPS5)))) - InitEulerAnglesbPS5;
-                    PS5ControllerGyroX = (EulerAnglesbPS5.X + EulerAnglesbPS5.Y) * 22222222f;
-                    PS5ControllerGyroY = EulerAnglesaPS5.Z * 22222222f;
+                    k_aCrossPS5 += Vector3.Cross(gyr_gPS5, (k_aPS5));
+                    j_bCrossPS5 += Vector3.Cross(gyr_gPS5, (j_bPS5));
+                    EulerAnglesaPS5 = ToEulerAngles(GetVector((i_aPS5), (j_aPS5), (k_aCrossPS5))) - InitEulerAnglesaPS5;
+                    EulerAnglesbPS5 = (ToEulerAngles(GetVector((i_bPS5), (j_bCrossPS5), (k_bPS5)))) - InitEulerAnglesbPS5;
+                    PS5ControllerGyroX = (EulerAnglesbPS5.X + EulerAnglesbPS5.Y) * 66666666f;
+                    PS5ControllerGyroY = EulerAnglesaPS5.Z * 66666666f;
                     if (PS5ControllerGyroCenter | (int)PS5ControllerGyroX == 0)
                     {
                         j_bCrossPS5 = new Vector3(0, 1, 0);
                         j_bPS5.X = 0f;
                         j_bPS5.Z = 0f;
-                        InitEulerAnglesbPS5 = Vector3.Normalize(ToEulerAngles(GetVector(Vector3.Normalize(i_bPS5), Vector3.Normalize(j_bCrossPS5), Vector3.Normalize(k_bPS5))));
+                        InitEulerAnglesbPS5 = (ToEulerAngles(GetVector((i_bPS5), (j_bCrossPS5), (k_bPS5))));
                     }
                     if (PS5ControllerGyroCenter | (int)PS5ControllerGyroY == 0)
                     {
                         k_aCrossPS5 = new Vector3(0, 0, 1);
                         k_aPS5.X = 0f;
-                        InitEulerAnglesaPS5 = ToEulerAngles(GetVector(Vector3.Normalize(i_aPS5), Vector3.Normalize(j_aPS5), Vector3.Normalize(k_aCrossPS5)));
+                        InitEulerAnglesaPS5 = ToEulerAngles(GetVector((i_aPS5), (j_aPS5), (k_aCrossPS5)));
                     }
                 }
                 else if (gyromode == 2)
@@ -9637,8 +9670,8 @@ namespace PGM
                     j_bCrossPS5 = Vector3.Cross(gyr_gPS5, (j_bPS5)) * 10f;
                     EulerAnglesaPS5 = ToEulerAngles(GetVector((i_aPS5), (j_aPS5), (k_aCrossPS5))) - InitEulerAnglesaPS5;
                     EulerAnglesbPS5 = (ToEulerAngles(GetVector((i_bPS5), (j_bCrossPS5), (k_bPS5)))) - InitEulerAnglesbPS5;
-                    PS5ControllerGyroX = (EulerAnglesbPS5.X + EulerAnglesbPS5.Y) * 22222222f;
-                    PS5ControllerGyroY = EulerAnglesaPS5.Z * 22222222f;
+                    PS5ControllerGyroX = (EulerAnglesbPS5.X + EulerAnglesbPS5.Y) * 66666666f;
+                    PS5ControllerGyroY = EulerAnglesaPS5.Z * 66666666f;
                     if (PS5ControllerGyroCenter | (int)PS5ControllerGyroX == 0)
                     {
                         j_bCrossPS5 = new Vector3(0, 1, 0);
@@ -9668,9 +9701,9 @@ namespace PGM
             PS5ControllerTouchOn = dss.Touchpad1.IsDown;
             if (gyromode == 1 | gyromode == 2)
             {
-                gyr_gPS5.X = (float)Math.Round((dss.Gyro.Z - 1) / 333333333f, 7);
-                gyr_gPS5.Y = -(float)Math.Round((dss.Gyro.X - 6) / 333333333f, 7);
-                gyr_gPS5.Z = -(float)Math.Round((dss.Gyro.Y - 5) / 333333333f, 7);
+                gyr_gPS5.X = (float)Math.Round((dss.Gyro.Z - 1) / 366666666f, 7);
+                gyr_gPS5.Y = -(float)Math.Round((dss.Gyro.X - 6) / 366666666f, 7);
+                gyr_gPS5.Z = -(float)Math.Round((dss.Gyro.Y - 5) / 366666666f, 7);
             }
             else
             {

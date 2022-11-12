@@ -78,12 +78,15 @@
             this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             this.autocompleteMenu1 = new AutocompleteMenuNS.AutocompleteMenu();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.connectWiimoteJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disconnectWiimoteJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -93,7 +96,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -105,14 +108,14 @@
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -120,7 +123,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -128,14 +131,14 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -149,14 +152,14 @@
             this.undoToolStripMenuItem,
             this.redoToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
@@ -164,7 +167,7 @@
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -172,20 +175,20 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(176, 6);
             // 
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -193,7 +196,7 @@
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -206,6 +209,7 @@
             this.connectBothJoyconsToolStripMenuItem,
             this.connectWiimoteJoyconLeftToolStripMenuItem,
             this.connectWiimoteJoyconRightToolStripMenuItem,
+            this.connectWiimoteJoyconsToolStripMenuItem,
             this.connectProControllerToolStripMenuItem,
             this.toolStripSeparator2,
             this.disconnectWiimoteToolStripMenuItem,
@@ -214,111 +218,112 @@
             this.disconnectBothJoyconsToolStripMenuItem,
             this.disconnectWiimoteJoyconLeftToolStripMenuItem,
             this.disconnectWiimoteJoyconRightToolStripMenuItem,
+            this.disconnectWiimoteJoyconsToolStripMenuItem,
             this.disconnectProControllerToolStripMenuItem});
             this.deviceToolStripMenuItem.Name = "deviceToolStripMenuItem";
-            this.deviceToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.deviceToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.deviceToolStripMenuItem.Text = "Device";
             // 
             // connectWiimoteToolStripMenuItem
             // 
             this.connectWiimoteToolStripMenuItem.Name = "connectWiimoteToolStripMenuItem";
-            this.connectWiimoteToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.connectWiimoteToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.connectWiimoteToolStripMenuItem.Text = "Connect Wiimote";
             this.connectWiimoteToolStripMenuItem.Click += new System.EventHandler(this.connectWiimoteToolStripMenuItem_Click);
             // 
             // connectJoyconLeftToolStripMenuItem
             // 
             this.connectJoyconLeftToolStripMenuItem.Name = "connectJoyconLeftToolStripMenuItem";
-            this.connectJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.connectJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.connectJoyconLeftToolStripMenuItem.Text = "Connect Joycon left";
             this.connectJoyconLeftToolStripMenuItem.Click += new System.EventHandler(this.connectJoyconLeftToolStripMenuItem_Click);
             // 
             // connectJoyconRightToolStripMenuItem
             // 
             this.connectJoyconRightToolStripMenuItem.Name = "connectJoyconRightToolStripMenuItem";
-            this.connectJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.connectJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.connectJoyconRightToolStripMenuItem.Text = "Connect Joycon right";
             this.connectJoyconRightToolStripMenuItem.Click += new System.EventHandler(this.connectJoyconRightToolStripMenuItem_Click);
             // 
             // connectBothJoyconsToolStripMenuItem
             // 
             this.connectBothJoyconsToolStripMenuItem.Name = "connectBothJoyconsToolStripMenuItem";
-            this.connectBothJoyconsToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.connectBothJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.connectBothJoyconsToolStripMenuItem.Text = "Connect both Joycons";
             this.connectBothJoyconsToolStripMenuItem.Click += new System.EventHandler(this.connectBothJoyconsToolStripMenuItem_Click);
             // 
             // connectWiimoteJoyconLeftToolStripMenuItem
             // 
             this.connectWiimoteJoyconLeftToolStripMenuItem.Name = "connectWiimoteJoyconLeftToolStripMenuItem";
-            this.connectWiimoteJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.connectWiimoteJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.connectWiimoteJoyconLeftToolStripMenuItem.Text = "Connect Wiimote Joycon left";
             this.connectWiimoteJoyconLeftToolStripMenuItem.Click += new System.EventHandler(this.connectWiimoteJoyconLeftToolStripMenuItem_Click);
             // 
             // connectWiimoteJoyconRightToolStripMenuItem
             // 
             this.connectWiimoteJoyconRightToolStripMenuItem.Name = "connectWiimoteJoyconRightToolStripMenuItem";
-            this.connectWiimoteJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.connectWiimoteJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.connectWiimoteJoyconRightToolStripMenuItem.Text = "Connect Wiimote Joycon right";
             this.connectWiimoteJoyconRightToolStripMenuItem.Click += new System.EventHandler(this.connectWiimoteJoyconRightToolStripMenuItem_Click);
             // 
             // connectProControllerToolStripMenuItem
             // 
             this.connectProControllerToolStripMenuItem.Name = "connectProControllerToolStripMenuItem";
-            this.connectProControllerToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.connectProControllerToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.connectProControllerToolStripMenuItem.Text = "Connect Pro Controller";
             this.connectProControllerToolStripMenuItem.Click += new System.EventHandler(this.connectProControllerToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(246, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(307, 6);
             // 
             // disconnectWiimoteToolStripMenuItem
             // 
             this.disconnectWiimoteToolStripMenuItem.Name = "disconnectWiimoteToolStripMenuItem";
-            this.disconnectWiimoteToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.disconnectWiimoteToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectWiimoteToolStripMenuItem.Text = "Disconnect Wiimote";
             this.disconnectWiimoteToolStripMenuItem.Click += new System.EventHandler(this.disconnectWiimoteToolStripMenuItem_Click);
             // 
             // disconnectJoyconLeftToolStripMenuItem
             // 
             this.disconnectJoyconLeftToolStripMenuItem.Name = "disconnectJoyconLeftToolStripMenuItem";
-            this.disconnectJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.disconnectJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectJoyconLeftToolStripMenuItem.Text = "Disconnect Joycon left";
             this.disconnectJoyconLeftToolStripMenuItem.Click += new System.EventHandler(this.disconnectJoyconLeftToolStripMenuItem_Click);
             // 
             // disconnectJoyconRightToolStripMenuItem
             // 
             this.disconnectJoyconRightToolStripMenuItem.Name = "disconnectJoyconRightToolStripMenuItem";
-            this.disconnectJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.disconnectJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectJoyconRightToolStripMenuItem.Text = "Disconnect Joycon right";
             this.disconnectJoyconRightToolStripMenuItem.Click += new System.EventHandler(this.disconnectJoyconRightToolStripMenuItem_Click);
             // 
             // disconnectBothJoyconsToolStripMenuItem
             // 
             this.disconnectBothJoyconsToolStripMenuItem.Name = "disconnectBothJoyconsToolStripMenuItem";
-            this.disconnectBothJoyconsToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.disconnectBothJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectBothJoyconsToolStripMenuItem.Text = "Disconnect both Joycons";
             this.disconnectBothJoyconsToolStripMenuItem.Click += new System.EventHandler(this.disconnectBothJoyconsToolStripMenuItem_Click);
             // 
             // disconnectWiimoteJoyconLeftToolStripMenuItem
             // 
             this.disconnectWiimoteJoyconLeftToolStripMenuItem.Name = "disconnectWiimoteJoyconLeftToolStripMenuItem";
-            this.disconnectWiimoteJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.disconnectWiimoteJoyconLeftToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectWiimoteJoyconLeftToolStripMenuItem.Text = "Disconnect Wiimote Joycon left";
             this.disconnectWiimoteJoyconLeftToolStripMenuItem.Click += new System.EventHandler(this.disconnectWiimoteJoyconLeftToolStripMenuItem_Click);
             // 
             // disconnectWiimoteJoyconRightToolStripMenuItem
             // 
             this.disconnectWiimoteJoyconRightToolStripMenuItem.Name = "disconnectWiimoteJoyconRightToolStripMenuItem";
-            this.disconnectWiimoteJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.disconnectWiimoteJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectWiimoteJoyconRightToolStripMenuItem.Text = "Disconnect Wiimote Joycon right";
             this.disconnectWiimoteJoyconRightToolStripMenuItem.Click += new System.EventHandler(this.disconnectWiimoteJoyconRightToolStripMenuItem_Click);
             // 
             // disconnectProControllerToolStripMenuItem
             // 
             this.disconnectProControllerToolStripMenuItem.Name = "disconnectProControllerToolStripMenuItem";
-            this.disconnectProControllerToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.disconnectProControllerToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectProControllerToolStripMenuItem.Text = "Disconnect Pro Controller";
             this.disconnectProControllerToolStripMenuItem.Click += new System.EventHandler(this.disconnectProControllerToolStripMenuItem_Click);
             // 
@@ -328,14 +333,14 @@
             this.runToolStripMenuItem,
             this.testToolStripMenuItem});
             this.processToolStripMenuItem.Name = "processToolStripMenuItem";
-            this.processToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.processToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
             this.processToolStripMenuItem.Text = "Process";
             // 
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
             this.runToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
@@ -343,7 +348,7 @@
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
@@ -360,67 +365,67 @@
             this.xboxOutputsToolStripMenuItem,
             this.extraOutputsToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.dataToolStripMenuItem.Text = "Data";
             // 
             // webcamToolStripMenuItem
             // 
             this.webcamToolStripMenuItem.Name = "webcamToolStripMenuItem";
-            this.webcamToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.webcamToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.webcamToolStripMenuItem.Text = "Webcam Inputs";
             this.webcamToolStripMenuItem.Click += new System.EventHandler(this.webcamToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(157, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem3.Text = "Classic Inputs";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(157, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem4.Text = "X Inputs";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(157, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem5.Text = "Direct Inputs";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // inputsToolStripMenuItem
             // 
             this.inputsToolStripMenuItem.Name = "inputsToolStripMenuItem";
-            this.inputsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.inputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.inputsToolStripMenuItem.Text = "Extra Inputs";
             this.inputsToolStripMenuItem.Click += new System.EventHandler(this.inputsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(191, 6);
             // 
             // outputsToolStripMenuItem
             // 
             this.outputsToolStripMenuItem.Name = "outputsToolStripMenuItem";
-            this.outputsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.outputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.outputsToolStripMenuItem.Text = "Classic Outputs";
             this.outputsToolStripMenuItem.Click += new System.EventHandler(this.outputsToolStripMenuItem_Click);
             // 
             // xboxOutputsToolStripMenuItem
             // 
             this.xboxOutputsToolStripMenuItem.Name = "xboxOutputsToolStripMenuItem";
-            this.xboxOutputsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.xboxOutputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.xboxOutputsToolStripMenuItem.Text = "X Outputs";
             this.xboxOutputsToolStripMenuItem.Click += new System.EventHandler(this.xboxOutputsToolStripMenuItem_Click);
             // 
             // extraOutputsToolStripMenuItem
             // 
             this.extraOutputsToolStripMenuItem.Name = "extraOutputsToolStripMenuItem";
-            this.extraOutputsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.extraOutputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.extraOutputsToolStripMenuItem.Text = "Extra Outputs";
             this.extraOutputsToolStripMenuItem.Click += new System.EventHandler(this.extraOutputsToolStripMenuItem_Click);
             // 
@@ -430,20 +435,20 @@
             this.helpToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(30, 24);
             this.toolStripMenuItem1.Text = "?";
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -463,27 +468,27 @@
             this.autocompleteMenu1.SetAutocompleteMenu(this.fastColoredTextBox1, this.autocompleteMenu1);
             this.fastColoredTextBox1.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n^\\s*(case|default)\\s*[^:]" +
     "*(?<range>:)\\s*(?<range>[^;]+);\r\n";
-            this.fastColoredTextBox1.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fastColoredTextBox1.AutoScrollMinSize = new System.Drawing.Size(31, 18);
             this.fastColoredTextBox1.BackBrush = null;
             this.fastColoredTextBox1.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
-            this.fastColoredTextBox1.CharHeight = 14;
-            this.fastColoredTextBox1.CharWidth = 8;
+            this.fastColoredTextBox1.CharHeight = 18;
+            this.fastColoredTextBox1.CharWidth = 10;
             this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.CSharp;
             this.fastColoredTextBox1.LeftBracket = '(';
             this.fastColoredTextBox1.LeftBracket2 = '{';
-            this.fastColoredTextBox1.Location = new System.Drawing.Point(0, 24);
+            this.fastColoredTextBox1.Location = new System.Drawing.Point(0, 28);
+            this.fastColoredTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.fastColoredTextBox1.Name = "fastColoredTextBox1";
             this.fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
             this.fastColoredTextBox1.RightBracket = ')';
             this.fastColoredTextBox1.RightBracket2 = '}';
             this.fastColoredTextBox1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fastColoredTextBox1.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fastColoredTextBox1.ServiceColors")));
-            this.fastColoredTextBox1.Size = new System.Drawing.Size(800, 426);
+            this.fastColoredTextBox1.Size = new System.Drawing.Size(1067, 526);
             this.fastColoredTextBox1.TabIndex = 1;
             this.fastColoredTextBox1.Zoom = 100;
             this.fastColoredTextBox1.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.fastColoredTextBox1_TextChanged);
@@ -1726,15 +1731,30 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // connectWiimoteJoyconsToolStripMenuItem
+            // 
+            this.connectWiimoteJoyconsToolStripMenuItem.Name = "connectWiimoteJoyconsToolStripMenuItem";
+            this.connectWiimoteJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.connectWiimoteJoyconsToolStripMenuItem.Text = "Connect Wiimote Joycons";
+            this.connectWiimoteJoyconsToolStripMenuItem.Click += new System.EventHandler(this.connectWiimoteJoyconsToolStripMenuItem_Click);
+            // 
+            // disconnectWiimoteJoyconsToolStripMenuItem
+            // 
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Name = "disconnectWiimoteJoyconsToolStripMenuItem";
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Text = "Disconnect Wiimote Joycons";
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Click += new System.EventHandler(this.disconnectWiimoteJoyconsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.fastColoredTextBox1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProGamingMapper";
@@ -1800,6 +1820,8 @@
         private System.Windows.Forms.ToolStripMenuItem disconnectWiimoteJoyconRightToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectProControllerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disconnectProControllerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectWiimoteJoyconsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disconnectWiimoteJoyconsToolStripMenuItem;
     }
 }
 
