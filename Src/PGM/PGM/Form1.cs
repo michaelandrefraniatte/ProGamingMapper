@@ -4187,8 +4187,8 @@ namespace PGM
             if (gyromode == 1 | gyromode == 2)
             {
                 gyr_gController1.X = 0;
-                gyr_gController1.Y = -(float)Math.Round((Int16)Controller1ThumbRightY / 2222222222f, 7);
-                gyr_gController1.Z = -(float)Math.Round((Int16)Controller1ThumbRightX / 2222222222f, 7);
+                gyr_gController1.Y = -(float)Math.Round((Int16)Controller1ThumbRightY / 2222222222f * 2f, 7);
+                gyr_gController1.Z = -(float)Math.Round((Int16)Controller1ThumbRightX / 2222222222f * 2f, 7);
                 i_aController1 = new Vector3(1, 0, 0);
                 j_aController1 = new Vector3(0, 1, 0);
                 k_aController1.Y = 0f;
@@ -4259,8 +4259,8 @@ namespace PGM
             if (gyromode == 1 | gyromode == 2)
             {
                 gyr_gController2.X = 0;
-                gyr_gController2.Y = -(float)Math.Round((Int16)Controller2ThumbRightY / 2222222222f, 7);
-                gyr_gController2.Z = -(float)Math.Round((Int16)Controller2ThumbRightX / 2222222222f, 7);
+                gyr_gController2.Y = -(float)Math.Round((Int16)Controller2ThumbRightY / 2222222222f * 2f, 7);
+                gyr_gController2.Z = -(float)Math.Round((Int16)Controller2ThumbRightX / 2222222222f * 2f, 7);
                 i_aController2 = new Vector3(1, 0, 0);
                 j_aController2 = new Vector3(0, 1, 0);
                 k_aController2.Y = 0f;
@@ -9701,9 +9701,9 @@ namespace PGM
             PS5ControllerTouchOn = dss.Touchpad1.IsDown;
             if (gyromode == 1 | gyromode == 2)
             {
-                gyr_gPS5.X = (float)Math.Round(dss.Gyro.Z / 2222222222f, 7);
-                gyr_gPS5.Y = -(float)Math.Round(dss.Gyro.X / 2222222222f, 7);
-                gyr_gPS5.Z = -(float)Math.Round(dss.Gyro.Y / 2222222222f, 7);
+                gyr_gPS5.X = (float)Math.Round(dss.Gyro.Z / 2222222222f * 2f, 7);
+                gyr_gPS5.Y = -(float)Math.Round(dss.Gyro.X / 2222222222f * 2f, 7);
+                gyr_gPS5.Z = -(float)Math.Round(dss.Gyro.Y / 2222222222f * 2f, 7);
             }
             else
             {
