@@ -1,17 +1,17 @@
-UsersAllowedList = new string[] { "michael113b" };
-EnableXC         = true;
-EnableJI         = true;
-double mousex    = 0f, mousey = 0f, viewpower1x = 0f, viewpower2x = 0f, viewpower3x = 1f, viewpower1y = 0f, viewpower2y = 0f, viewpower3y = 1f, dzx = 0f, dzy = 0f;
-if (irx >= 0f)
-    mousex = Scale(irx * irx * irx / 1024f / 1024f * viewpower3x + irx * irx / 1024f * viewpower2x + irx * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
-if (irx <= 0f)
-    mousex = Scale(-(-irx * -irx * -irx) / 1024f / 1024f * viewpower3x - (-irx * -irx) / 1024f * viewpower2x - (-irx) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
-if (iry >= 0f)
-    mousey = Scale(iry * iry * iry / 1024f / 1024f * viewpower3y + iry * iry / 1024f * viewpower2y + iry * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
-if (iry <= 0f)
-    mousey = Scale(-(-iry * -iry * -iry) / 1024f / 1024f * viewpower3y - (-iry * -iry) / 1024f * viewpower2y - (-iry) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
-controller1_send_rightstickx = -mousex / 1024f * 32767f;
-controller1_send_rightsticky = -mousey / 1024f * 32767f;
+UsersAllowedList   = new string[] { "michael113b" };
+EnableXC           = true;
+EnableJI           = true;
+double viewpower1x = 0f, viewpower2x = 0f, viewpower3x = 1f, viewpower1y = 0f, viewpower2y = 0f, viewpower3y = 1f, dzx = 0f, dzy = 0f;
+if (irx >= 0f & irx <= 1024f)
+    mousexp = Scale(irx * irx * irx / 1024f / 1024f * viewpower3x + irx * irx / 1024f * viewpower2x + irx * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (irx <= 0f & irx >= -1024f)
+    mousexp = Scale(-(-irx * -irx * -irx) / 1024f / 1024f * viewpower3x - (-irx * -irx) / 1024f * viewpower2x - (-irx) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (iry >= 0f & iry <= 1024f)
+    mouseyp = Scale(iry * iry * iry / 1024f / 1024f * viewpower3y + iry * iry / 1024f * viewpower2y + iry * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (iry <= 0f & iry >= -1024f)
+    mouseyp = Scale(-(-iry * -iry * -iry) / 1024f / 1024f * viewpower3y - (-iry * -iry) / 1024f * viewpower2y - (-iry) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller1_send_rightstickx = Math.Abs(-mousexp / 1024f * 32767f) <= 32767f ? -mousexp / 1024f * 32767f : Math.Sign(mousexp) * 32767f;
+controller1_send_rightsticky = Math.Abs(-mouseyp / 1024f * 32767f) <= 32767f ? -mouseyp / 1024f * 32767f : Math.Sign(mouseyp) * 32767f;
 if (JoyconLeftStickX > 0.35f)
     controller1_send_leftstickx = 32767;
 if (JoyconLeftStickX < -0.35f)
