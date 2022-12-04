@@ -84,7 +84,7 @@ namespace PGM
         public static int width = Screen.PrimaryScreen.Bounds.Width;
         public static int height = Screen.PrimaryScreen.Bounds.Height;
         private static bool checkingusername = false;
-        private static int sleeptime = 1;
+        public static int sleeptime = 1, xcnumber;
         private Type program;
         private object obj;
         private Assembly assembly;
@@ -98,7 +98,7 @@ namespace PGM
                 {
                     public class FooClass 
                     { 
-                        public int irmode = 1, gyromode = 1, sleeptime = 1, keys12345 = 0, keys54321 = 0;
+                        public int irmode = 1, gyromode = 1, sleeptime = 1, keys12345 = 0, keys54321 = 0, xcnumber = 2;
                         public bool testbool = false, EnableXC = false, EnableKM = false, EnableRI = false, EnableDI = false, EnableXI = false, EnableJI = false, EnablePI = false, JoyconLeftGyroCenter = false, JoyconRightGyroCenter = false, ProControllerGyroCenter = false, JoyconLeftAccelCenter = false, JoyconRightAccelCenter = false, ProControllerAccelCenter = false, PS5ControllerGyroCenter = false, PS5ControllerAccelCenter = false, JoyconLeftStickCenter = false, JoyconRightStickCenter = false, ProControllerStickCenter = false, Controller1GyroCenter = false, Controller2GyroCenter = false;
                         public bool[] getstate = new bool[36];
                         public int[] pollcount = new int[36];
@@ -131,7 +131,7 @@ namespace PGM
                         public object[] Main(int width, int height, bool Key_LBUTTON, bool Key_RBUTTON, bool Key_CANCEL, bool Key_MBUTTON, bool Key_XBUTTON1, bool Key_XBUTTON2, bool Key_BACK, bool Key_Tab, bool Key_CLEAR, bool Key_Return, bool Key_SHIFT, bool Key_CONTROL, bool Key_MENU, bool Key_PAUSE, bool Key_CAPITAL, bool Key_KANA, bool Key_HANGEUL, bool Key_HANGUL, bool Key_JUNJA, bool Key_FINAL, bool Key_HANJA, bool Key_KANJI, bool Key_Escape, bool Key_CONVERT, bool Key_NONCONVERT, bool Key_ACCEPT, bool Key_MODECHANGE, bool Key_Space, bool Key_PRIOR, bool Key_NEXT, bool Key_END, bool Key_HOME, bool Key_LEFT, bool Key_UP, bool Key_RIGHT, bool Key_DOWN, bool Key_SELECT, bool Key_PRINT, bool Key_EXECUTE, bool Key_SNAPSHOT, bool Key_INSERT, bool Key_DELETE, bool Key_HELP, bool Key_APOSTROPHE, bool Key_0, bool Key_1, bool Key_2, bool Key_3, bool Key_4, bool Key_5, bool Key_6, bool Key_7, bool Key_8, bool Key_9, bool Key_A, bool Key_B, bool Key_C, bool Key_D, bool Key_E, bool Key_F, bool Key_G, bool Key_H, bool Key_I, bool Key_J, bool Key_K, bool Key_L, bool Key_M, bool Key_N, bool Key_O, bool Key_P, bool Key_Q, bool Key_R, bool Key_S, bool Key_T, bool Key_U, bool Key_V, bool Key_W, bool Key_X, bool Key_Y, bool Key_Z, bool Key_LWIN, bool Key_RWIN, bool Key_APPS, bool Key_SLEEP, bool Key_NUMPAD0, bool Key_NUMPAD1, bool Key_NUMPAD2, bool Key_NUMPAD3, bool Key_NUMPAD4, bool Key_NUMPAD5, bool Key_NUMPAD6, bool Key_NUMPAD7, bool Key_NUMPAD8, bool Key_NUMPAD9, bool Key_MULTIPLY, bool Key_ADD, bool Key_SEPARATOR, bool Key_SUBTRACT, bool Key_DECIMAL, bool Key_DIVIDE, bool Key_F1, bool Key_F2, bool Key_F3, bool Key_F4, bool Key_F5, bool Key_F6, bool Key_F7, bool Key_F8, bool Key_F9, bool Key_F10, bool Key_F11, bool Key_F12, bool Key_F13, bool Key_F14, bool Key_F15, bool Key_F16, bool Key_F17, bool Key_F18, bool Key_F19, bool Key_F20, bool Key_F21, bool Key_F22, bool Key_F23, bool Key_F24, bool Key_NUMLOCK, bool Key_SCROLL, bool Key_LeftShift, bool Key_RightShift, bool Key_LeftControl, bool Key_RightControl, bool Key_LMENU, bool Key_RMENU, bool Key_BROWSER_BACK, bool Key_BROWSER_FORWARD, bool Key_BROWSER_REFRESH, bool Key_BROWSER_STOP, bool Key_BROWSER_SEARCH, bool Key_BROWSER_FAVORITES, bool Key_BROWSER_HOME, bool Key_VOLUME_MUTE, bool Key_VOLUME_DOWN, bool Key_VOLUME_UP, bool Key_MEDIA_NEXT_TRACK, bool Key_MEDIA_PREV_TRACK, bool Key_MEDIA_STOP, bool Key_MEDIA_PLAY_PAUSE, bool Key_LAUNCH_MAIL, bool Key_LAUNCH_MEDIA_SELECT, bool Key_LAUNCH_APP1, bool Key_LAUNCH_APP2, bool Key_OEM_1, bool Key_OEM_PLUS, bool Key_OEM_COMMA, bool Key_OEM_MINUS, bool Key_OEM_PERIOD, bool Key_OEM_2, bool Key_OEM_3, bool Key_OEM_4, bool Key_OEM_5, bool Key_OEM_6, bool Key_OEM_7, bool Key_OEM_8, bool Key_OEM_102, bool Key_PROCESSKEY, bool Key_PACKET, bool Key_ATTN, bool Key_CRSEL, bool Key_EXSEL, bool Key_EREOF, bool Key_PLAY, bool Key_ZOOM, bool Key_NONAME, bool Key_PA1, bool Key_OEM_CLEAR, double irx, double iry, bool WiimoteButtonStateA, bool WiimoteButtonStateB, bool WiimoteButtonStateMinus, bool WiimoteButtonStateHome, bool WiimoteButtonStatePlus, bool WiimoteButtonStateOne, bool WiimoteButtonStateTwo, bool WiimoteButtonStateUp, bool WiimoteButtonStateDown, bool WiimoteButtonStateLeft, bool WiimoteButtonStateRight, double WiimoteRawValuesX, double WiimoteRawValuesY, double WiimoteRawValuesZ, double WiimoteNunchuckStateRawJoystickX, double WiimoteNunchuckStateRawJoystickY, double WiimoteNunchuckStateRawValuesX, double WiimoteNunchuckStateRawValuesY, double WiimoteNunchuckStateRawValuesZ, bool WiimoteNunchuckStateC, bool WiimoteNunchuckStateZ, double JoyconRightStickX, double JoyconRightStickY, bool JoyconRightButtonSHOULDER_1, bool JoyconRightButtonSHOULDER_2, bool JoyconRightButtonSR, bool JoyconRightButtonSL, bool JoyconRightButtonDPAD_DOWN, bool JoyconRightButtonDPAD_RIGHT, bool JoyconRightButtonDPAD_UP, bool JoyconRightButtonDPAD_LEFT, bool JoyconRightButtonPLUS, bool JoyconRightButtonHOME, bool JoyconRightButtonSTICK, bool JoyconRightButtonACC, bool JoyconRightButtonSPA, bool JoyconRightRollLeft, bool JoyconRightRollRight, double JoyconRightAccelX, double JoyconRightAccelY, double JoyconRightGyroX, double JoyconRightGyroY, double JoyconLeftStickX, double JoyconLeftStickY, bool JoyconLeftButtonSHOULDER_1, bool JoyconLeftButtonSHOULDER_2, bool JoyconLeftButtonSR, bool JoyconLeftButtonSL, bool JoyconLeftButtonDPAD_DOWN, bool JoyconLeftButtonDPAD_RIGHT, bool JoyconLeftButtonDPAD_UP, bool JoyconLeftButtonDPAD_LEFT, bool JoyconLeftButtonMINUS, bool JoyconLeftButtonCAPTURE, bool JoyconLeftButtonSTICK, bool JoyconLeftButtonACC, bool JoyconLeftButtonSMA, bool JoyconLeftRollLeft, bool JoyconLeftRollRight, double JoyconLeftAccelX, double JoyconLeftAccelY, double JoyconLeftGyroX, double JoyconLeftGyroY, double ProControllerLeftStickX, double ProControllerLeftStickY, double ProControllerRightStickX, double ProControllerRightStickY, bool ProControllerButtonSHOULDER_Left_1, bool ProControllerButtonSHOULDER_Left_2, bool ProControllerButtonDPAD_DOWN, bool ProControllerButtonDPAD_RIGHT, bool ProControllerButtonDPAD_UP, bool ProControllerButtonDPAD_LEFT, bool ProControllerButtonMINUS, bool ProControllerButtonCAPTURE, bool ProControllerButtonSTICK_Left, bool ProControllerButtonSHOULDER_Right_1, bool ProControllerButtonSHOULDER_Right_2, bool ProControllerButtonA, bool ProControllerButtonB, bool ProControllerButtonX, bool ProControllerButtonY, bool ProControllerButtonPLUS, bool ProControllerButtonHOME, bool ProControllerButtonSTICK_Right, double ProControllerAccelX, double ProControllerAccelY, double ProControllerGyroX, double ProControllerGyroY, double camx, double camy, bool Controller1ButtonAPressed, bool Controller2ButtonAPressed, bool Controller1ButtonBPressed, bool Controller2ButtonBPressed, bool Controller1ButtonXPressed, bool Controller2ButtonXPressed, bool Controller1ButtonYPressed, bool Controller2ButtonYPressed, bool Controller1ButtonStartPressed, bool Controller2ButtonStartPressed, bool Controller1ButtonBackPressed, bool Controller2ButtonBackPressed, bool Controller1ButtonDownPressed, bool Controller2ButtonDownPressed, bool Controller1ButtonUpPressed, bool Controller2ButtonUpPressed, bool Controller1ButtonLeftPressed, bool Controller2ButtonLeftPressed, bool Controller1ButtonRightPressed, bool Controller2ButtonRightPressed, bool Controller1ButtonShoulderLeftPressed, bool Controller2ButtonShoulderLeftPressed, bool Controller1ButtonShoulderRightPressed, bool Controller2ButtonShoulderRightPressed, bool Controller1ThumbpadLeftPressed, bool Controller2ThumbpadLeftPressed, bool Controller1ThumbpadRightPressed, bool Controller2ThumbpadRightPressed, double Controller1TriggerLeftPosition, double Controller2TriggerLeftPosition, double Controller1TriggerRightPosition, double Controller2TriggerRightPosition, double Controller1ThumbLeftX, double Controller2ThumbLeftX, double Controller1ThumbLeftY, double Controller2ThumbLeftY, double Controller1ThumbRightX, double Controller2ThumbRightX, double Controller1ThumbRightY, double Controller2ThumbRightY, int Joystick1AxisX, int Joystick1AxisY, int Joystick1AxisZ, int Joystick1RotationX, int Joystick1RotationY, int Joystick1RotationZ, int Joystick1Sliders0, int Joystick1Sliders1, int Joystick1PointOfViewControllers0, int Joystick1PointOfViewControllers1, int Joystick1PointOfViewControllers2, int Joystick1PointOfViewControllers3, int Joystick1VelocityX, int Joystick1VelocityY, int Joystick1VelocityZ, int Joystick1AngularVelocityX, int Joystick1AngularVelocityY, int Joystick1AngularVelocityZ, int Joystick1VelocitySliders0, int Joystick1VelocitySliders1, int Joystick1AccelerationX, int Joystick1AccelerationY, int Joystick1AccelerationZ, int Joystick1AngularAccelerationX, int Joystick1AngularAccelerationY, int Joystick1AngularAccelerationZ, int Joystick1AccelerationSliders0, int Joystick1AccelerationSliders1, int Joystick1ForceX, int Joystick1ForceY, int Joystick1ForceZ, int Joystick1TorqueX, int Joystick1TorqueY, int Joystick1TorqueZ, int Joystick1ForceSliders0, int Joystick1ForceSliders1, bool Joystick1Buttons0, bool Joystick1Buttons1, bool Joystick1Buttons2, bool Joystick1Buttons3, bool Joystick1Buttons4, bool Joystick1Buttons5, bool Joystick1Buttons6, bool Joystick1Buttons7, bool Joystick1Buttons8, bool Joystick1Buttons9, bool Joystick1Buttons10, bool Joystick1Buttons11, bool Joystick1Buttons12, bool Joystick1Buttons13, bool Joystick1Buttons14, bool Joystick1Buttons15, bool Joystick1Buttons16, bool Joystick1Buttons17, bool Joystick1Buttons18, bool Joystick1Buttons19, bool Joystick1Buttons20, bool Joystick1Buttons21, bool Joystick1Buttons22, bool Joystick1Buttons23, bool Joystick1Buttons24, bool Joystick1Buttons25, bool Joystick1Buttons26, bool Joystick1Buttons27, bool Joystick1Buttons28, bool Joystick1Buttons29, bool Joystick1Buttons30, bool Joystick1Buttons31, bool Joystick1Buttons32, bool Joystick1Buttons33, bool Joystick1Buttons34, bool Joystick1Buttons35, bool Joystick1Buttons36, bool Joystick1Buttons37, bool Joystick1Buttons38, bool Joystick1Buttons39, bool Joystick1Buttons40, bool Joystick1Buttons41, bool Joystick1Buttons42, bool Joystick1Buttons43, bool Joystick1Buttons44, bool Joystick1Buttons45, bool Joystick1Buttons46, bool Joystick1Buttons47, bool Joystick1Buttons48, bool Joystick1Buttons49, bool Joystick1Buttons50, bool Joystick1Buttons51, bool Joystick1Buttons52, bool Joystick1Buttons53, bool Joystick1Buttons54, bool Joystick1Buttons55, bool Joystick1Buttons56, bool Joystick1Buttons57, bool Joystick1Buttons58, bool Joystick1Buttons59, bool Joystick1Buttons60, bool Joystick1Buttons61, bool Joystick1Buttons62, bool Joystick1Buttons63, bool Joystick1Buttons64, bool Joystick1Buttons65, bool Joystick1Buttons66, bool Joystick1Buttons67, bool Joystick1Buttons68, bool Joystick1Buttons69, bool Joystick1Buttons70, bool Joystick1Buttons71, bool Joystick1Buttons72, bool Joystick1Buttons73, bool Joystick1Buttons74, bool Joystick1Buttons75, bool Joystick1Buttons76, bool Joystick1Buttons77, bool Joystick1Buttons78, bool Joystick1Buttons79, bool Joystick1Buttons80, bool Joystick1Buttons81, bool Joystick1Buttons82, bool Joystick1Buttons83, bool Joystick1Buttons84, bool Joystick1Buttons85, bool Joystick1Buttons86, bool Joystick1Buttons87, bool Joystick1Buttons88, bool Joystick1Buttons89, bool Joystick1Buttons90, bool Joystick1Buttons91, bool Joystick1Buttons92, bool Joystick1Buttons93, bool Joystick1Buttons94, bool Joystick1Buttons95, bool Joystick1Buttons96, bool Joystick1Buttons97, bool Joystick1Buttons98, bool Joystick1Buttons99, bool Joystick1Buttons100, bool Joystick1Buttons101, bool Joystick1Buttons102, bool Joystick1Buttons103, bool Joystick1Buttons104, bool Joystick1Buttons105, bool Joystick1Buttons106, bool Joystick1Buttons107, bool Joystick1Buttons108, bool Joystick1Buttons109, bool Joystick1Buttons110, bool Joystick1Buttons111, bool Joystick1Buttons112, bool Joystick1Buttons113, bool Joystick1Buttons114, bool Joystick1Buttons115, bool Joystick1Buttons116, bool Joystick1Buttons117, bool Joystick1Buttons118, bool Joystick1Buttons119, bool Joystick1Buttons120, bool Joystick1Buttons121, bool Joystick1Buttons122, bool Joystick1Buttons123, bool Joystick1Buttons124, bool Joystick1Buttons125, bool Joystick1Buttons126, bool Joystick1Buttons127, int Joystick2AxisX, int Joystick2AxisY, int Joystick2AxisZ, int Joystick2RotationX, int Joystick2RotationY, int Joystick2RotationZ, int Joystick2Sliders0, int Joystick2Sliders1, int Joystick2PointOfViewControllers0, int Joystick2PointOfViewControllers1, int Joystick2PointOfViewControllers2, int Joystick2PointOfViewControllers3, int Joystick2VelocityX, int Joystick2VelocityY, int Joystick2VelocityZ, int Joystick2AngularVelocityX, int Joystick2AngularVelocityY, int Joystick2AngularVelocityZ, int Joystick2VelocitySliders0, int Joystick2VelocitySliders1, int Joystick2AccelerationX, int Joystick2AccelerationY, int Joystick2AccelerationZ, int Joystick2AngularAccelerationX, int Joystick2AngularAccelerationY, int Joystick2AngularAccelerationZ, int Joystick2AccelerationSliders0, int Joystick2AccelerationSliders1, int Joystick2ForceX, int Joystick2ForceY, int Joystick2ForceZ, int Joystick2TorqueX, int Joystick2TorqueY, int Joystick2TorqueZ, int Joystick2ForceSliders0, int Joystick2ForceSliders1, bool Joystick2Buttons0, bool Joystick2Buttons1, bool Joystick2Buttons2, bool Joystick2Buttons3, bool Joystick2Buttons4, bool Joystick2Buttons5, bool Joystick2Buttons6, bool Joystick2Buttons7, bool Joystick2Buttons8, bool Joystick2Buttons9, bool Joystick2Buttons10, bool Joystick2Buttons11, bool Joystick2Buttons12, bool Joystick2Buttons13, bool Joystick2Buttons14, bool Joystick2Buttons15, bool Joystick2Buttons16, bool Joystick2Buttons17, bool Joystick2Buttons18, bool Joystick2Buttons19, bool Joystick2Buttons20, bool Joystick2Buttons21, bool Joystick2Buttons22, bool Joystick2Buttons23, bool Joystick2Buttons24, bool Joystick2Buttons25, bool Joystick2Buttons26, bool Joystick2Buttons27, bool Joystick2Buttons28, bool Joystick2Buttons29, bool Joystick2Buttons30, bool Joystick2Buttons31, bool Joystick2Buttons32, bool Joystick2Buttons33, bool Joystick2Buttons34, bool Joystick2Buttons35, bool Joystick2Buttons36, bool Joystick2Buttons37, bool Joystick2Buttons38, bool Joystick2Buttons39, bool Joystick2Buttons40, bool Joystick2Buttons41, bool Joystick2Buttons42, bool Joystick2Buttons43, bool Joystick2Buttons44, bool Joystick2Buttons45, bool Joystick2Buttons46, bool Joystick2Buttons47, bool Joystick2Buttons48, bool Joystick2Buttons49, bool Joystick2Buttons50, bool Joystick2Buttons51, bool Joystick2Buttons52, bool Joystick2Buttons53, bool Joystick2Buttons54, bool Joystick2Buttons55, bool Joystick2Buttons56, bool Joystick2Buttons57, bool Joystick2Buttons58, bool Joystick2Buttons59, bool Joystick2Buttons60, bool Joystick2Buttons61, bool Joystick2Buttons62, bool Joystick2Buttons63, bool Joystick2Buttons64, bool Joystick2Buttons65, bool Joystick2Buttons66, bool Joystick2Buttons67, bool Joystick2Buttons68, bool Joystick2Buttons69, bool Joystick2Buttons70, bool Joystick2Buttons71, bool Joystick2Buttons72, bool Joystick2Buttons73, bool Joystick2Buttons74, bool Joystick2Buttons75, bool Joystick2Buttons76, bool Joystick2Buttons77, bool Joystick2Buttons78, bool Joystick2Buttons79, bool Joystick2Buttons80, bool Joystick2Buttons81, bool Joystick2Buttons82, bool Joystick2Buttons83, bool Joystick2Buttons84, bool Joystick2Buttons85, bool Joystick2Buttons86, bool Joystick2Buttons87, bool Joystick2Buttons88, bool Joystick2Buttons89, bool Joystick2Buttons90, bool Joystick2Buttons91, bool Joystick2Buttons92, bool Joystick2Buttons93, bool Joystick2Buttons94, bool Joystick2Buttons95, bool Joystick2Buttons96, bool Joystick2Buttons97, bool Joystick2Buttons98, bool Joystick2Buttons99, bool Joystick2Buttons100, bool Joystick2Buttons101, bool Joystick2Buttons102, bool Joystick2Buttons103, bool Joystick2Buttons104, bool Joystick2Buttons105, bool Joystick2Buttons106, bool Joystick2Buttons107, bool Joystick2Buttons108, bool Joystick2Buttons109, bool Joystick2Buttons110, bool Joystick2Buttons111, bool Joystick2Buttons112, bool Joystick2Buttons113, bool Joystick2Buttons114, bool Joystick2Buttons115, bool Joystick2Buttons116, bool Joystick2Buttons117, bool Joystick2Buttons118, bool Joystick2Buttons119, bool Joystick2Buttons120, bool Joystick2Buttons121, bool Joystick2Buttons122, bool Joystick2Buttons123, bool Joystick2Buttons124, bool Joystick2Buttons125, bool Joystick2Buttons126, bool Joystick2Buttons127, bool Mouse1Buttons0, bool Mouse1Buttons1, bool Mouse1Buttons2, bool Mouse1Buttons3, bool Mouse1Buttons4, bool Mouse1Buttons5, bool Mouse1Buttons6, bool Mouse1Buttons7, int MouseHookX, int MouseHookY, int Mouse1AxisX, int Mouse1AxisY, int Mouse1AxisZ, bool Mouse2Buttons0, bool Mouse2Buttons1, bool Mouse2Buttons2, bool Mouse2Buttons3, bool Mouse2Buttons4, bool Mouse2Buttons5, bool Mouse2Buttons6, bool Mouse2Buttons7, int Mouse2AxisX, int Mouse2AxisY, int Mouse2AxisZ, bool Keyboard1KeyEscape, bool Keyboard1KeyD1, bool Keyboard1KeyD2, bool Keyboard1KeyD3, bool Keyboard1KeyD4, bool Keyboard1KeyD5, bool Keyboard1KeyD6, bool Keyboard1KeyD7, bool Keyboard1KeyD8, bool Keyboard1KeyD9, bool Keyboard1KeyD0, bool Keyboard1KeyMinus, bool Keyboard1KeyEquals, bool Keyboard1KeyBack, bool Keyboard1KeyTab, bool Keyboard1KeyQ, bool Keyboard1KeyW, bool Keyboard1KeyE, bool Keyboard1KeyR, bool Keyboard1KeyT, bool Keyboard1KeyY, bool Keyboard1KeyU, bool Keyboard1KeyI, bool Keyboard1KeyO, bool Keyboard1KeyP, bool Keyboard1KeyLeftBracket, bool Keyboard1KeyRightBracket, bool Keyboard1KeyReturn, bool Keyboard1KeyLeftControl, bool Keyboard1KeyA, bool Keyboard1KeyS, bool Keyboard1KeyD, bool Keyboard1KeyF, bool Keyboard1KeyG, bool Keyboard1KeyH, bool Keyboard1KeyJ, bool Keyboard1KeyK, bool Keyboard1KeyL, bool Keyboard1KeySemicolon, bool Keyboard1KeyApostrophe, bool Keyboard1KeyGrave, bool Keyboard1KeyLeftShift, bool Keyboard1KeyBackslash, bool Keyboard1KeyZ, bool Keyboard1KeyX, bool Keyboard1KeyC, bool Keyboard1KeyV, bool Keyboard1KeyB, bool Keyboard1KeyN, bool Keyboard1KeyM, bool Keyboard1KeyComma, bool Keyboard1KeyPeriod, bool Keyboard1KeySlash, bool Keyboard1KeyRightShift, bool Keyboard1KeyMultiply, bool Keyboard1KeyLeftAlt, bool Keyboard1KeySpace, bool Keyboard1KeyCapital, bool Keyboard1KeyF1, bool Keyboard1KeyF2, bool Keyboard1KeyF3, bool Keyboard1KeyF4, bool Keyboard1KeyF5, bool Keyboard1KeyF6, bool Keyboard1KeyF7, bool Keyboard1KeyF8, bool Keyboard1KeyF9, bool Keyboard1KeyF10, bool Keyboard1KeyNumberLock, bool Keyboard1KeyScrollLock, bool Keyboard1KeyNumberPad7, bool Keyboard1KeyNumberPad8, bool Keyboard1KeyNumberPad9, bool Keyboard1KeySubtract, bool Keyboard1KeyNumberPad4, bool Keyboard1KeyNumberPad5, bool Keyboard1KeyNumberPad6, bool Keyboard1KeyAdd, bool Keyboard1KeyNumberPad1, bool Keyboard1KeyNumberPad2, bool Keyboard1KeyNumberPad3, bool Keyboard1KeyNumberPad0, bool Keyboard1KeyDecimal, bool Keyboard1KeyOem102, bool Keyboard1KeyF11, bool Keyboard1KeyF12, bool Keyboard1KeyF13, bool Keyboard1KeyF14, bool Keyboard1KeyF15, bool Keyboard1KeyKana, bool Keyboard1KeyAbntC1, bool Keyboard1KeyConvert, bool Keyboard1KeyNoConvert, bool Keyboard1KeyYen, bool Keyboard1KeyAbntC2, bool Keyboard1KeyNumberPadEquals, bool Keyboard1KeyPreviousTrack, bool Keyboard1KeyAT, bool Keyboard1KeyColon, bool Keyboard1KeyUnderline, bool Keyboard1KeyKanji, bool Keyboard1KeyStop, bool Keyboard1KeyAX, bool Keyboard1KeyUnlabeled, bool Keyboard1KeyNextTrack, bool Keyboard1KeyNumberPadEnter, bool Keyboard1KeyRightControl, bool Keyboard1KeyMute, bool Keyboard1KeyCalculator, bool Keyboard1KeyPlayPause, bool Keyboard1KeyMediaStop, bool Keyboard1KeyVolumeDown, bool Keyboard1KeyVolumeUp, bool Keyboard1KeyWebHome, bool Keyboard1KeyNumberPadComma, bool Keyboard1KeyDivide, bool Keyboard1KeyPrintScreen, bool Keyboard1KeyRightAlt, bool Keyboard1KeyPause, bool Keyboard1KeyHome, bool Keyboard1KeyUp, bool Keyboard1KeyPageUp, bool Keyboard1KeyLeft, bool Keyboard1KeyRight, bool Keyboard1KeyEnd, bool Keyboard1KeyDown, bool Keyboard1KeyPageDown, bool Keyboard1KeyInsert, bool Keyboard1KeyDelete, bool Keyboard1KeyLeftWindowsKey, bool Keyboard1KeyRightWindowsKey, bool Keyboard1KeyApplications, bool Keyboard1KeyPower, bool Keyboard1KeySleep, bool Keyboard1KeyWake, bool Keyboard1KeyWebSearch, bool Keyboard1KeyWebFavorites, bool Keyboard1KeyWebRefresh, bool Keyboard1KeyWebStop, bool Keyboard1KeyWebForward, bool Keyboard1KeyWebBack, bool Keyboard1KeyMyComputer, bool Keyboard1KeyMail, bool Keyboard1KeyMediaSelect, bool Keyboard1KeyUnknown, bool Keyboard2KeyEscape, bool Keyboard2KeyD1, bool Keyboard2KeyD2, bool Keyboard2KeyD3, bool Keyboard2KeyD4, bool Keyboard2KeyD5, bool Keyboard2KeyD6, bool Keyboard2KeyD7, bool Keyboard2KeyD8, bool Keyboard2KeyD9, bool Keyboard2KeyD0, bool Keyboard2KeyMinus, bool Keyboard2KeyEquals, bool Keyboard2KeyBack, bool Keyboard2KeyTab, bool Keyboard2KeyQ, bool Keyboard2KeyW, bool Keyboard2KeyE, bool Keyboard2KeyR, bool Keyboard2KeyT, bool Keyboard2KeyY, bool Keyboard2KeyU, bool Keyboard2KeyI, bool Keyboard2KeyO, bool Keyboard2KeyP, bool Keyboard2KeyLeftBracket, bool Keyboard2KeyRightBracket, bool Keyboard2KeyReturn, bool Keyboard2KeyLeftControl, bool Keyboard2KeyA, bool Keyboard2KeyS, bool Keyboard2KeyD, bool Keyboard2KeyF, bool Keyboard2KeyG, bool Keyboard2KeyH, bool Keyboard2KeyJ, bool Keyboard2KeyK, bool Keyboard2KeyL, bool Keyboard2KeySemicolon, bool Keyboard2KeyApostrophe, bool Keyboard2KeyGrave, bool Keyboard2KeyLeftShift, bool Keyboard2KeyBackslash, bool Keyboard2KeyZ, bool Keyboard2KeyX, bool Keyboard2KeyC, bool Keyboard2KeyV, bool Keyboard2KeyB, bool Keyboard2KeyN, bool Keyboard2KeyM, bool Keyboard2KeyComma, bool Keyboard2KeyPeriod, bool Keyboard2KeySlash, bool Keyboard2KeyRightShift, bool Keyboard2KeyMultiply, bool Keyboard2KeyLeftAlt, bool Keyboard2KeySpace, bool Keyboard2KeyCapital, bool Keyboard2KeyF1, bool Keyboard2KeyF2, bool Keyboard2KeyF3, bool Keyboard2KeyF4, bool Keyboard2KeyF5, bool Keyboard2KeyF6, bool Keyboard2KeyF7, bool Keyboard2KeyF8, bool Keyboard2KeyF9, bool Keyboard2KeyF10, bool Keyboard2KeyNumberLock, bool Keyboard2KeyScrollLock, bool Keyboard2KeyNumberPad7, bool Keyboard2KeyNumberPad8, bool Keyboard2KeyNumberPad9, bool Keyboard2KeySubtract, bool Keyboard2KeyNumberPad4, bool Keyboard2KeyNumberPad5, bool Keyboard2KeyNumberPad6, bool Keyboard2KeyAdd, bool Keyboard2KeyNumberPad1, bool Keyboard2KeyNumberPad2, bool Keyboard2KeyNumberPad3, bool Keyboard2KeyNumberPad0, bool Keyboard2KeyDecimal, bool Keyboard2KeyOem102, bool Keyboard2KeyF11, bool Keyboard2KeyF12, bool Keyboard2KeyF13, bool Keyboard2KeyF14, bool Keyboard2KeyF15, bool Keyboard2KeyKana, bool Keyboard2KeyAbntC1, bool Keyboard2KeyConvert, bool Keyboard2KeyNoConvert, bool Keyboard2KeyYen, bool Keyboard2KeyAbntC2, bool Keyboard2KeyNumberPadEquals, bool Keyboard2KeyPreviousTrack, bool Keyboard2KeyAT, bool Keyboard2KeyColon, bool Keyboard2KeyUnderline, bool Keyboard2KeyKanji, bool Keyboard2KeyStop, bool Keyboard2KeyAX, bool Keyboard2KeyUnlabeled, bool Keyboard2KeyNextTrack, bool Keyboard2KeyNumberPadEnter, bool Keyboard2KeyRightControl, bool Keyboard2KeyMute, bool Keyboard2KeyCalculator, bool Keyboard2KeyPlayPause, bool Keyboard2KeyMediaStop, bool Keyboard2KeyVolumeDown, bool Keyboard2KeyVolumeUp, bool Keyboard2KeyWebHome, bool Keyboard2KeyNumberPadComma, bool Keyboard2KeyDivide, bool Keyboard2KeyPrintScreen, bool Keyboard2KeyRightAlt, bool Keyboard2KeyPause, bool Keyboard2KeyHome, bool Keyboard2KeyUp, bool Keyboard2KeyPageUp, bool Keyboard2KeyLeft, bool Keyboard2KeyRight, bool Keyboard2KeyEnd, bool Keyboard2KeyDown, bool Keyboard2KeyPageDown, bool Keyboard2KeyInsert, bool Keyboard2KeyDelete, bool Keyboard2KeyLeftWindowsKey, bool Keyboard2KeyRightWindowsKey, bool Keyboard2KeyApplications, bool Keyboard2KeyPower, bool Keyboard2KeySleep, bool Keyboard2KeyWake, bool Keyboard2KeyWebSearch, bool Keyboard2KeyWebFavorites, bool Keyboard2KeyWebRefresh, bool Keyboard2KeyWebStop, bool Keyboard2KeyWebForward, bool Keyboard2KeyWebBack, bool Keyboard2KeyMyComputer, bool Keyboard2KeyMail, bool Keyboard2KeyMediaSelect, bool Keyboard2KeyUnknown, string TextFromSpeech, double PS5ControllerLeftStickX, double PS5ControllerLeftStickY, double PS5ControllerRightStickX, double PS5ControllerRightStickY, double PS5ControllerLeftTriggerPosition, double PS5ControllerRightTriggerPosition, double PS5ControllerTouchX, double PS5ControllerTouchY, bool PS5ControllerTouchOn, double PS5ControllerGyroX, double PS5ControllerGyroY, double PS5ControllerAccelX, double PS5ControllerAccelY, bool PS5ControllerButtonCrossPressed, bool PS5ControllerButtonCirclePressed, bool PS5ControllerButtonSquarePressed, bool PS5ControllerButtonTrianglePressed, bool PS5ControllerButtonDPadUpPressed, bool PS5ControllerButtonDPadRightPressed, bool PS5ControllerButtonDPadDownPressed, bool PS5ControllerButtonDPadLeftPressed, bool PS5ControllerButtonL1Pressed, bool PS5ControllerButtonR1Pressed, bool PS5ControllerButtonL2Pressed, bool PS5ControllerButtonR2Pressed, bool PS5ControllerButtonL3Pressed, bool PS5ControllerButtonR3Pressed, bool PS5ControllerButtonCreatePressed, bool PS5ControllerButtonMenuPressed, bool PS5ControllerButtonLogoPressed, bool PS5ControllerButtonTouchpadPressed, bool PS5ControllerButtonMicPressed, double Controller1GyroX, double Controller1GyroY, double Controller2GyroX, double Controller2GyroY)
                         {
                             funct_driver
-                            return new object[] { UsersAllowedList, sleeptime, KeyboardMouseDriverType, MouseMoveX, MouseMoveY, MouseAbsX, MouseAbsY, MouseDesktopX, MouseDesktopY, SendLeftClick, SendRightClick, SendMiddleClick, SendWheelUp, SendWheelDown, SendLeft, SendRight, SendUp, SendDown, SendLButton, SendRButton, SendCancel, SendMBUTTON, SendXBUTTON1, SendXBUTTON2, SendBack, SendTab, SendClear, SendReturn, SendSHIFT, SendCONTROL, SendMENU, SendPAUSE, SendCAPITAL, SendKANA, SendHANGEUL, SendHANGUL, SendJUNJA, SendFINAL, SendHANJA, SendKANJI, SendEscape, SendCONVERT, SendNONCONVERT, SendACCEPT, SendMODECHANGE, SendSpace, SendPRIOR, SendNEXT, SendEND, SendHOME, SendLEFT, SendUP, SendRIGHT, SendDOWN, SendSELECT, SendPRINT, SendEXECUTE, SendSNAPSHOT, SendINSERT, SendDELETE, SendHELP, SendAPOSTROPHE, Send0, Send1, Send2, Send3, Send4, Send5, Send6, Send7, Send8, Send9, SendA, SendB, SendC, SendD, SendE, SendF, SendG, SendH, SendI, SendJ, SendK, SendL, SendM, SendN, SendO, SendP, SendQ, SendR, SendS, SendT, SendU, SendV, SendW, SendX, SendY, SendZ, SendLWIN, SendRWIN, SendAPPS, SendSLEEP, SendNUMPAD0, SendNUMPAD1, SendNUMPAD2, SendNUMPAD3, SendNUMPAD4, SendNUMPAD5, SendNUMPAD6, SendNUMPAD7, SendNUMPAD8, SendNUMPAD9, SendMULTIPLY, SendADD, SendSEPARATOR, SendSUBTRACT, SendDECIMAL, SendDIVIDE, SendF1, SendF2, SendF3, SendF4, SendF5, SendF6, SendF7, SendF8, SendF9, SendF10, SendF11, SendF12, SendF13, SendF14, SendF15, SendF16, SendF17, SendF18, SendF19, SendF20, SendF21, SendF22, SendF23, SendF24, SendNUMLOCK, SendSCROLL, SendLeftShift, SendRightShift, SendLeftControl, SendRightControl, SendLMENU, SendRMENU, centery, irmode, SpeechToText, controller1_send_back, controller1_send_start, controller1_send_A, controller1_send_B, controller1_send_X, controller1_send_Y, controller1_send_up, controller1_send_left, controller1_send_down, controller1_send_right, controller1_send_leftstick, controller1_send_rightstick, controller1_send_leftbumper, controller1_send_rightbumper, controller1_send_lefttrigger, controller1_send_righttrigger, controller1_send_leftstickx, controller1_send_leftsticky, controller1_send_rightstickx, controller1_send_rightsticky, controller2_send_back, controller2_send_start, controller2_send_A, controller2_send_B, controller2_send_X, controller2_send_Y, controller2_send_up, controller2_send_left, controller2_send_down, controller2_send_right, controller2_send_leftstick, controller2_send_rightstick, controller2_send_leftbumper, controller2_send_rightbumper, controller2_send_lefttrigger, controller2_send_righttrigger, controller2_send_leftstickx, controller2_send_leftsticky, controller2_send_rightstickx, controller2_send_rightsticky, pollcount, keys12345, keys54321, getstate, mousexp, mouseyp, testdouble, testbool, EnableKM, EnableXC, EnableRI, EnableDI, EnableXI, EnableJI, EnablePI, JoyconLeftGyroCenter, JoyconRightGyroCenter, ProControllerGyroCenter, JoyconLeftAccelCenter, JoyconRightAccelCenter, ProControllerAccelCenter, gyromode, controller1_send_lefttriggerposition, controller1_send_righttriggerposition, controller2_send_lefttriggerposition, controller2_send_righttriggerposition, PS5ControllerGyroCenter, PS5ControllerAccelCenter, JoyconLeftStickCenter, JoyconRightStickCenter, ProControllerStickCenter, Controller1GyroCenter, Controller2GyroCenter };
+                            return new object[] { UsersAllowedList, sleeptime, KeyboardMouseDriverType, MouseMoveX, MouseMoveY, MouseAbsX, MouseAbsY, MouseDesktopX, MouseDesktopY, SendLeftClick, SendRightClick, SendMiddleClick, SendWheelUp, SendWheelDown, SendLeft, SendRight, SendUp, SendDown, SendLButton, SendRButton, SendCancel, SendMBUTTON, SendXBUTTON1, SendXBUTTON2, SendBack, SendTab, SendClear, SendReturn, SendSHIFT, SendCONTROL, SendMENU, SendPAUSE, SendCAPITAL, SendKANA, SendHANGEUL, SendHANGUL, SendJUNJA, SendFINAL, SendHANJA, SendKANJI, SendEscape, SendCONVERT, SendNONCONVERT, SendACCEPT, SendMODECHANGE, SendSpace, SendPRIOR, SendNEXT, SendEND, SendHOME, SendLEFT, SendUP, SendRIGHT, SendDOWN, SendSELECT, SendPRINT, SendEXECUTE, SendSNAPSHOT, SendINSERT, SendDELETE, SendHELP, SendAPOSTROPHE, Send0, Send1, Send2, Send3, Send4, Send5, Send6, Send7, Send8, Send9, SendA, SendB, SendC, SendD, SendE, SendF, SendG, SendH, SendI, SendJ, SendK, SendL, SendM, SendN, SendO, SendP, SendQ, SendR, SendS, SendT, SendU, SendV, SendW, SendX, SendY, SendZ, SendLWIN, SendRWIN, SendAPPS, SendSLEEP, SendNUMPAD0, SendNUMPAD1, SendNUMPAD2, SendNUMPAD3, SendNUMPAD4, SendNUMPAD5, SendNUMPAD6, SendNUMPAD7, SendNUMPAD8, SendNUMPAD9, SendMULTIPLY, SendADD, SendSEPARATOR, SendSUBTRACT, SendDECIMAL, SendDIVIDE, SendF1, SendF2, SendF3, SendF4, SendF5, SendF6, SendF7, SendF8, SendF9, SendF10, SendF11, SendF12, SendF13, SendF14, SendF15, SendF16, SendF17, SendF18, SendF19, SendF20, SendF21, SendF22, SendF23, SendF24, SendNUMLOCK, SendSCROLL, SendLeftShift, SendRightShift, SendLeftControl, SendRightControl, SendLMENU, SendRMENU, centery, irmode, SpeechToText, controller1_send_back, controller1_send_start, controller1_send_A, controller1_send_B, controller1_send_X, controller1_send_Y, controller1_send_up, controller1_send_left, controller1_send_down, controller1_send_right, controller1_send_leftstick, controller1_send_rightstick, controller1_send_leftbumper, controller1_send_rightbumper, controller1_send_lefttrigger, controller1_send_righttrigger, controller1_send_leftstickx, controller1_send_leftsticky, controller1_send_rightstickx, controller1_send_rightsticky, controller2_send_back, controller2_send_start, controller2_send_A, controller2_send_B, controller2_send_X, controller2_send_Y, controller2_send_up, controller2_send_left, controller2_send_down, controller2_send_right, controller2_send_leftstick, controller2_send_rightstick, controller2_send_leftbumper, controller2_send_rightbumper, controller2_send_lefttrigger, controller2_send_righttrigger, controller2_send_leftstickx, controller2_send_leftsticky, controller2_send_rightstickx, controller2_send_rightsticky, pollcount, keys12345, keys54321, getstate, mousexp, mouseyp, testdouble, testbool, EnableKM, EnableXC, EnableRI, EnableDI, EnableXI, EnableJI, EnablePI, JoyconLeftGyroCenter, JoyconRightGyroCenter, ProControllerGyroCenter, JoyconLeftAccelCenter, JoyconRightAccelCenter, ProControllerAccelCenter, gyromode, controller1_send_lefttriggerposition, controller1_send_righttriggerposition, controller2_send_lefttriggerposition, controller2_send_righttriggerposition, PS5ControllerGyroCenter, PS5ControllerAccelCenter, JoyconLeftStickCenter, JoyconRightStickCenter, ProControllerStickCenter, Controller1GyroCenter, Controller2GyroCenter, xcnumber };
                         }
                         public double Scale(double value, double min, double max, double minScale, double maxScale)
                         {
@@ -1419,6 +1419,7 @@ namespace PGM
                 range.SetStyle(OutputStyle, new Regex(@"JoyconLeftStickCenter"));
                 range.SetStyle(OutputStyle, new Regex(@"JoyconRightStickCenter"));
                 range.SetStyle(OutputStyle, new Regex(@"ProControllerStickCenter"));
+                range.SetStyle(OutputStyle, new Regex(@"xcnumber"));
             }
             catch { }
         }
@@ -2730,6 +2731,7 @@ namespace PGM
             str += "mouseyp : " + mouseyp + Environment.NewLine;
             str += "testdouble : " + testdouble + Environment.NewLine;
             str += "testbool : " + testbool + Environment.NewLine;
+            str += "xcnumber : " + xcnumber + Environment.NewLine;
             str += "JoyconLeftGyroCenter : " + JoyconLeftGyroCenter + Environment.NewLine;
             str += "JoyconRightGyroCenter : " + JoyconRightGyroCenter + Environment.NewLine;
             str += "ProControllerGyroCenter : " + ProControllerGyroCenter + Environment.NewLine;
@@ -3646,6 +3648,7 @@ namespace PGM
                 sleeptime = (int)val[1];
                 SpeechToText = (string[])val[152];
                 EnableKM = (bool)val[201]; EnableXC = (bool)val[202]; EnableRI = (bool)val[203]; EnableDI = (bool)val[204]; EnableXI = (bool)val[205]; EnableJI = (bool)val[206]; EnablePI = (bool)val[207];
+                xcnumber = (int)val[226];
                 checkingusername = false;
                 if (UsersAllowedList.Length == 0)
                 {
@@ -11454,195 +11457,213 @@ namespace PGM
         public static void LoadControllers()
         {
             scpBus = new ScpBus();
-            scpBus.PlugIn(1);
-            scpBus.PlugIn(2);
-            controller1 = new X360Controller();
-            controller2 = new X360Controller();
+            if (Form1.xcnumber == 1 | Form1.xcnumber == 2)
+            {
+                scpBus.PlugIn(1);
+                controller1 = new X360Controller();
+            }
+            if (Form1.xcnumber == 2)
+            {
+                scpBus.PlugIn(2);
+                controller2 = new X360Controller();
+            }
         }
         public static void UnLoadControllers()
         {
             SetControllers(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 0, 0, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 0, 0, 0, 0, 0, 0, 0, 0);
-            Thread.Sleep(100);
-            scpBus.Unplug(1);
-            Thread.Sleep(100);
-            scpBus.Unplug(2);
+            if (Form1.xcnumber == 1 | Form1.xcnumber == 2)
+            {
+                Thread.Sleep(100);
+                scpBus.Unplug(1);
+            }
+            if (Form1.xcnumber == 2)
+            {
+                Thread.Sleep(100);
+                scpBus.Unplug(2);
+            }
         }
         public static void SetControllers(bool controller1_send_back, bool controller1_send_start, bool controller1_send_A, bool controller1_send_B, bool controller1_send_X, bool controller1_send_Y, bool controller1_send_up, bool controller1_send_left, bool controller1_send_down, bool controller1_send_right, bool controller1_send_leftstick, bool controller1_send_rightstick, bool controller1_send_leftbumper, bool controller1_send_rightbumper, bool controller1_send_lefttrigger, bool controller1_send_righttrigger, double controller1_send_leftstickx, double controller1_send_leftsticky, double controller1_send_rightstickx, double controller1_send_rightsticky, bool controller2_send_back, bool controller2_send_start, bool controller2_send_A, bool controller2_send_B, bool controller2_send_X, bool controller2_send_Y, bool controller2_send_up, bool controller2_send_left, bool controller2_send_down, bool controller2_send_right, bool controller2_send_leftstick, bool controller2_send_rightstick, bool controller2_send_leftbumper, bool controller2_send_rightbumper, bool controller2_send_lefttrigger, bool controller2_send_righttrigger, double controller2_send_leftstickx, double controller2_send_leftsticky, double controller2_send_rightstickx, double controller2_send_rightsticky, double controller1_send_lefttriggerposition, double controller1_send_righttriggerposition, double controller2_send_lefttriggerposition, double controller2_send_righttriggerposition)
         {
-            valchanged(1, controller1_send_back);
-            if (wd[1] == 1)
-                controller1.Buttons ^= X360Buttons.Back;
-            if (wu[1] == 1)
-                controller1.Buttons &= ~X360Buttons.Back;
-            valchanged(2, controller1_send_start);
-            if (wd[2] == 1)
-                controller1.Buttons ^= X360Buttons.Start;
-            if (wu[2] == 1)
-                controller1.Buttons &= ~X360Buttons.Start;
-            valchanged(3, controller1_send_A);
-            if (wd[3] == 1)
-                controller1.Buttons ^= X360Buttons.A;
-            if (wu[3] == 1)
-                controller1.Buttons &= ~X360Buttons.A;
-            valchanged(4, controller1_send_B);
-            if (wd[4] == 1)
-                controller1.Buttons ^= X360Buttons.B;
-            if (wu[4] == 1)
-                controller1.Buttons &= ~X360Buttons.B;
-            valchanged(5, controller1_send_X);
-            if (wd[5] == 1)
-                controller1.Buttons ^= X360Buttons.X;
-            if (wu[5] == 1)
-                controller1.Buttons &= ~X360Buttons.X;
-            valchanged(6, controller1_send_Y);
-            if (wd[6] == 1)
-                controller1.Buttons ^= X360Buttons.Y;
-            if (wu[6] == 1)
-                controller1.Buttons &= ~X360Buttons.Y;
-            valchanged(7, controller1_send_up);
-            if (wd[7] == 1)
-                controller1.Buttons ^= X360Buttons.Up;
-            if (wu[7] == 1)
-                controller1.Buttons &= ~X360Buttons.Up;
-            valchanged(8, controller1_send_left);
-            if (wd[8] == 1)
-                controller1.Buttons ^= X360Buttons.Left;
-            if (wu[8] == 1)
-                controller1.Buttons &= ~X360Buttons.Left;
-            valchanged(9, controller1_send_down);
-            if (wd[9] == 1)
-                controller1.Buttons ^= X360Buttons.Down;
-            if (wu[9] == 1)
-                controller1.Buttons &= ~X360Buttons.Down;
-            valchanged(10, controller1_send_right);
-            if (wd[10] == 1)
-                controller1.Buttons ^= X360Buttons.Right;
-            if (wu[10] == 1)
-                controller1.Buttons &= ~X360Buttons.Right;
-            valchanged(11, controller1_send_leftstick);
-            if (wd[11] == 1)
-                controller1.Buttons ^= X360Buttons.LeftStick;
-            if (wu[11] == 1)
-                controller1.Buttons &= ~X360Buttons.LeftStick;
-            valchanged(12, controller1_send_rightstick);
-            if (wd[12] == 1)
-                controller1.Buttons ^= X360Buttons.RightStick;
-            if (wu[12] == 1)
-                controller1.Buttons &= ~X360Buttons.RightStick;
-            valchanged(13, controller1_send_leftbumper);
-            if (wd[13] == 1)
-                controller1.Buttons ^= X360Buttons.LeftBumper;
-            if (wu[13] == 1)
-                controller1.Buttons &= ~X360Buttons.LeftBumper;
-            valchanged(14, controller1_send_rightbumper);
-            if (wd[14] == 1)
-                controller1.Buttons ^= X360Buttons.RightBumper;
-            if (wu[14] == 1)
-                controller1.Buttons &= ~X360Buttons.RightBumper;
-            controller1.LeftStickX = (short)controller1_send_leftstickx;
-            controller1.LeftStickY = (short)controller1_send_leftsticky;
-            controller1.RightStickX = (short)controller1_send_rightstickx;
-            controller1.RightStickY = (short)controller1_send_rightsticky;
-            valchanged(15, controller2_send_back);
-            if (wd[15] == 1)
-                controller2.Buttons ^= X360Buttons.Back;
-            if (wu[15] == 1)
-                controller2.Buttons &= ~X360Buttons.Back;
-            valchanged(16, controller2_send_start);
-            if (wd[16] == 1)
-                controller2.Buttons ^= X360Buttons.Start;
-            if (wu[16] == 1)
-                controller2.Buttons &= ~X360Buttons.Start;
-            valchanged(17, controller2_send_A);
-            if (wd[17] == 1)
-                controller2.Buttons ^= X360Buttons.A;
-            if (wu[17] == 1)
-                controller2.Buttons &= ~X360Buttons.A;
-            valchanged(18, controller2_send_B);
-            if (wd[18] == 1)
-                controller2.Buttons ^= X360Buttons.B;
-            if (wu[18] == 1)
-                controller2.Buttons &= ~X360Buttons.B;
-            valchanged(19, controller2_send_X);
-            if (wd[19] == 1)
-                controller2.Buttons ^= X360Buttons.X;
-            if (wu[19] == 1)
-                controller2.Buttons &= ~X360Buttons.X;
-            valchanged(20, controller2_send_Y);
-            if (wd[20] == 1)
-                controller2.Buttons ^= X360Buttons.Y;
-            if (wu[20] == 1)
-                controller2.Buttons &= ~X360Buttons.Y;
-            valchanged(21, controller2_send_up);
-            if (wd[21] == 1)
-                controller2.Buttons ^= X360Buttons.Up;
-            if (wu[21] == 1)
-                controller2.Buttons &= ~X360Buttons.Up;
-            valchanged(22, controller2_send_left);
-            if (wd[22] == 1)
-                controller2.Buttons ^= X360Buttons.Left;
-            if (wu[22] == 1)
-                controller2.Buttons &= ~X360Buttons.Left;
-            valchanged(23, controller2_send_down);
-            if (wd[23] == 1)
-                controller2.Buttons ^= X360Buttons.Down;
-            if (wu[23] == 1)
-                controller2.Buttons &= ~X360Buttons.Down;
-            valchanged(24, controller2_send_right);
-            if (wd[24] == 1)
-                controller2.Buttons ^= X360Buttons.Right;
-            if (wu[24] == 1)
-                controller2.Buttons &= ~X360Buttons.Right;
-            valchanged(25, controller2_send_leftstick);
-            if (wd[25] == 1)
-                controller2.Buttons ^= X360Buttons.LeftStick;
-            if (wu[25] == 1)
-                controller2.Buttons &= ~X360Buttons.LeftStick;
-            valchanged(26, controller2_send_rightstick);
-            if (wd[26] == 1)
-                controller2.Buttons ^= X360Buttons.RightStick;
-            if (wu[26] == 1)
-                controller2.Buttons &= ~X360Buttons.RightStick;
-            valchanged(27, controller2_send_leftbumper);
-            if (wd[27] == 1)
-                controller2.Buttons ^= X360Buttons.LeftBumper;
-            if (wu[27] == 1)
-                controller2.Buttons &= ~X360Buttons.LeftBumper;
-            valchanged(28, controller2_send_rightbumper);
-            if (wd[28] == 1)
-                controller2.Buttons ^= X360Buttons.RightBumper;
-            if (wu[28] == 1)
-                controller2.Buttons &= ~X360Buttons.RightBumper;
-            controller2.LeftStickX = (short)controller2_send_leftstickx;
-            controller2.LeftStickY = (short)controller2_send_leftsticky;
-            controller2.RightStickX = (short)controller2_send_rightstickx;
-            controller2.RightStickY = (short)controller2_send_rightsticky;
-            controller1.LeftTrigger = (byte)controller1_send_lefttriggerposition;
-            controller1.RightTrigger = (byte)controller1_send_righttriggerposition;
-            controller2.LeftTrigger = (byte)controller2_send_lefttriggerposition;
-            controller2.RightTrigger = (byte)controller2_send_righttriggerposition;
-            valchanged(29, controller1_send_lefttrigger);
-            if (controller1_send_lefttrigger)
-                controller1.LeftTrigger = 255;
-            if (wu[29] == 1)
-                controller1.LeftTrigger = 0;
-            valchanged(30, controller1_send_righttrigger);
-            if (controller1_send_righttrigger)
-                controller1.RightTrigger = 255;
-            if (wu[30] == 1)
-                controller1.RightTrigger = 0;
-            valchanged(31, controller2_send_lefttrigger);
-            if (controller2_send_lefttrigger)
-                controller2.LeftTrigger = 255;
-            if (wu[31] == 1)
-                controller2.LeftTrigger = 0;
-            valchanged(32, controller2_send_righttrigger);
-            if (controller2_send_righttrigger)
-                controller2.RightTrigger = 255;
-            if (wu[32] == 1)
-                controller2.RightTrigger = 0;
-            scpBus.Report(1, controller1.GetReport());
-            scpBus.Report(2, controller2.GetReport());
+            if (Form1.xcnumber == 1 | Form1.xcnumber == 2)
+            {
+                valchanged(1, controller1_send_back);
+                if (wd[1] == 1)
+                    controller1.Buttons ^= X360Buttons.Back;
+                if (wu[1] == 1)
+                    controller1.Buttons &= ~X360Buttons.Back;
+                valchanged(2, controller1_send_start);
+                if (wd[2] == 1)
+                    controller1.Buttons ^= X360Buttons.Start;
+                if (wu[2] == 1)
+                    controller1.Buttons &= ~X360Buttons.Start;
+                valchanged(3, controller1_send_A);
+                if (wd[3] == 1)
+                    controller1.Buttons ^= X360Buttons.A;
+                if (wu[3] == 1)
+                    controller1.Buttons &= ~X360Buttons.A;
+                valchanged(4, controller1_send_B);
+                if (wd[4] == 1)
+                    controller1.Buttons ^= X360Buttons.B;
+                if (wu[4] == 1)
+                    controller1.Buttons &= ~X360Buttons.B;
+                valchanged(5, controller1_send_X);
+                if (wd[5] == 1)
+                    controller1.Buttons ^= X360Buttons.X;
+                if (wu[5] == 1)
+                    controller1.Buttons &= ~X360Buttons.X;
+                valchanged(6, controller1_send_Y);
+                if (wd[6] == 1)
+                    controller1.Buttons ^= X360Buttons.Y;
+                if (wu[6] == 1)
+                    controller1.Buttons &= ~X360Buttons.Y;
+                valchanged(7, controller1_send_up);
+                if (wd[7] == 1)
+                    controller1.Buttons ^= X360Buttons.Up;
+                if (wu[7] == 1)
+                    controller1.Buttons &= ~X360Buttons.Up;
+                valchanged(8, controller1_send_left);
+                if (wd[8] == 1)
+                    controller1.Buttons ^= X360Buttons.Left;
+                if (wu[8] == 1)
+                    controller1.Buttons &= ~X360Buttons.Left;
+                valchanged(9, controller1_send_down);
+                if (wd[9] == 1)
+                    controller1.Buttons ^= X360Buttons.Down;
+                if (wu[9] == 1)
+                    controller1.Buttons &= ~X360Buttons.Down;
+                valchanged(10, controller1_send_right);
+                if (wd[10] == 1)
+                    controller1.Buttons ^= X360Buttons.Right;
+                if (wu[10] == 1)
+                    controller1.Buttons &= ~X360Buttons.Right;
+                valchanged(11, controller1_send_leftstick);
+                if (wd[11] == 1)
+                    controller1.Buttons ^= X360Buttons.LeftStick;
+                if (wu[11] == 1)
+                    controller1.Buttons &= ~X360Buttons.LeftStick;
+                valchanged(12, controller1_send_rightstick);
+                if (wd[12] == 1)
+                    controller1.Buttons ^= X360Buttons.RightStick;
+                if (wu[12] == 1)
+                    controller1.Buttons &= ~X360Buttons.RightStick;
+                valchanged(13, controller1_send_leftbumper);
+                if (wd[13] == 1)
+                    controller1.Buttons ^= X360Buttons.LeftBumper;
+                if (wu[13] == 1)
+                    controller1.Buttons &= ~X360Buttons.LeftBumper;
+                valchanged(14, controller1_send_rightbumper);
+                if (wd[14] == 1)
+                    controller1.Buttons ^= X360Buttons.RightBumper;
+                if (wu[14] == 1)
+                    controller1.Buttons &= ~X360Buttons.RightBumper;
+                controller1.LeftStickX = (short)controller1_send_leftstickx;
+                controller1.LeftStickY = (short)controller1_send_leftsticky;
+                controller1.RightStickX = (short)controller1_send_rightstickx;
+                controller1.RightStickY = (short)controller1_send_rightsticky;
+                controller1.LeftTrigger = (byte)controller1_send_lefttriggerposition;
+                controller1.RightTrigger = (byte)controller1_send_righttriggerposition;
+                valchanged(29, controller1_send_lefttrigger);
+                if (controller1_send_lefttrigger)
+                    controller1.LeftTrigger = 255;
+                if (wu[29] == 1)
+                    controller1.LeftTrigger = 0;
+                valchanged(30, controller1_send_righttrigger);
+                if (controller1_send_righttrigger)
+                    controller1.RightTrigger = 255;
+                if (wu[30] == 1)
+                    controller1.RightTrigger = 0;
+                scpBus.Report(1, controller1.GetReport());
+            }
+            if (Form1.xcnumber == 2)
+            {
+                valchanged(15, controller2_send_back);
+                if (wd[15] == 1)
+                    controller2.Buttons ^= X360Buttons.Back;
+                if (wu[15] == 1)
+                    controller2.Buttons &= ~X360Buttons.Back;
+                valchanged(16, controller2_send_start);
+                if (wd[16] == 1)
+                    controller2.Buttons ^= X360Buttons.Start;
+                if (wu[16] == 1)
+                    controller2.Buttons &= ~X360Buttons.Start;
+                valchanged(17, controller2_send_A);
+                if (wd[17] == 1)
+                    controller2.Buttons ^= X360Buttons.A;
+                if (wu[17] == 1)
+                    controller2.Buttons &= ~X360Buttons.A;
+                valchanged(18, controller2_send_B);
+                if (wd[18] == 1)
+                    controller2.Buttons ^= X360Buttons.B;
+                if (wu[18] == 1)
+                    controller2.Buttons &= ~X360Buttons.B;
+                valchanged(19, controller2_send_X);
+                if (wd[19] == 1)
+                    controller2.Buttons ^= X360Buttons.X;
+                if (wu[19] == 1)
+                    controller2.Buttons &= ~X360Buttons.X;
+                valchanged(20, controller2_send_Y);
+                if (wd[20] == 1)
+                    controller2.Buttons ^= X360Buttons.Y;
+                if (wu[20] == 1)
+                    controller2.Buttons &= ~X360Buttons.Y;
+                valchanged(21, controller2_send_up);
+                if (wd[21] == 1)
+                    controller2.Buttons ^= X360Buttons.Up;
+                if (wu[21] == 1)
+                    controller2.Buttons &= ~X360Buttons.Up;
+                valchanged(22, controller2_send_left);
+                if (wd[22] == 1)
+                    controller2.Buttons ^= X360Buttons.Left;
+                if (wu[22] == 1)
+                    controller2.Buttons &= ~X360Buttons.Left;
+                valchanged(23, controller2_send_down);
+                if (wd[23] == 1)
+                    controller2.Buttons ^= X360Buttons.Down;
+                if (wu[23] == 1)
+                    controller2.Buttons &= ~X360Buttons.Down;
+                valchanged(24, controller2_send_right);
+                if (wd[24] == 1)
+                    controller2.Buttons ^= X360Buttons.Right;
+                if (wu[24] == 1)
+                    controller2.Buttons &= ~X360Buttons.Right;
+                valchanged(25, controller2_send_leftstick);
+                if (wd[25] == 1)
+                    controller2.Buttons ^= X360Buttons.LeftStick;
+                if (wu[25] == 1)
+                    controller2.Buttons &= ~X360Buttons.LeftStick;
+                valchanged(26, controller2_send_rightstick);
+                if (wd[26] == 1)
+                    controller2.Buttons ^= X360Buttons.RightStick;
+                if (wu[26] == 1)
+                    controller2.Buttons &= ~X360Buttons.RightStick;
+                valchanged(27, controller2_send_leftbumper);
+                if (wd[27] == 1)
+                    controller2.Buttons ^= X360Buttons.LeftBumper;
+                if (wu[27] == 1)
+                    controller2.Buttons &= ~X360Buttons.LeftBumper;
+                valchanged(28, controller2_send_rightbumper);
+                if (wd[28] == 1)
+                    controller2.Buttons ^= X360Buttons.RightBumper;
+                if (wu[28] == 1)
+                    controller2.Buttons &= ~X360Buttons.RightBumper;
+                controller2.LeftStickX = (short)controller2_send_leftstickx;
+                controller2.LeftStickY = (short)controller2_send_leftsticky;
+                controller2.RightStickX = (short)controller2_send_rightstickx;
+                controller2.RightStickY = (short)controller2_send_rightsticky;
+                controller2.LeftTrigger = (byte)controller2_send_lefttriggerposition;
+                controller2.RightTrigger = (byte)controller2_send_righttriggerposition;
+                valchanged(31, controller2_send_lefttrigger);
+                if (controller2_send_lefttrigger)
+                    controller2.LeftTrigger = 255;
+                if (wu[31] == 1)
+                    controller2.LeftTrigger = 0;
+                valchanged(32, controller2_send_righttrigger);
+                if (controller2_send_righttrigger)
+                    controller2.RightTrigger = 255;
+                if (wu[32] == 1)
+                    controller2.RightTrigger = 0;
+                scpBus.Report(2, controller2.GetReport());
+            }
         }
     }
 }

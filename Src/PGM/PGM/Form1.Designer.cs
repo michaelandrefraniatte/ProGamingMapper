@@ -50,6 +50,7 @@
             this.connectBothJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectWiimoteJoyconLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectWiimoteJoyconRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectWiimoteJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectProControllerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.disconnectWiimoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +59,7 @@
             this.disconnectBothJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disconnectWiimoteJoyconLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disconnectWiimoteJoyconRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disconnectWiimoteJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disconnectProControllerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,8 +80,6 @@
             this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             this.autocompleteMenu1 = new AutocompleteMenuNS.AutocompleteMenu();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.connectWiimoteJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.disconnectWiimoteJoyconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
             this.SuspendLayout();
@@ -266,6 +266,13 @@
             this.connectWiimoteJoyconRightToolStripMenuItem.Text = "Connect Wiimote Joycon right";
             this.connectWiimoteJoyconRightToolStripMenuItem.Click += new System.EventHandler(this.connectWiimoteJoyconRightToolStripMenuItem_Click);
             // 
+            // connectWiimoteJoyconsToolStripMenuItem
+            // 
+            this.connectWiimoteJoyconsToolStripMenuItem.Name = "connectWiimoteJoyconsToolStripMenuItem";
+            this.connectWiimoteJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.connectWiimoteJoyconsToolStripMenuItem.Text = "Connect Wiimote Joycons";
+            this.connectWiimoteJoyconsToolStripMenuItem.Click += new System.EventHandler(this.connectWiimoteJoyconsToolStripMenuItem_Click);
+            // 
             // connectProControllerToolStripMenuItem
             // 
             this.connectProControllerToolStripMenuItem.Name = "connectProControllerToolStripMenuItem";
@@ -319,6 +326,13 @@
             this.disconnectWiimoteJoyconRightToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.disconnectWiimoteJoyconRightToolStripMenuItem.Text = "Disconnect Wiimote Joycon right";
             this.disconnectWiimoteJoyconRightToolStripMenuItem.Click += new System.EventHandler(this.disconnectWiimoteJoyconRightToolStripMenuItem_Click);
+            // 
+            // disconnectWiimoteJoyconsToolStripMenuItem
+            // 
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Name = "disconnectWiimoteJoyconsToolStripMenuItem";
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Text = "Disconnect Wiimote Joycons";
+            this.disconnectWiimoteJoyconsToolStripMenuItem.Click += new System.EventHandler(this.disconnectWiimoteJoyconsToolStripMenuItem_Click);
             // 
             // disconnectProControllerToolStripMenuItem
             // 
@@ -476,12 +490,13 @@
             this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.CSharp;
             this.fastColoredTextBox1.LeftBracket = '(';
             this.fastColoredTextBox1.LeftBracket2 = '{';
             this.fastColoredTextBox1.Location = new System.Drawing.Point(0, 28);
-            this.fastColoredTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fastColoredTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.fastColoredTextBox1.Name = "fastColoredTextBox1";
             this.fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
             this.fastColoredTextBox1.RightBracket = ')';
@@ -1689,6 +1704,7 @@
         "mouseyp",
         "testdouble",
         "testbool",
+        "xcnumber",
         "PS5ControllerGyroCenter",
         "PS5ControllerAccelCenter",
         "PS5ControllerLeftStickX",
@@ -1731,20 +1747,6 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // connectWiimoteJoyconsToolStripMenuItem
-            // 
-            this.connectWiimoteJoyconsToolStripMenuItem.Name = "connectWiimoteJoyconsToolStripMenuItem";
-            this.connectWiimoteJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
-            this.connectWiimoteJoyconsToolStripMenuItem.Text = "Connect Wiimote Joycons";
-            this.connectWiimoteJoyconsToolStripMenuItem.Click += new System.EventHandler(this.connectWiimoteJoyconsToolStripMenuItem_Click);
-            // 
-            // disconnectWiimoteJoyconsToolStripMenuItem
-            // 
-            this.disconnectWiimoteJoyconsToolStripMenuItem.Name = "disconnectWiimoteJoyconsToolStripMenuItem";
-            this.disconnectWiimoteJoyconsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
-            this.disconnectWiimoteJoyconsToolStripMenuItem.Text = "Disconnect Wiimote Joycons";
-            this.disconnectWiimoteJoyconsToolStripMenuItem.Click += new System.EventHandler(this.disconnectWiimoteJoyconsToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1754,7 +1756,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProGamingMapper";
