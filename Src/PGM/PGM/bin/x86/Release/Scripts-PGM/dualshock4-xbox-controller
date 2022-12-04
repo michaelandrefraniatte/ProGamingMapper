@@ -1,6 +1,7 @@
 UsersAllowedList                      = new string[] { "michael113b" };
 EnableDI                              = true;
 EnableXC                              = true;
+xcnumber                              = 1;
 double mousex                         = 0f, mousey = 0f;
 mousex                                = -(Joystick1AxisX - 32767f) / 20f;
 mousey                                = (Joystick1AxisY - 32767f) / 20f;

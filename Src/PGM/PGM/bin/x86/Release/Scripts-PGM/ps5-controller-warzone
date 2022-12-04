@@ -1,5 +1,6 @@
 UsersAllowedList        = new string[] { "michael113b" };
 EnableXC                = true;
+xcnumber                = 1;
 gyromode                = 2;
 PS5ControllerGyroCenter = PS5ControllerButtonMenuPressed;
 double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 15.0f, dzy = 15.0f;

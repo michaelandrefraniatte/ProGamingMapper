@@ -1,5 +1,6 @@
 UsersAllowedList              = new string[] { "michael113b", "mic113b" };
 EnableXC                      = true;
+xcnumber                      = 1;
 EnableJI                      = true;
 controller1_send_leftstickx   = Math.Abs(JoyconLeftStickX * 32767f * 1500f / 1024f) <= 32767f ? JoyconLeftStickX * 32767f * 1500f / 1024f : Math.Sign(JoyconLeftStickX) * 32767f;
 controller1_send_leftsticky   = Math.Abs(JoyconLeftStickY * 32767f * 1500f / 1024f) <= 32767f ? JoyconLeftStickY * 32767f * 1500f / 1024f : Math.Sign(JoyconLeftStickY) * 32767f;

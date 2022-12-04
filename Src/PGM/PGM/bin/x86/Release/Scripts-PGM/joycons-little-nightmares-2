@@ -1,5 +1,6 @@
 UsersAllowedList              = new string[] { "michael113b", "mic113b" };
 EnableXC                      = true;
+xcnumber                      = 1;
 EnableJI                      = true;
 double mousex                 = 0f, mousey = 0f;
 mousex                        = JoyconRightStickX * 1400f;

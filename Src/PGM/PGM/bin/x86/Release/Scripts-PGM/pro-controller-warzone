@@ -1,5 +1,6 @@
 UsersAllowedList        = new string[] { "michael113b" };
 EnableXC                = true;
+xcnumber                = 1;
 EnablePI                = true;
 gyromode                = 2;
 ProControllerGyroCenter = ProControllerButtonPLUS;

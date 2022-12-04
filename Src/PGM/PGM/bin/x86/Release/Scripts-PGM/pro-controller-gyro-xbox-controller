@@ -1,5 +1,6 @@
 UsersAllowedList = new string[] { "michael113b" };
 EnableXC         = true;
+xcnumber         = 1;
 EnablePI         = true;
 double statex    = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 8.0f, dzy = 8.0f;
 mousex           = -ProControllerGyroX * 32767f / 1024f;

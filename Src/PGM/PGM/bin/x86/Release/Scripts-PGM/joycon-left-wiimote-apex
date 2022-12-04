@@ -1,5 +1,6 @@
 UsersAllowedList   = new string[] { "michael113b" };
 EnableXC           = true;
+xcnumber           = 1;
 EnableJI           = true;
 double viewpower1x = 0f, viewpower2x = 0f, viewpower3x = 1f, viewpower1y = 0f, viewpower2y = 0f, viewpower3y = 1f, dzx = 0f, dzy = 0f;
 if (irx >= 0f & irx <= 1024f)
