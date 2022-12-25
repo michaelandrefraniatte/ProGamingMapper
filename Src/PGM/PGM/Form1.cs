@@ -8452,6 +8452,20 @@ namespace PGM
                     }
                     catch { }
                 }
+                if (wiimoteconnected)
+                {
+                    if (readingfilecount == 0)
+                        readingfile = false;
+                    readingfilecount++;
+                    if (readingfilecount > 100)
+                    {
+                        if (!readingfile)
+                        {
+                            WiimoteFound(path);
+                        }
+                        readingfilecount = 0;
+                    }
+                }
             }
         }
         private void CloseHandles()
@@ -8485,6 +8499,7 @@ namespace PGM
                 }
                 catch { }
         }
+        public static string path;
         public const string vendor_id = "57e", vendor_id_ = "057e", product_r1 = "0330", product_r2 = "0306", product_l = "2006", product_r = "2007", product_pro = "2009";
         public enum EFileAttributes : uint
         {
@@ -9314,9 +9329,9 @@ namespace PGM
             Prohid_read_timeout(handlePro, buf_Pro, (UIntPtr)report_lenPro);
         }
         public const double REGISTER_IR = 0x04b00030, REGISTER_EXTENSION_INIT_1 = 0x04a400f0, REGISTER_EXTENSION_INIT_2 = 0x04a400fb, REGISTER_EXTENSION_TYPE = 0x04a400fa, REGISTER_EXTENSION_CALIBRATION = 0x04a40020, REGISTER_MOTIONPLUS_INIT = 0x04a600fe;
-        public static double irx0, iry0, irx1, iry1, irx, iry, irxc, iryc, WiimoteIRSensors0X, WiimoteIRSensors0Y, WiimoteIRSensors1X, WiimoteIRSensors1Y, WiimoteRawValuesX, WiimoteRawValuesY, WiimoteRawValuesZ, calibrationxinit, calibrationyinit, calibrationzinit, stickviewxinit, stickviewyinit, WiimoteNunchuckStateRawValuesX, WiimoteNunchuckStateRawValuesY, WiimoteNunchuckStateRawValuesZ, WiimoteNunchuckStateRawJoystickX, WiimoteNunchuckStateRawJoystickY, mousex, mousey, WiimoteIRSensors0Xcam, WiimoteIRSensors0Ycam, WiimoteIRSensors1Xcam, WiimoteIRSensors1Ycam, WiimoteIRSensorsXcam, WiimoteIRSensorsYcam, centery = 160f, WiimoteIR0notfound = 0, irx2, iry2, irx3, iry3;
+        public static double irx0, iry0, irx1, iry1, irx, iry, irxc, iryc, WiimoteIRSensors0X, WiimoteIRSensors0Y, WiimoteIRSensors1X, WiimoteIRSensors1Y, WiimoteRawValuesX, WiimoteRawValuesY, WiimoteRawValuesZ, calibrationxinit, calibrationyinit, calibrationzinit, stickviewxinit, stickviewyinit, readingfilecount, WiimoteNunchuckStateRawValuesX, WiimoteNunchuckStateRawValuesY, WiimoteNunchuckStateRawValuesZ, WiimoteNunchuckStateRawJoystickX, WiimoteNunchuckStateRawJoystickY, mousex, mousey, WiimoteIRSensors0Xcam, WiimoteIRSensors0Ycam, WiimoteIRSensors1Xcam, WiimoteIRSensors1Ycam, WiimoteIRSensorsXcam, WiimoteIRSensorsYcam, centery = 160f, WiimoteIR0notfound = 0, irx2, iry2, irx3, iry3;
         public static int irmode = 1, gyromode = 1;
-        public static bool WiimoteIR1foundcam, WiimoteIR0foundcam, WiimoteIR1found, WiimoteIR0found, WiimoteIRswitch, WiimoteButtonStateA, WiimoteButtonStateB, WiimoteButtonStateMinus, WiimoteButtonStateHome, WiimoteButtonStatePlus, WiimoteButtonStateOne, WiimoteButtonStateTwo, WiimoteButtonStateUp, WiimoteButtonStateDown, WiimoteButtonStateLeft, WiimoteButtonStateRight, WiimoteNunchuckStateC, WiimoteNunchuckStateZ, ISWIIMOTE;
+        public static bool readingfile, WiimoteIR1foundcam, WiimoteIR0foundcam, WiimoteIR1found, WiimoteIR0found, WiimoteIRswitch, WiimoteButtonStateA, WiimoteButtonStateB, WiimoteButtonStateMinus, WiimoteButtonStateHome, WiimoteButtonStatePlus, WiimoteButtonStateOne, WiimoteButtonStateTwo, WiimoteButtonStateUp, WiimoteButtonStateDown, WiimoteButtonStateLeft, WiimoteButtonStateRight, WiimoteNunchuckStateC, WiimoteNunchuckStateZ, ISWIIMOTE;
         public static byte[] buff = new byte[] { 0x55 }, mBuff = new byte[22], aBuffer = new byte[22];
         public const byte Type = 0x12, IR = 0x13, WriteMemory = 0x16, ReadMemory = 0x16, IRExtensionAccel = 0x37;
         public static FileStream mStream;
@@ -9503,6 +9518,7 @@ namespace PGM
             try
             {
                 mStream.Read(aBuffer, 0, 22);
+                readingfile = true;
             }
             catch
             {
@@ -9542,7 +9558,10 @@ namespace PGM
                 {
                     if ((diDetail.DevicePath.Contains(vendor_id) | diDetail.DevicePath.Contains(vendor_id_)) & (diDetail.DevicePath.Contains(product_r1) | diDetail.DevicePath.Contains(product_r2)))
                     {
-                        WiimoteFound(diDetail.DevicePath);
+                        path = diDetail.DevicePath;
+                        WiimoteFound(path);
+                        WiimoteFound(path);
+                        WiimoteFound(path);
                         return true;
                     }
                 }
