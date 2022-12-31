@@ -142,12 +142,6 @@ namespace DualSenseAPI.State
                         HasChanges = true;
                     }
                 }
-                else
-                {
-                    // we should never EVER get here. and if we do, we need to know about it to fix it,
-                    // as a core assumption has been violated.
-                    throw new InvalidOperationException();
-                }
             }
         }
     }

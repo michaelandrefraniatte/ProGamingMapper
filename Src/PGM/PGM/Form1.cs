@@ -9863,13 +9863,6 @@ namespace PGM
         private IDisposable pollerSubscription;
 
         /// <summary>
-        /// State event handler for asynchronous polling.
-        /// </summary>
-        /// <seealso cref="BeginPolling(uint)"/>
-        /// <seealso cref="EndPolling"/>
-        public event StatePolledHandler OnStatePolled;
-
-        /// <summary>
         /// Button state changed event handler for asynchronous polling.
         /// </summary>
         /// <seealso cref="BeginPolling(uint)"/>
@@ -10000,9 +9993,9 @@ namespace PGM
         /// <returns>Enumerable of available controllers.</returns>
         public static IEnumerable<DualSense> EnumerateControllers()
         {
-            foreach (ConnectedDeviceDefinition deviceDefinition in HidScanner.Instance.ListDevices())
+            foreach (ConnectedDeviceDefinition deviceDefinition in HidScanner.ListDevices())
             {
-                IDevice device = HidScanner.Instance.GetConnectedDevice(deviceDefinition);
+                IDevice device = HidScanner.GetConnectedDevice(deviceDefinition);
                 yield return new DualSense(device, deviceDefinition.ReadBufferSize, deviceDefinition.WriteBufferSize);
             }
         }
