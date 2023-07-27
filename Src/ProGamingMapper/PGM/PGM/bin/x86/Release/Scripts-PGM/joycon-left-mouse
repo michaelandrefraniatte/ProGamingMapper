@@ -1,0 +1,16 @@
+UsersAllowedList = new string[] { "michael113b" };
+EnableKM         = true;
+EnableJI         = true;
+SendD            = JoyconLeftStickX >= 0.25f;
+SendQ            = JoyconLeftStickX <= -0.25f;
+SendZ            = JoyconLeftStickY >= 0.25f;
+SendS            = JoyconLeftStickY <= -0.25f;
+Send1            = JoyconLeftButtonDPAD_DOWN;
+Send2            = JoyconLeftButtonDPAD_LEFT;
+Send3            = JoyconLeftButtonDPAD_UP;
+Send4            = JoyconLeftButtonDPAD_RIGHT;
+SendSpace        = JoyconLeftButtonSHOULDER_1;
+SendLeftShift    = JoyconLeftButtonSHOULDER_2;
+SendE            = JoyconLeftButtonMINUS;
+SendA            = JoyconLeftButtonSL;
+SendV            = JoyconLeftAccelX <= 1.15f;

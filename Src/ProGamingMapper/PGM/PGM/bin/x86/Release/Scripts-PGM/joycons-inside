@@ -1,0 +1,25 @@
+UsersAllowedList              = new string[] { "michael113b", "mic113b" };
+EnableXC                      = true;
+xcnumber                      = 1;
+EnableJI                      = true;
+controller1_send_leftstickx   = Math.Abs(JoyconLeftStickX * 32767f * 1500f / 1024f) <= 32767f ? JoyconLeftStickX * 32767f * 1500f / 1024f : Math.Sign(JoyconLeftStickX) * 32767f;
+controller1_send_leftsticky   = Math.Abs(JoyconLeftStickY * 32767f * 1500f / 1024f) <= 32767f ? JoyconLeftStickY * 32767f * 1500f / 1024f : Math.Sign(JoyconLeftStickY) * 32767f;
+controller1_send_rightstickx  = Math.Abs(JoyconRightStickX * 32767f * 1500f / 1024f) <= 32767f ? JoyconRightStickX * 32767f * 1500f / 1024f : Math.Sign(JoyconRightStickX) * 32767f;
+controller1_send_rightsticky  = Math.Abs(JoyconRightStickY * 32767f * 1500f / 1024f) <= 32767f ? JoyconRightStickY * 32767f * 1500f / 1024f : Math.Sign(JoyconRightStickY) * 32767f;
+controller1_send_A            = JoyconRightButtonDPAD_DOWN;
+controller1_send_Y            = JoyconRightButtonDPAD_UP;
+controller1_send_B            = JoyconRightButtonDPAD_RIGHT;
+controller1_send_X            = JoyconRightButtonDPAD_LEFT;
+controller1_send_down         = JoyconLeftButtonDPAD_DOWN;
+controller1_send_up           = JoyconLeftButtonDPAD_UP;
+controller1_send_right        = JoyconLeftButtonDPAD_RIGHT;
+controller1_send_left         = JoyconLeftButtonDPAD_LEFT;
+controller1_send_back         = JoyconLeftButtonCAPTURE;
+controller1_send_start        = JoyconRightButtonHOME;
+controller1_send_leftstick    = JoyconLeftButtonSTICK;
+controller1_send_rightstick   = JoyconRightButtonSTICK;
+controller1_send_leftbumper   = JoyconLeftButtonSHOULDER_1;
+controller1_send_rightbumper  = JoyconRightButtonSHOULDER_1;
+controller1_send_lefttrigger  = JoyconLeftButtonSHOULDER_2;
+controller1_send_righttrigger = JoyconRightButtonSHOULDER_2;
+

@@ -1,0 +1,97 @@
+UsersAllowedList        = new string[] { "michael113b" };
+EnableKM                = true;
+EnableJI                = true;
+KeyboardMouseDriverType = "kmevent";
+sleeptime               = 21;
+double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower05x = 0f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, viewpower05y = 0f, dzx = 25.0f, dzy = 25.0f, limit = 127f;
+valchanged(0, JoyconLeftButtonCAPTURE);
+if (wd[0] == 1 & !getstate[0]) 
+{
+    getstate[0] = true;
+}
+else 
+{ 
+    if (wd[0] == 1 & getstate[0]) 
+    {
+        MouseMoveX     = 0;
+        MouseMoveY     = 0;
+        MouseDesktopX  = 0;
+        MouseDesktopY  = 0;
+        MouseAbsX      = 0;
+        MouseAbsY      = 0;
+        SendD          = false;
+        SendQ          = false;
+        SendZ          = false;
+        SendS          = false;
+        Send8          = false;
+        Send7          = false;
+        Send9          = false;
+        Send6          = false;
+        SendB          = false;  
+        Send1          = false;
+        Send2          = false;
+        Send3          = false;
+        Send4          = false;
+        SendSpace      = false;
+        SendLeftShift  = false;
+        SendE          = false;
+        SendA          = false;
+        SendV          = false;
+        SendEscape     = false;
+        SendTab        = false;
+        SendR          = false;
+        SendF          = false;
+        SendT          = false;
+        SendG          = false;
+        SendY          = false; 
+        SendU          = false;
+        SendX          = false;
+        SendC          = false;
+        SendRightClick = false;
+        SendLeftClick  = false;
+        getstate[0]       = false;
+    }
+}
+if (getstate[0]) 
+{
+    statex = Math.Abs(JoyconRightStickX * limit) <= limit ? JoyconRightStickX * limit : Math.Sign(JoyconRightStickX) * limit;
+    statey = Math.Abs(JoyconRightStickY * limit) <= limit ? JoyconRightStickY * limit : Math.Sign(JoyconRightStickY) * limit;
+    if (statex >= (dzx / 100f) * limit & statex <= limit)
+        mousex = Scale(statex, (dzx / 100f) * limit, limit, 1f, limit);
+    if (statex <= -(dzx / 100f) * limit & statex >= -limit)
+        mousex = Scale(statex, -limit, -(dzx / 100f) * limit, -limit, 1f);
+    if (statex <= (dzx / 100f) * limit & statex >= -(dzx / 100f) * limit)
+        mousex = 0f;
+    if (statey >= (dzy / 100f) * limit & statey <= limit)
+        mousey = Scale(statey, (dzy / 100f) * limit, limit, 1f, limit);
+    if (statey <= -(dzy / 100f) * limit & statey >= -limit)
+        mousey = Scale(statey, -limit, -(dzy / 100f) * limit, -limit, 1f);
+    if (statey <= (dzy / 100f) * limit & statey >= -(dzy / 100f) * limit)
+        mousey = 0f;
+    MouseMoveX     = -Math.Sign(JoyconRightStickX) * (Math.Abs(statex * statex * statex) / limit / limit * viewpower3x + Math.Abs(statex * statex) / limit * viewpower2x + Math.Abs(statex) * viewpower1x);
+    MouseMoveY     = Math.Sign(JoyconRightStickY) * (Math.Abs(statey * statey * statey) / limit / limit * viewpower3y + Math.Abs(statey * statey) / limit * viewpower2y + Math.Abs(statey) * viewpower1y);
+    SendD          = JoyconLeftStickX > 0.35f;
+    SendQ          = JoyconLeftStickX < -0.35f;
+    SendZ          = JoyconLeftStickY > 0.35f;
+    SendS          = JoyconLeftStickY < -0.35f;
+    Send8          = JoyconLeftButtonDPAD_DOWN;
+    Send7          = JoyconLeftButtonDPAD_LEFT;
+    Send9          = JoyconLeftButtonDPAD_RIGHT;
+    Send6          = JoyconLeftButtonDPAD_UP;
+    SendSpace      = JoyconLeftButtonSHOULDER_1;
+    SendLeftShift  = JoyconLeftButtonSHOULDER_2;
+    SendE          = JoyconLeftButtonSL;
+    SendY          = JoyconLeftButtonSR;
+    SendB          = JoyconLeftButtonSTICK;  
+    SendV          = JoyconLeftButtonMINUS;
+    SendR          = JoyconRightButtonDPAD_LEFT;
+    SendF          = JoyconRightButtonDPAD_DOWN;
+    SendX          = JoyconRightButtonDPAD_UP;
+    SendC          = JoyconRightButtonDPAD_RIGHT;
+    SendRightClick = JoyconRightButtonSHOULDER_1;
+    SendLeftClick  = JoyconRightButtonSHOULDER_2;
+    SendA          = JoyconRightButtonSR;
+    SendU          = JoyconRightButtonSL;
+    SendH          = JoyconRightButtonSTICK;
+    SendEscape     = JoyconRightButtonHOME;
+}

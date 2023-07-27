@@ -1,0 +1,200 @@
+UsersAllowedList = new string[] { "michael113b" };
+EnableKM         = true;
+EnableJI         = true;
+centery          = 140f;
+irmode           = 1;
+double mousex    = 0f, mousey = 0f, viewpower1x = 0.08f, viewpower2x = 0f, viewpower3x = 0.92f, viewpower1y = 0.08f, viewpower2y = 0f, viewpower3y = 0.92f, dzx = 0.0f, dzy = 0.0f;
+valchanged(0, JoyconLeftButtonCAPTURE);
+if (wd[0] == 1 & !getstate[0]) 
+{
+    width    = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+    height   = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+    getstate[0] = true;
+}
+else 
+{ 
+    if (wd[0] == 1 & getstate[0]) 
+    {
+        MouseMoveX     = 0;
+        MouseMoveY     = 0;
+        MouseDesktopX  = 0;
+        MouseDesktopY  = 0;
+        MouseAbsX      = 0;
+        MouseAbsY      = 0;
+        SendD          = false;
+        SendQ          = false;
+        SendZ          = false;
+        SendS          = false;
+        Send8          = false;
+        Send7          = false;
+        Send9          = false;
+        Send6          = false;
+        SendB          = false;  
+        Send1          = false;
+        Send2          = false;
+        Send3          = false;
+        Send4          = false;
+        SendSpace      = false;
+        SendLeftShift  = false;
+        SendE          = false;
+        SendA          = false;
+        SendV          = false;
+        SendEscape     = false;
+        SendTab        = false;
+        SendR          = false;
+        SendF          = false;
+        SendT          = false;
+        SendG          = false;
+        SendY          = false; 
+        SendU          = false;
+        SendX          = false;
+        SendC          = false;
+        SendRightClick = false;
+        SendLeftClick  = false;
+        getstate[0]       = false;
+    }
+}
+if (getstate[0]) 
+{
+    if (irx >= 0f)
+        mousex = Scale(irx * irx * irx / 1024f / 1024f * viewpower3x + irx * irx / 1024f * viewpower2x + irx * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+    if (irx <= 0f)
+        mousex = Scale(-(-irx * -irx * -irx) / 1024f / 1024f * viewpower3x - (-irx * -irx) / 1024f * viewpower2x - (-irx) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+    if (iry >= 0f)
+        mousey = Scale(iry * iry * iry / 1024f / 1024f * viewpower3y + iry * iry / 1024f * viewpower2y + iry * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+    if (iry <= 0f)
+        mousey = Scale(-(-iry * -iry * -iry) / 1024f / 1024f * viewpower3y - (-iry * -iry) / 1024f * viewpower2y - (-iry) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+    MouseMoveX     = -mousex * 600 / 1024f;
+    MouseMoveY     = mousey * 400 / 1024f;
+    MouseDesktopX  = width / 2f - mousex * width / 2f / 1024f;
+    MouseDesktopY  = height / 2f + mousey * height / 2f / 1024f;
+    SendD          = JoyconLeftStickX > 0.35f;
+    SendQ          = JoyconLeftStickX < -0.35f;
+    SendZ          = JoyconLeftStickY > 0.35f;
+    SendS          = JoyconLeftStickY < -0.35f;
+    Send8          = JoyconLeftButtonDPAD_DOWN;
+    Send7          = JoyconLeftButtonDPAD_LEFT;
+    Send9          = JoyconLeftButtonDPAD_RIGHT;
+    Send6          = JoyconLeftButtonDPAD_UP;
+    SendSpace      = JoyconLeftButtonSHOULDER_1;
+    SendLeftShift  = JoyconLeftButtonSHOULDER_2;
+    SendE          = JoyconLeftButtonSR;
+    SendB          = JoyconLeftButtonSTICK;  
+    SendV          = JoyconLeftButtonMINUS;
+    SendEscape     = WiimoteButtonStateTwo;
+    SendH          = JoyconLeftButtonCAPTURE;
+    SendTab        = WiimoteButtonStateOne;
+    SendR          = ((WiimoteRawValuesZ > 0 ? WiimoteRawValuesZ : -WiimoteRawValuesZ) >= 30f & (WiimoteRawValuesY > 0 ? WiimoteRawValuesY : -WiimoteRawValuesY) >= 30f & (WiimoteRawValuesX > 0 ? WiimoteRawValuesX : -WiimoteRawValuesX) >= 30f);
+    SendF          = WiimoteButtonStateHome;
+    SendX          = WiimoteButtonStateUp;
+    SendC          = WiimoteButtonStateDown;
+    SendRightClick = WiimoteButtonStateA;
+    SendLeftClick  = WiimoteButtonStateB | WiimoteButtonStateLeft | WiimoteButtonStateRight | JoyconLeftButtonMINUS | JoyconLeftButtonSL;
+    SendY          = WiimoteButtonStateLeft; 
+    SendU          = WiimoteButtonStateRight;
+    SendA          = JoyconLeftButtonSL;
+    valchanged(1, WiimoteButtonStateMinus);
+    if (wd[1] == 1) 
+    { 
+        if (keys54321[0] == 0) 
+           Send5 = true; 
+        if (keys54321[0] == 1) 
+           Send4 = true; 
+        if (keys54321[0] == 2) 
+           Send3 = true; 
+        if (keys54321[0] == 3) 
+           Send2 = true; 
+        if (keys54321[0] == 4) 
+           Send1 = true; 
+    } 
+    if (wu[1] == 1) 
+    { 
+        if (keys54321[0] == 0) 
+        { 
+            Send5 = false; 
+            keys54321[0] = 1; 
+            keys12345[0] = 0; 
+        } 
+        else if (keys54321[0] == 1) 
+        { 
+            Send4 = false; 
+            keys54321[0] = 2; 
+            keys12345[0] = 4; 
+        } 
+        else if (keys54321[0] == 2) 
+        { 
+            Send3 = false; 
+            keys54321[0] = 3; 
+            keys12345[0] = 3; 
+        } 
+        else if (keys54321[0] == 3) 
+        { 
+            Send2 = false; 
+            keys54321[0] = 4; 
+            keys12345[0] = 2; 
+        } 
+        else if (keys54321[0] == 4) 
+        { 
+            Send1 = false; 
+            keys54321[0] = 0; 
+            keys12345[0] = 1; 
+        } 
+    } 
+    valchanged(2, WiimoteButtonStatePlus); 
+    if (wd[2] == 1) 
+    { 
+        if (keys12345[0] == 0) 
+           Send1 = true; 
+        if (keys12345[0] == 1) 
+           Send2 = true; 
+        if (keys12345[0] == 2) 
+           Send3 = true; 
+        if (keys12345[0] == 3) 
+           Send4 = true; 
+        if (keys12345[0] == 4) 
+           Send5 = true; 
+    } 
+    if (wu[2] == 1) 
+    { 
+        if (keys12345[0] == 0) 
+        { 
+            Send1 = false; 
+            keys12345[0] = 1; 
+            keys54321[0] = 0; 
+        } 
+        else if (keys12345[0] == 1) 
+        { 
+            Send2 = false; 
+            keys12345[0] = 2; 
+            keys54321[0] = 4; 
+        } 
+        else if (keys12345[0] == 2) 
+        { 
+            Send3 = false; 
+            keys12345[0] = 3; 
+            keys54321[0] = 3; 
+        } 
+        else if (keys12345[0] == 3) 
+        { 
+            Send4 = false; 
+            keys12345[0] = 4; 
+            keys54321[0] = 2; 
+        } 
+        else if (keys12345[0] == 4) 
+        { 
+            Send5 = false; 
+            keys12345[0] = 0; 
+            keys54321[0] = 1; 
+        } 
+    }
+    valchanged(3, SendV); 
+    if (wd[3] == 1) 
+    { 
+        keys54321[0]--; 
+        keys12345[0]--; 
+        if (keys54321[0] < 0) 
+           keys54321[0] = 4; 
+        if (keys12345[0] < 0) 
+           keys12345[0] = 4; 
+    }
+}

@@ -1,0 +1,93 @@
+UsersAllowedList        = new string[] { "michael113b" };
+EnableKM                = true;
+EnablePI                = true;
+KeyboardMouseDriverType = "kmevent";
+sleeptime               = 21;
+double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower05x = 0f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, viewpower05y = 0f, dzx = 35.0f, dzy = 35.0f, limit = 127f;
+valchanged(0, ProControllerButtonCAPTURE);
+if (wd[0] == 1 & !getstate[0]) 
+{
+    getstate[0] = true;
+}
+else 
+{ 
+    if (wd[0] == 1 & getstate[0]) 
+    {
+        MouseMoveX     = 0;
+        MouseMoveY     = 0;
+        MouseDesktopX  = 0;
+        MouseDesktopY  = 0;
+        MouseAbsX      = 0;
+        MouseAbsY      = 0;
+        SendD          = false;
+        SendQ          = false;
+        SendZ          = false;
+        SendS          = false;
+        Send8          = false;
+        Send7          = false;
+        Send9          = false;
+        Send6          = false;
+        SendB          = false;  
+        Send1          = false;
+        Send2          = false;
+        Send3          = false;
+        Send4          = false;
+        SendSpace      = false;
+        SendLeftShift  = false;
+        SendE          = false;
+        SendA          = false;
+        SendV          = false;
+        SendEscape     = false;
+        SendTab        = false;
+        SendR          = false;
+        SendF          = false;
+        SendT          = false;
+        SendG          = false;
+        SendY          = false; 
+        SendU          = false;
+        SendX          = false;
+        SendC          = false;
+        SendRightClick = false;
+        SendLeftClick  = false;
+        getstate[0]       = false;
+    }
+}
+if (getstate[0]) 
+{
+    statex = Math.Abs(ProControllerRightStickX * 50f) <= limit ? ProControllerRightStickX * 50f : Math.Sign(ProControllerRightStickX) * limit;
+    statey = Math.Abs(ProControllerRightStickY * 50f) <= limit ? ProControllerRightStickY * 50f : Math.Sign(ProControllerRightStickY) * limit;
+    if (statex >= (dzx / 100f) * limit & statex <= limit)
+        mousex = Scale(statex, (dzx / 100f) * limit, limit, 0f, limit);
+    if (statex <= -(dzx / 100f) * limit & statex >= -limit)
+        mousex = Scale(statex, -limit, -(dzx / 100f) * limit, -limit, 0f);
+    if (statex <= (dzx / 100f) * limit & statex >= -(dzx / 100f) * limit)
+        mousex = 0f;
+    if (statey >= (dzy / 100f) * limit & statey <= limit)
+        mousey = Scale(statey, (dzy / 100f) * limit, limit, 0f, limit);
+    if (statey <= -(dzy / 100f) * limit & statey >= -limit)
+        mousey = Scale(statey, -limit, -(dzy / 100f) * limit, -limit, 0f);
+    if (statey <= (dzy / 100f) * limit & statey >= -(dzy / 100f) * limit)
+        mousey = 0f;
+    MouseMoveX     = -Math.Sign(ProControllerRightStickX) * (Math.Abs(statex * statex * statex) / limit / limit * viewpower3x + Math.Abs(statex * statex) / limit * viewpower2x + Math.Abs(statex) * viewpower1x);
+    MouseMoveY     = Math.Sign(ProControllerRightStickY) * (Math.Abs(statey * statey * statey) / limit / limit * viewpower3y + Math.Abs(statey * statey) / limit * viewpower2y + Math.Abs(statey) * viewpower1y);
+    SendD          = ProControllerLeftStickX > 0.35f;
+    SendQ          = ProControllerLeftStickX < -0.35f;
+    SendZ          = ProControllerLeftStickY > 0.35f;
+    SendS          = ProControllerLeftStickY < -0.35f;
+    Send0          = ProControllerButtonDPAD_DOWN;
+    Send1          = ProControllerButtonDPAD_LEFT;
+    Send2          = ProControllerButtonDPAD_RIGHT;
+    Send3          = ProControllerButtonDPAD_UP;
+    SendSpace      = ProControllerButtonSHOULDER_Left_1;
+    SendLeftShift  = ProControllerButtonSHOULDER_Right_1;
+    SendE          = ProControllerButtonMINUS;
+    SendB          = ProControllerButtonSTICK_Right;  
+    SendR          = ProControllerButtonY;
+    SendF          = ProControllerButtonX;
+    SendX          = ProControllerButtonB;
+    SendC          = ProControllerButtonA;
+    SendRightClick = ProControllerButtonSHOULDER_Left_2;
+    SendLeftClick  = ProControllerButtonSHOULDER_Right_2;
+    SendH          = ProControllerButtonSTICK_Left;
+    SendEscape     = ProControllerButtonHOME;
+}

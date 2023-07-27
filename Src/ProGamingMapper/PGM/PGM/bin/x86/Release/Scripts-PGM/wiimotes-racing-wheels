@@ -1,0 +1,50 @@
+UsersAllowedList = new string[] { "michael113b" };
+EnableXC         = true;
+xcnumber         = 2;
+double mousex    = 0f, mousey = 0f, dzx = 20.0f, dzy = 0.0f;
+/* First Player */
+if (Wiimote1RawValuesY > 0f)
+    mousex = Scale(Wiimote1RawValuesY * 45f, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (Wiimote1RawValuesY < 0f)
+    mousex = Scale(Wiimote1RawValuesY * 45f, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (Wiimote1RawValuesX > 0f)
+    mousey = Scale(Wiimote1RawValuesX * 90f, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (Wiimote1RawValuesX < 0f)
+    mousey = Scale(Wiimote1RawValuesX * 90f, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller1_send_leftstickx   = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;
+controller1_send_leftsticky   = Math.Abs(mousey * 32767f / 1024f) <= 32767f ? mousey * 32767f / 1024f : Math.Sign(mousey) * 32767f;
+controller1_send_down         = Wiimote1ButtonStateLeft;
+controller1_send_left         = Wiimote1ButtonStateUp;
+controller1_send_right        = Wiimote1ButtonStateDown;
+controller1_send_up           = Wiimote1ButtonStateRight;
+controller1_send_A            = Wiimote1ButtonStateB;
+controller1_send_B            = Wiimote1ButtonStateOne & Wiimote1ButtonStateTwo;  
+controller1_send_Y            = Wiimote1ButtonStateA;
+controller1_send_X            = Wiimote1ButtonStateHome;
+controller1_send_lefttrigger  = Wiimote1ButtonStateOne;
+controller1_send_righttrigger = Wiimote1ButtonStateTwo;
+controller1_send_rightbumper  = Wiimote1ButtonStatePlus;
+controller1_send_leftbumper   = Wiimote1ButtonStateMinus;
+/* Second Player */
+if (Wiimote2RawValuesY > 0f)
+    mousex = Scale(Wiimote2RawValuesY * 45f, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (Wiimote2RawValuesY < 0f)
+    mousex = Scale(Wiimote2RawValuesY * 45f, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (Wiimote2RawValuesX > 0f)
+    mousey = Scale(Wiimote2RawValuesX * 90f, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (Wiimote2RawValuesX < 0f)
+    mousey = Scale(Wiimote2RawValuesX * 90f, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller2_send_leftstickx   = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;
+controller2_send_leftsticky   = Math.Abs(mousey * 32767f / 1024f) <= 32767f ? mousey * 32767f / 1024f : Math.Sign(mousey) * 32767f;
+controller2_send_down         = Wiimote2ButtonStateLeft;
+controller2_send_left         = Wiimote2ButtonStateUp;
+controller2_send_right        = Wiimote2ButtonStateDown;
+controller2_send_up           = Wiimote2ButtonStateRight;
+controller2_send_A            = Wiimote2ButtonStateB;
+controller2_send_B            = Wiimote2ButtonStateOne & Wiimote2ButtonStateTwo;  
+controller2_send_Y            = Wiimote2ButtonStateA;
+controller2_send_X            = Wiimote2ButtonStateHome;
+controller2_send_lefttrigger  = Wiimote2ButtonStateOne;
+controller2_send_righttrigger = Wiimote2ButtonStateTwo;
+controller2_send_rightbumper  = Wiimote2ButtonStatePlus;
+controller2_send_leftbumper   = Wiimote2ButtonStateMinus;

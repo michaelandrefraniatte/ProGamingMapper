@@ -1,0 +1,47 @@
+UsersAllowedList        = new string[] { "michael113b" };
+EnableKM                = true;
+KeyboardMouseDriverType = "kmevent";
+sleeptime               = 1;
+SpeechToText            = new string[] { "Load", "Fire", "Left", "Right", "Up", "Down" };
+SendSpace               = TextFromSpeech == "Load" ? true : false;
+SendX                   = TextFromSpeech == "Fire" ? true : false;
+valchanged(0, TextFromSpeech == "Left" ? true : false);
+valchanged(1, TextFromSpeech == "Right" ? true : false);
+if ((wd[0] == 1 & getstate[0]) | wd[1] == 1)
+{
+    getstate[0] = false;
+}
+else if (wd[0] == 1 & !getstate[0])
+{
+    getstate[0] = true;
+}
+if ((wd[1] == 1 & getstate[1]) | wd[0] == 1)
+{
+    getstate[1] = false;
+}
+else if (wd[1] == 1 & !getstate[1])
+{
+    getstate[1] = true;
+}
+SendLeft  = getstate[0];
+SendRight = getstate[1];
+valchanged(2, TextFromSpeech == "Up" ? true : false);
+valchanged(3, TextFromSpeech == "Down" ? true : false);
+if ((wd[2] == 1 & getstate[2]) | wd[3] == 1)
+{
+    getstate[2] = false;
+}
+else if (wd[2] == 1 & !getstate[2])
+{
+    getstate[2] = true;
+}
+if ((wd[3] == 1 & getstate[3]) | wd[2] == 1)
+{
+    getstate[3] = false;
+}
+else if (wd[3] == 1 & !getstate[3])
+{
+    getstate[3] = true;
+}
+SendUp   = getstate[2];
+SendDown = getstate[3];

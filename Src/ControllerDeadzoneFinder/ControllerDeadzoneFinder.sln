@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerDeadzoneFinder", "ControllerDeadzoneFinder\ControllerDeadzoneFinder.csproj", "{8C584FD0-DF91-40C7-AE59-F7AF6D46BC0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C584FD0-DF91-40C7-AE59-F7AF6D46BC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C584FD0-DF91-40C7-AE59-F7AF6D46BC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C584FD0-DF91-40C7-AE59-F7AF6D46BC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C584FD0-DF91-40C7-AE59-F7AF6D46BC0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B066F0B-14ED-4871-9A23-A591FEDB0ED6}
+	EndGlobalSection
+EndGlobal

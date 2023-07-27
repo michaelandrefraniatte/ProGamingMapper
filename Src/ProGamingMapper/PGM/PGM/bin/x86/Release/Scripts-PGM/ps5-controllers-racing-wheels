@@ -1,0 +1,85 @@
+UsersAllowedList        = new string[] { "michael113b" };
+PS5ControllerDescriptor = new string[] { "54C", "CE6", "DualSense", "54C", "CE6", "DualSense" };
+EnableXC                = true;
+xcnumber                = 2;
+double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 20.0f, dzy = 0.0f;
+/* First player */
+mousex = PS5Controller1AccelY * 31.25f;
+mousey = PS5Controller1LeftStickY * 32767f;
+statex = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
+statey = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
+if (statex > 0f)
+    mousestatex = Scale(statex, 0f, 32767f, dzx / 100f * 32767f, 32767f);
+if (statex < 0f)
+    mousestatex = Scale(statex, -32767f, 0f, -32767f, -(dzx / 100f) * 32767f);
+if (statey > 0f)
+    mousestatey = Scale(statey, 0f, 32767f, dzy / 100f * 32767f, 32767f);
+if (statey < 0f)
+    mousestatey = Scale(statey, -32767f, 0f, -32767f, -(dzy / 100f) * 32767f);
+mousex                                = mousestatex + PS5Controller1LeftStickX * 32767f;
+mousey                                = mousestatey;
+statex                                = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
+statey                                = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
+controller1_send_leftstickx           = statex;
+controller1_send_leftsticky           = statey;
+mousex                                = PS5Controller1RightStickX * 1024f;
+mousey                                = PS5Controller1RightStickY * 1024f;
+controller1_send_rightstickx          = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;
+controller1_send_rightsticky          = Math.Abs(-mousey * 32767f / 1024f) <= 32767f ? -mousey * 32767f / 1024f : Math.Sign(-mousey) * 32767f;
+controller1_send_down                 = PS5Controller1ButtonDPadDownPressed;
+controller1_send_left                 = PS5Controller1ButtonDPadLeftPressed;
+controller1_send_right                = PS5Controller1ButtonDPadRightPressed;
+controller1_send_up                   = PS5Controller1ButtonDPadUpPressed;
+controller1_send_leftstick            = PS5Controller1ButtonL3Pressed;
+controller1_send_rightstick           = PS5Controller1ButtonR3Pressed;
+controller1_send_B                    = PS5Controller1ButtonCrossPressed;
+controller1_send_A                    = PS5Controller1ButtonCirclePressed;
+controller1_send_Y                    = PS5Controller1ButtonSquarePressed;
+controller1_send_X                    = PS5Controller1ButtonTrianglePressed;
+controller1_send_lefttriggerposition  = PS5Controller1LeftTriggerPosition * 255;
+controller1_send_righttriggerposition = PS5Controller1RightTriggerPosition * 255;
+controller1_send_leftbumper           = PS5Controller1ButtonL1Pressed;
+controller1_send_rightbumper          = PS5Controller1ButtonR1Pressed;
+controller1_send_back                 = PS5Controller1ButtonLogoPressed;
+controller1_send_start                = PS5Controller1ButtonTouchpadPressed;
+PS5Controller1AccelCenter             = PS5Controller1ButtonMenuPressed;
+/* Second player */
+mousex = PS5Controller2AccelY * 31.25f;
+mousey = PS5Controller2LeftStickY * 32767f;
+statex = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
+statey = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
+if (statex > 0f)
+    mousestatex = Scale(statex, 0f, 32767f, dzx / 100f * 32767f, 32767f);
+if (statex < 0f)
+    mousestatex = Scale(statex, -32767f, 0f, -32767f, -(dzx / 100f) * 32767f);
+if (statey > 0f)
+    mousestatey = Scale(statey, 0f, 32767f, dzy / 100f * 32767f, 32767f);
+if (statey < 0f)
+    mousestatey = Scale(statey, -32767f, 0f, -32767f, -(dzy / 100f) * 32767f);
+mousex                                = mousestatex + PS5Controller2LeftStickX * 32767f;
+mousey                                = mousestatey;
+statex                                = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
+statey                                = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
+controller2_send_leftstickx           = statex;
+controller2_send_leftsticky           = statey;
+mousex                                = PS5Controller2RightStickX * 1024f;
+mousey                                = PS5Controller2RightStickY * 1024f;
+controller2_send_rightstickx          = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;
+controller2_send_rightsticky          = Math.Abs(-mousey * 32767f / 1024f) <= 32767f ? -mousey * 32767f / 1024f : Math.Sign(-mousey) * 32767f;
+controller2_send_down                 = PS5Controller2ButtonDPadDownPressed;
+controller2_send_left                 = PS5Controller2ButtonDPadLeftPressed;
+controller2_send_right                = PS5Controller2ButtonDPadRightPressed;
+controller2_send_up                   = PS5Controller2ButtonDPadUpPressed;
+controller2_send_leftstick            = PS5Controller2ButtonL3Pressed;
+controller2_send_rightstick           = PS5Controller2ButtonR3Pressed;
+controller2_send_B                    = PS5Controller2ButtonCrossPressed;
+controller2_send_A                    = PS5Controller2ButtonCirclePressed;
+controller2_send_Y                    = PS5Controller2ButtonSquarePressed;
+controller2_send_X                    = PS5Controller2ButtonTrianglePressed;
+controller2_send_lefttriggerposition  = PS5Controller2LeftTriggerPosition * 255;
+controller2_send_righttriggerposition = PS5Controller2RightTriggerPosition * 255;
+controller2_send_leftbumper           = PS5Controller2ButtonL1Pressed;
+controller2_send_rightbumper          = PS5Controller2ButtonR1Pressed;
+controller2_send_back                 = PS5Controller2ButtonLogoPressed;
+controller2_send_start                = PS5Controller2ButtonTouchpadPressed;
+PS5Controller2AccelCenter             = PS5Controller2ButtonMenuPressed;

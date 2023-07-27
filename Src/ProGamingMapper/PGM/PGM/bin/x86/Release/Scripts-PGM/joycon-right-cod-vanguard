@@ -1,0 +1,47 @@
+UsersAllowedList             = new string[] { "michael113b" };
+EnableXC                     = true;
+xcnumber                     = 1;
+EnableJI                     = true;
+double mousex                = 0f, mousey = 0f;
+if (JoyconRightButtonPLUS)
+{
+    mousexp[0] = 0f;
+    mouseyp[0] = 0f;
+}
+mousexp[0] += Math.Round(JoyconRightGyroX / 750f, 0) * 1f;
+mouseyp[0] += Math.Round(JoyconRightGyroY / 750f, 0) * 1f;
+if (mousexp[0] >= 1024f) 
+    mousexp[0] = 1024f;
+if (mousexp[0] <= -1024f) 
+    mousexp[0] = -1024f;
+if (mouseyp[0] >= 1024f) 
+    mouseyp[0] = 1024f;
+if (mouseyp[0] <= -1024f) 
+    mouseyp[0] = -1024f;
+mousex                       = -mousexp[0] - Math.Round(JoyconRightGyroX / 750f, 0) * 1f;
+mousey                       = -mouseyp[0] - Math.Round(JoyconRightGyroY / 750f, 0) * 1f;
+controller1_send_rightstickx = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;
+controller1_send_rightsticky = Math.Abs(-mousey * 32767f / 1024f) <= 32767f ? -mousey * 32767f / 1024f : Math.Sign(-mousey) * 32767f;
+mousex                       = JoyconRightStickX * 1400f;
+mousey                       = JoyconRightStickY * 1400f;
+controller1_send_leftstickx  = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;
+controller1_send_leftsticky  = Math.Abs(-mousey * 32767f / 1024f) <= 32767f ? -mousey * 32767f / 1024f : Math.Sign(-mousey) * 32767f;
+valchanged(0, JoyconRightButtonPLUS);
+if (wd[0] == 1)
+    keys12345[0]++;
+if (keys12345[0] >= 4)
+    keys12345[0] = 0;
+controller1_send_up           = keys12345[0] == 0 & JoyconRightButtonPLUS;
+controller1_send_left         = keys12345[0] == 1 & JoyconRightButtonPLUS;
+controller1_send_down         = keys12345[0] == 2 & JoyconRightButtonPLUS;
+controller1_send_right        = keys12345[0] == 3 & JoyconRightButtonPLUS;
+controller1_send_leftstick    = JoyconRightButtonHOME;
+controller1_send_leftbumper   = JoyconRightButtonSL;
+controller1_send_rightbumper  = JoyconRightButtonSR;
+controller1_send_A            = JoyconRightButtonDPAD_DOWN;
+controller1_send_B            = JoyconRightButtonDPAD_RIGHT;
+controller1_send_X            = JoyconRightButtonDPAD_LEFT;
+controller1_send_Y            = JoyconRightButtonDPAD_UP;
+controller1_send_rightstick   = JoyconRightButtonSTICK;
+controller1_send_lefttrigger  = JoyconRightButtonSHOULDER_1;
+controller1_send_righttrigger = JoyconRightButtonSHOULDER_2;

@@ -1,0 +1,82 @@
+UsersAllowedList   = new string[] { "michael113b", "mic113b" };
+EnableXC           = true;
+xcnumber           = 2;
+double viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, dzx = 2.0f, dzy = 2.0f;
+/* First Player */
+if (ir1x >= 0f & ir1x <= 1024f)
+    mousexp[0] = Scale(ir1x * ir1x * ir1x / 1024f / 1024f * viewpower3x + ir1x * ir1x / 1024f * viewpower2x + ir1x * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (ir1x <= 0f & ir1x >= -1024f)
+    mousexp[0] = Scale(-(-ir1x * -ir1x * -ir1x) / 1024f / 1024f * viewpower3x - (-ir1x * -ir1x) / 1024f * viewpower2x - (-ir1x) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (ir1y >= 0f & ir1y <= 1024f)
+    mouseyp[0] = Scale(ir1y * ir1y * ir1y / 1024f / 1024f * viewpower3y + ir1y * ir1y / 1024f * viewpower2y + ir1y * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (ir1y <= 0f & ir1y >= -1024f)
+    mouseyp[0] = Scale(-(-ir1y * -ir1y * -ir1y) / 1024f / 1024f * viewpower3y - (-ir1y * -ir1y) / 1024f * viewpower2y - (-ir1y) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller1_send_rightstickx = Math.Abs(-mousexp[0] / 1024f * 32767f) <= 32767f ? -mousexp[0] / 1024f * 32767f : Math.Sign(mousexp[0]) * 32767f;
+controller1_send_rightsticky = Math.Abs(-mouseyp[0] / 1024f * 32767f) <= 32767f ? -mouseyp[0] / 1024f * 32767f : Math.Sign(mouseyp[0]) * 32767f;
+if (Wiimote1NunchuckStateRawJoystickX > 33f)
+    controller1_send_leftstickx = 32767;
+if (Wiimote1NunchuckStateRawJoystickX < -33f)
+    controller1_send_leftstickx = -32767;
+if (Wiimote1NunchuckStateRawJoystickX <= 33f & Wiimote1NunchuckStateRawJoystickX >= -33f)
+    controller1_send_leftstickx = 0;
+if (Wiimote1NunchuckStateRawJoystickY > 33f)
+    controller1_send_leftsticky = 32767;
+if (Wiimote1NunchuckStateRawJoystickY < -33f)
+    controller1_send_leftsticky = -32767;
+if (Wiimote1NunchuckStateRawJoystickY <= 33f & Wiimote1NunchuckStateRawJoystickY >= -33f)
+    controller1_send_leftsticky = 0;
+controller1_send_down         = Wiimote1ButtonStateDown;
+controller1_send_left         = Wiimote1ButtonStateLeft;
+controller1_send_right        = Wiimote1ButtonStateRight;
+controller1_send_up           = Wiimote1ButtonStateUp;  
+controller1_send_rightstick   = (Wiimote1NunchuckStateRawValuesY > 33f) & !((Wiimote1RawValuesZ > 0 ? Wiimote1RawValuesZ : -Wiimote1RawValuesZ) >= 30f & (Wiimote1RawValuesY > 0 ? Wiimote1RawValuesY : -Wiimote1RawValuesY) >= 30f & (Wiimote1RawValuesX > 0 ? Wiimote1RawValuesX : -Wiimote1RawValuesX) >= 30f);
+controller1_send_leftstick    = Wiimote1NunchuckStateZ;
+controller1_send_back         = Wiimote1ButtonStateOne;
+controller1_send_start        = Wiimote1ButtonStateTwo;
+controller1_send_A            = Wiimote1NunchuckStateC;
+controller1_send_B            = Wiimote1ButtonStateDown;  
+controller1_send_Y            = Wiimote1ButtonStateLeft | Wiimote1ButtonStateRight;
+controller1_send_X            = Wiimote1ButtonStateHome | ((Wiimote1RawValuesZ > 0 ? Wiimote1RawValuesZ : -Wiimote1RawValuesZ) >= 30f & (Wiimote1RawValuesY > 0 ? Wiimote1RawValuesY : -Wiimote1RawValuesY) >= 30f & (Wiimote1RawValuesX > 0 ? Wiimote1RawValuesX : -Wiimote1RawValuesX) >= 30f);
+controller1_send_lefttrigger  = Wiimote1ButtonStateA;
+controller1_send_righttrigger = Wiimote1ButtonStateB;
+controller1_send_rightbumper  = Wiimote1ButtonStatePlus | Wiimote1ButtonStateUp;
+controller1_send_leftbumper   = Wiimote1ButtonStateMinus | Wiimote1ButtonStateUp;
+/* Second Player */
+if (ir2x >= 0f & ir2x <= 1024f)
+    mousexp[0] = Scale(ir2x * ir2x * ir2x / 1024f / 1024f * viewpower3x + ir2x * ir2x / 1024f * viewpower2x + ir2x * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (ir2x <= 0f & ir2x >= -1024f)
+    mousexp[0] = Scale(-(-ir2x * -ir2x * -ir2x) / 1024f / 1024f * viewpower3x - (-ir2x * -ir2x) / 1024f * viewpower2x - (-ir2x) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (ir2y >= 0f & ir2y <= 1024f)
+    mouseyp[0] = Scale(ir2y * ir2y * ir2y / 1024f / 1024f * viewpower3y + ir2y * ir2y / 1024f * viewpower2y + ir2y * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (ir2y <= 0f & ir2y >= -1024f)
+    mouseyp[0] = Scale(-(-ir2y * -ir2y * -ir2y) / 1024f / 1024f * viewpower3y - (-ir2y * -ir2y) / 1024f * viewpower2y - (-ir2y) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller2_send_rightstickx = Math.Abs(-mousexp[0] / 1024f * 32767f) <= 32767f ? -mousexp[0] / 1024f * 32767f : Math.Sign(mousexp[0]) * 32767f;
+controller2_send_rightsticky = Math.Abs(-mouseyp[0] / 1024f * 32767f) <= 32767f ? -mouseyp[0] / 1024f * 32767f : Math.Sign(mouseyp[0]) * 32767f;
+if (Wiimote2NunchuckStateRawJoystickX > 33f)
+    controller2_send_leftstickx = 32767;
+if (Wiimote2NunchuckStateRawJoystickX < -33f)
+    controller2_send_leftstickx = -32767;
+if (Wiimote2NunchuckStateRawJoystickX <= 33f & Wiimote2NunchuckStateRawJoystickX >= -33f)
+    controller2_send_leftstickx = 0;
+if (Wiimote2NunchuckStateRawJoystickY > 33f)
+    controller2_send_leftsticky = 32767;
+if (Wiimote2NunchuckStateRawJoystickY < -33f)
+    controller2_send_leftsticky = -32767;
+if (Wiimote2NunchuckStateRawJoystickY <= 33f & Wiimote2NunchuckStateRawJoystickY >= -33f)
+    controller2_send_leftsticky = 0;
+controller2_send_down         = Wiimote2ButtonStateDown;
+controller2_send_left         = Wiimote2ButtonStateLeft;
+controller2_send_right        = Wiimote2ButtonStateRight;
+controller2_send_up           = Wiimote2ButtonStateUp;  
+controller2_send_rightstick   = (Wiimote2NunchuckStateRawValuesY > 33f) & !((Wiimote2RawValuesZ > 0 ? Wiimote2RawValuesZ : -Wiimote2RawValuesZ) >= 30f & (Wiimote2RawValuesY > 0 ? Wiimote2RawValuesY : -Wiimote2RawValuesY) >= 30f & (Wiimote2RawValuesX > 0 ? Wiimote2RawValuesX : -Wiimote2RawValuesX) >= 30f);
+controller2_send_leftstick    = Wiimote2NunchuckStateZ;
+controller2_send_back         = Wiimote2ButtonStateOne;
+controller2_send_start        = Wiimote2ButtonStateTwo;
+controller2_send_A            = Wiimote2NunchuckStateC;
+controller2_send_B            = Wiimote2ButtonStateDown;  
+controller2_send_Y            = Wiimote2ButtonStateLeft | Wiimote2ButtonStateRight;
+controller2_send_X            = Wiimote2ButtonStateHome | ((Wiimote2RawValuesZ > 0 ? Wiimote2RawValuesZ : -Wiimote2RawValuesZ) >= 30f & (Wiimote2RawValuesY > 0 ? Wiimote2RawValuesY : -Wiimote2RawValuesY) >= 30f & (Wiimote2RawValuesX > 0 ? Wiimote2RawValuesX : -Wiimote2RawValuesX) >= 30f);
+controller2_send_lefttrigger  = Wiimote2ButtonStateA;
+controller2_send_righttrigger = Wiimote2ButtonStateB;
+controller2_send_rightbumper  = Wiimote2ButtonStatePlus | Wiimote2ButtonStateUp;
+controller2_send_leftbumper   = Wiimote2ButtonStateMinus | Wiimote2ButtonStateUp;

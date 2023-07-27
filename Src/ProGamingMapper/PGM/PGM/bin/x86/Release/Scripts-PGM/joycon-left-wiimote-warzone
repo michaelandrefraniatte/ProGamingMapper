@@ -1,0 +1,43 @@
+UsersAllowedList   = new string[] { "michael113b" };
+EnableXC           = true;
+xcnumber           = 1;
+EnableJI           = true;
+double viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, dzx = 2.0f, dzy = 2.0f;
+if (irx >= 0f & irx <= 1024f)
+    mousexp[0] = Scale(irx * irx * irx / 1024f / 1024f * viewpower3x + irx * irx / 1024f * viewpower2x + irx * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (irx <= 0f & irx >= -1024f)
+    mousexp[0] = Scale(-(-irx * -irx * -irx) / 1024f / 1024f * viewpower3x - (-irx * -irx) / 1024f * viewpower2x - (-irx) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (iry >= 0f & iry <= 1024f)
+    mouseyp[0] = Scale(iry * iry * iry / 1024f / 1024f * viewpower3y + iry * iry / 1024f * viewpower2y + iry * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (iry <= 0f & iry >= -1024f)
+    mouseyp[0] = Scale(-(-iry * -iry * -iry) / 1024f / 1024f * viewpower3y - (-iry * -iry) / 1024f * viewpower2y - (-iry) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller1_send_rightstickx = Math.Abs(-mousexp[0] / 1024f * 32767f) <= 32767f ? -mousexp[0] / 1024f * 32767f : Math.Sign(mousexp[0]) * 32767f;
+controller1_send_rightsticky = Math.Abs(-mouseyp[0] / 1024f * 32767f) <= 32767f ? -mouseyp[0] / 1024f * 32767f : Math.Sign(mouseyp[0]) * 32767f;
+if (JoyconLeftStickX > 0.35f)
+    controller1_send_leftstickx = 32767;
+if (JoyconLeftStickX < -0.35f)
+    controller1_send_leftstickx = -32767;
+if (JoyconLeftStickX <= 0.35f & JoyconLeftStickX >= -0.35f)
+    controller1_send_leftstickx = 0;
+if (JoyconLeftStickY > 0.35f)
+    controller1_send_leftsticky = 32767;
+if (JoyconLeftStickY < -0.35f)
+    controller1_send_leftsticky = -32767;
+if (JoyconLeftStickY <= 0.35f & JoyconLeftStickY >= -0.35f)
+    controller1_send_leftsticky = 0;
+controller1_send_down         = JoyconLeftButtonDPAD_DOWN;
+controller1_send_left         = JoyconLeftButtonDPAD_LEFT;
+controller1_send_right        = JoyconLeftButtonDPAD_RIGHT;
+controller1_send_up           = JoyconLeftButtonDPAD_UP;
+controller1_send_rightstick   = JoyconLeftButtonMINUS | JoyconLeftButtonACC;
+controller1_send_leftstick    = JoyconLeftButtonSHOULDER_2;
+controller1_send_back         = WiimoteButtonStateOne;
+controller1_send_start        = WiimoteButtonStateTwo | JoyconLeftButtonCAPTURE;
+controller1_send_A            = JoyconLeftButtonSHOULDER_1;
+controller1_send_B            = WiimoteButtonStateDown;  
+controller1_send_Y            = WiimoteButtonStateLeft | WiimoteButtonStateRight;
+controller1_send_X            = WiimoteButtonStateHome | ((WiimoteRawValuesZ > 0 ? WiimoteRawValuesZ : -WiimoteRawValuesZ) >= 30f & (WiimoteRawValuesY > 0 ? WiimoteRawValuesY : -WiimoteRawValuesY) >= 30f & (WiimoteRawValuesX > 0 ? WiimoteRawValuesX : -WiimoteRawValuesX) >= 30f);
+controller1_send_lefttrigger  = WiimoteButtonStateA;
+controller1_send_righttrigger = WiimoteButtonStateB;
+controller1_send_rightbumper  = WiimoteButtonStatePlus | WiimoteButtonStateUp;
+controller1_send_leftbumper   = WiimoteButtonStateMinus | WiimoteButtonStateUp;

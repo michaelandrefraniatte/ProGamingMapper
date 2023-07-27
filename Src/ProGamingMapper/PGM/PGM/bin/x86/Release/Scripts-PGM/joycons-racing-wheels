@@ -1,0 +1,89 @@
+UsersAllowedList = new string[] { "michael113b" };
+EnableXC         = true;
+xcnumber         = 2;
+EnableJI         = true;
+double mousex    = 0f, mousey = 0f, dzx = 20.0f, dzy = 0.0f;
+/* First Player */
+if (JoyconRightAccelX >= 1024f)
+    JoyconRightAccelX = 1024f;
+if (JoyconRightAccelX <= -1024f)
+    JoyconRightAccelX = -1024f;
+if (JoyconRightAccelY >= 1024f)
+    JoyconRightAccelY = 1024f;
+if (JoyconRightAccelY <= -1024f)
+    JoyconRightAccelY = -1024f;
+if (JoyconRightAccelX > 0f & JoyconRightAccelX <= 1024f)
+    mousex = Scale(JoyconRightAccelX, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (JoyconRightAccelX < 0f & JoyconRightAccelX >= -1024f)
+    mousex = Scale(JoyconRightAccelX, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (JoyconRightAccelY > 0f & JoyconRightAccelY <= 1024f)
+    mousey = Scale(JoyconRightAccelY, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (JoyconRightAccelY < 0f & JoyconRightAccelY >= -1024f)
+    mousey = Scale(JoyconRightAccelY, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller1_send_leftstickx   = -mousex * 32767f / 1024f;
+controller1_send_leftsticky   = mousey * 32767f / 1024f;
+controller1_send_A            = JoyconRightButtonHOME;
+controller1_send_lefttrigger  = JoyconRightButtonDPAD_RIGHT;
+controller1_send_righttrigger = JoyconRightButtonDPAD_UP;
+controller1_send_Y            = JoyconRightButtonDPAD_LEFT;
+controller1_send_back         = JoyconRightButtonDPAD_DOWN;
+controller1_send_start        = JoyconRightButtonPLUS;
+controller1_send_rightstick   = JoyconRightButtonSTICK;
+controller1_send_leftbumper   = JoyconRightButtonSHOULDER_1;
+controller1_send_rightbumper  = JoyconRightButtonSHOULDER_2;
+controller1_send_B            = JoyconRightButtonSL;
+controller1_send_X            = JoyconRightButtonSR;
+if (JoyconRightStickY > 0.35f) 
+    controller1_send_rightstickx = 32767;
+if (JoyconRightStickY < -0.35f) 
+    controller1_send_rightstickx = -32767;
+if (JoyconRightStickY <= 0.35f & JoyconRightStickY >= -0.35f) 
+    controller1_send_rightstickx = 0;
+if (JoyconRightStickX > 0.35f) 
+    controller1_send_rightsticky = -32767;
+if (JoyconRightStickX < -0.35f) 
+    controller1_send_rightsticky = 32767;
+if (JoyconRightStickX <= 0.35f & JoyconRightStickX >= -0.35f) 
+    controller1_send_rightsticky = 0;
+/* Second Player */
+if (JoyconLeftAccelX >= 1024f)
+    JoyconLeftAccelX = 1024f;
+if (JoyconLeftAccelX <= -1024f)
+    JoyconLeftAccelX = -1024f;
+if (JoyconLeftAccelY >= 1024f)
+    JoyconLeftAccelY = 1024f;
+if (JoyconLeftAccelY <= -1024f)
+    JoyconLeftAccelY = -1024f;
+if (JoyconLeftAccelX > 0f & JoyconLeftAccelX <= 1024f)
+    mousex = Scale(JoyconLeftAccelX, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (JoyconLeftAccelX < 0f & JoyconLeftAccelX >= -1024f)
+    mousex = Scale(JoyconLeftAccelX, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (JoyconLeftAccelY > 0f & JoyconLeftAccelY <= 1024f)
+    mousey = Scale(JoyconLeftAccelY, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (JoyconLeftAccelY < 0f & JoyconLeftAccelY >= -1024f)
+    mousey = Scale(JoyconLeftAccelY, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+controller2_send_leftstickx   = mousex * 32767f / 1024f;
+controller2_send_leftsticky   = -mousey * 32767f / 1024f;
+controller2_send_A            = JoyconLeftButtonCAPTURE;
+controller2_send_lefttrigger  = JoyconLeftButtonDPAD_LEFT;
+controller2_send_righttrigger = JoyconLeftButtonDPAD_DOWN;
+controller2_send_Y            = JoyconLeftButtonDPAD_RIGHT;
+controller2_send_back         = JoyconLeftButtonDPAD_UP;
+controller2_send_start        = JoyconLeftButtonMINUS;
+controller2_send_rightstick   = JoyconLeftButtonSTICK;
+controller2_send_leftbumper   = JoyconLeftButtonSHOULDER_1;
+controller2_send_rightbumper  = JoyconLeftButtonSHOULDER_2;
+controller2_send_B            = JoyconLeftButtonSR;
+controller2_send_X            = JoyconLeftButtonSL;
+if (JoyconLeftStickY > 0.35f) 
+    controller2_send_rightstickx = -32767;
+if (JoyconLeftStickY < -0.35f) 
+    controller2_send_rightstickx = 32767;
+if (JoyconLeftStickY <= 0.35f & JoyconLeftStickY >= -0.35f) 
+    controller2_send_rightstickx = 0;
+if (JoyconLeftStickX > 0.35f) 
+    controller2_send_rightsticky = 32767;
+if (JoyconLeftStickX < -0.35f) 
+    controller2_send_rightsticky = -32767;
+if (JoyconLeftStickX <= 0.35f & JoyconLeftStickX >= -0.35f) 
+    controller2_send_rightsticky = 0;

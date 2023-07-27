@@ -1,0 +1,13 @@
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\bin\Debug\ControllerDeadzoneFinder.exe.config
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\bin\Debug\ControllerDeadzoneFinder.exe
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\bin\Debug\ControllerDeadzoneFinder.pdb
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\bin\Debug\controller.dll
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\bin\Debug\controller.pdb
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.csprojAssemblyReference.cache
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.Form1.resources
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.Properties.Resources.resources
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.csproj.GenerateResource.cache
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.csproj.CoreCompileInputs.cache
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.csproj.CopyComplete
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.exe
+C:\Users\mic\Documents\GitHub\crappy-scripts\Src\Scripts\form\xbox360controller\ControllerDeadzoneFinder\ControllerDeadzoneFinder\obj\Debug\ControllerDeadzoneFinder.pdb
