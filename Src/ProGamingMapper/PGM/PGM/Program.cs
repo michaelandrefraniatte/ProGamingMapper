@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Management;
 using System.Security.Cryptography;
+using OpenWithSingleInstance;
 namespace PGM
 {
     public static class Program
@@ -25,7 +26,7 @@ namespace PGM
         /// Point d'entrée principal de l'application.
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Main(params string[] args)
         {
             bool runelevated = true;
             bool oneinstanceonly = true;
@@ -69,7 +70,13 @@ namespace PGM
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            if (SingleInstanceHelper.CheckInstancesUsingMutex() && args.Length > 0)
+            {
+                Process _otherInstance = SingleInstanceHelper.GetAlreadyRunningInstance();
+                MessageHelper.SendDataMessage(_otherInstance, args[0]);
+                return;//Exit this instance and let the existing one open the file
+            }
+            Application.Run(new Form1(args.Length > 0 ? args[0] : null));
         }
         public static bool hasAdminRights()
         {

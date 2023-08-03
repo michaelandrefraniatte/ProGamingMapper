@@ -21,14 +21,20 @@ using AForge;
 using AForge.Imaging;
 using Vector3 = System.Numerics.Vector3;
 using System.Reactive.Linq;
+using OpenWithSingleInstance;
 
 namespace PGM
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1(string filePath)
         {
             InitializeComponent();
+            if (filePath != null)
+            {
+                onopenwith = true;
+                OpenFileWith(filePath);
+            }
         }
         [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod")]
         public static extern uint TimeBeginPeriod(uint ms);
@@ -66,7 +72,7 @@ namespace PGM
         public static Form10 form10 = new Form10();
         public static bool form2visible = false, form3visible = false, form4visible = false, form5visible = false, form6visible = false, form7visible = false, form8visible = false, form9visible = false, form10visible = false;
         public static string openFilePath = "", fastColoredTextBoxSaved = "", ps5controllervendorid, ps5controllerproductid, ps5controllerlabel, ps4controllervendorid, ps4controllerproductid, ps4controllerlabel, networkip, networkport, networklabel, ps5controller1vendorid, ps5controller1productid, ps5controller1label, ps4controller1vendorid, ps4controller1productid, ps4controller1label, ps5controller2vendorid, ps5controller2productid, ps5controller2label, ps4controller2vendorid, ps4controller2productid, ps4controller2label;
-        private static bool justSaved = true, ps5controller2similar, ps4controller2similar;
+        private static bool justSaved = true, ps5controller2similar, ps4controller2similar, onopenwith = false;
         private static DialogResult result;
         private static ContextMenu contextMenu = new ContextMenu();
         private static MenuItem menuItem;
@@ -168,6 +174,60 @@ namespace PGM
         double int_2_deltaX = 0; double int_2_deltaY = 0; double int_2_x = 0; double int_2_y = 0; bool int_2_SendLeftClick; bool int_2_SendRightClick; bool int_2_SendMiddleClick; bool int_2_SendWheelUp; bool int_2_SendWheelDown; bool int_2_SendCANCEL; bool int_2_SendBACK; bool int_2_SendTAB; bool int_2_SendCLEAR; bool int_2_SendRETURN; bool int_2_SendSHIFT; bool int_2_SendCONTROL; bool int_2_SendMENU; bool int_2_SendCAPITAL; bool int_2_SendESCAPE; bool int_2_SendSPACE; bool int_2_SendPRIOR; bool int_2_SendNEXT; bool int_2_SendEND; bool int_2_SendHOME; bool int_2_SendLEFT; bool int_2_SendUP; bool int_2_SendRIGHT; bool int_2_SendDOWN; bool int_2_SendSNAPSHOT; bool int_2_SendINSERT; bool int_2_SendNUMPADDEL; bool int_2_SendNUMPADINSERT; bool int_2_SendHELP; bool int_2_SendAPOSTROPHE; bool int_2_SendBACKSPACE; bool int_2_SendPAGEDOWN; bool int_2_SendPAGEUP; bool int_2_SendFIN; bool int_2_SendMOUSE; bool int_2_SendA; bool int_2_SendB; bool int_2_SendC; bool int_2_SendD; bool int_2_SendE; bool int_2_SendF; bool int_2_SendG; bool int_2_SendH; bool int_2_SendI; bool int_2_SendJ; bool int_2_SendK; bool int_2_SendL; bool int_2_SendM; bool int_2_SendN; bool int_2_SendO; bool int_2_SendP; bool int_2_SendQ; bool int_2_SendR; bool int_2_SendS; bool int_2_SendT; bool int_2_SendU; bool int_2_SendV; bool int_2_SendW; bool int_2_SendX; bool int_2_SendY; bool int_2_SendZ; bool int_2_SendLWIN; bool int_2_SendRWIN; bool int_2_SendAPPS; bool int_2_SendDELETE; bool int_2_SendNUMPAD0; bool int_2_SendNUMPAD1; bool int_2_SendNUMPAD2; bool int_2_SendNUMPAD3; bool int_2_SendNUMPAD4; bool int_2_SendNUMPAD5; bool int_2_SendNUMPAD6; bool int_2_SendNUMPAD7; bool int_2_SendNUMPAD8; bool int_2_SendNUMPAD9; bool int_2_SendMULTIPLY; bool int_2_SendADD; bool int_2_SendSUBTRACT; bool int_2_SendDECIMAL; bool int_2_SendPRINTSCREEN; bool int_2_SendDIVIDE; bool int_2_SendF1; bool int_2_SendF2; bool int_2_SendF3; bool int_2_SendF4; bool int_2_SendF5; bool int_2_SendF6; bool int_2_SendF7; bool int_2_SendF8; bool int_2_SendF9; bool int_2_SendF10; bool int_2_SendF11; bool int_2_SendF12; bool int_2_SendNUMLOCK; bool int_2_SendSCROLLLOCK; bool int_2_SendLEFTSHIFT; bool int_2_SendRIGHTSHIFT; bool int_2_SendLEFTCONTROL; bool int_2_SendRIGHTCONTROL; bool int_2_SendLEFTALT; bool int_2_SendRIGHTALT; bool int_2_SendBROWSER_BACK; bool int_2_SendBROWSER_FORWARD; bool int_2_SendBROWSER_REFRESH; bool int_2_SendBROWSER_STOP; bool int_2_SendBROWSER_SEARCH; bool int_2_SendBROWSER_FAVORITES; bool int_2_SendBROWSER_HOME; bool int_2_SendVOLUME_MUTE; bool int_2_SendVOLUME_DOWN; bool int_2_SendVOLUME_UP; bool int_2_SendMEDIA_NEXT_TRACK; bool int_2_SendMEDIA_PREV_TRACK; bool int_2_SendMEDIA_STOP; bool int_2_SendMEDIA_PLAY_PAUSE; bool int_2_SendLAUNCH_MAIL; bool int_2_SendLAUNCH_MEDIA_SELECT; bool int_2_SendLAUNCH_APP1; bool int_2_SendLAUNCH_APP2; bool int_2_SendOEM_1; bool int_2_SendOEM_PLUS; bool int_2_SendOEM_COMMA; bool int_2_SendOEM_MINUS; bool int_2_SendOEM_PERIOD; bool int_2_SendOEM_2; bool int_2_SendOEM_3; bool int_2_SendOEM_4; bool int_2_SendOEM_5; bool int_2_SendOEM_6; bool int_2_SendOEM_7; bool int_2_SendOEM_8; bool int_2_SendOEM_102; bool int_2_SendEREOF; bool int_2_SendZOOM; bool int_2_SendEscape; bool int_2_SendOne; bool int_2_SendTwo; bool int_2_SendThree; bool int_2_SendFour; bool int_2_SendFive; bool int_2_SendSix; bool int_2_SendSeven; bool int_2_SendEight; bool int_2_SendNine; bool int_2_SendZero; bool int_2_SendDashUnderscore; bool int_2_SendPlusEquals; bool int_2_SendBackspace; bool int_2_SendTab; bool int_2_SendOpenBracketBrace; bool int_2_SendCloseBracketBrace; bool int_2_SendEnter; bool int_2_SendControl; bool int_2_SendSemicolonColon; bool int_2_SendSingleDoubleQuote; bool int_2_SendTilde; bool int_2_SendLeftShift; bool int_2_SendBackslashPipe; bool int_2_SendCommaLeftArrow; bool int_2_SendPeriodRightArrow; bool int_2_SendForwardSlashQuestionMark; bool int_2_SendRightShift; bool int_2_SendRightAlt; bool int_2_SendSpace; bool int_2_SendCapsLock; bool int_2_SendUp; bool int_2_SendDown; bool int_2_SendRight; bool int_2_SendLeft; bool int_2_SendHome; bool int_2_SendEnd; bool int_2_SendDelete; bool int_2_SendPageUp; bool int_2_SendPageDown; bool int_2_SendInsert; bool int_2_SendPrintScreen; bool int_2_SendNumLock; bool int_2_SendScrollLock; bool int_2_SendMenu; bool int_2_SendWindowsKey; bool int_2_SendNumpadDivide; bool int_2_SendNumpadAsterisk; bool int_2_SendNumpad7; bool int_2_SendNumpad8; bool int_2_SendNumpad9; bool int_2_SendNumpad4; bool int_2_SendNumpad5; bool int_2_SendNumpad6; bool int_2_SendNumpad1; bool int_2_SendNumpad2; bool int_2_SendNumpad3; bool int_2_SendNumpad0; bool int_2_SendNumpadDelete; bool int_2_SendNumpadEnter; bool int_2_SendNumpadPlus; bool int_2_SendNumpadMinus;
         private bool controller1_send_back; bool controller1_send_start; bool controller1_send_A; bool controller1_send_B; bool controller1_send_X; bool controller1_send_Y; bool controller1_send_up; bool controller1_send_left; bool controller1_send_down; bool controller1_send_right; bool controller1_send_leftstick; bool controller1_send_rightstick; bool controller1_send_leftbumper; bool controller1_send_rightbumper; bool controller1_send_lefttrigger; bool controller1_send_righttrigger; double controller1_send_leftstickx; double controller1_send_leftsticky; double controller1_send_rightstickx; double controller1_send_rightsticky; bool controller2_send_back; bool controller2_send_start; bool controller2_send_A; bool controller2_send_B; bool controller2_send_X; bool controller2_send_Y; bool controller2_send_up; bool controller2_send_left; bool controller2_send_down; bool controller2_send_right; bool controller2_send_leftstick; bool controller2_send_rightstick; bool controller2_send_leftbumper; bool controller2_send_rightbumper; bool controller2_send_lefttrigger; bool controller2_send_righttrigger; double controller2_send_leftstickx; double controller2_send_leftsticky; double controller2_send_rightstickx; double controller2_send_rightsticky; double controller1_send_lefttriggerposition; double controller1_send_righttriggerposition; double controller2_send_lefttriggerposition; double controller2_send_righttriggerposition; bool controller1_send_xbox; bool controller2_send_xbox;
         public Valuechange ValueChange = new Valuechange();
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == MessageHelper.WM_COPYDATA)
+            {
+                COPYDATASTRUCT _dataStruct = Marshal.PtrToStructure<COPYDATASTRUCT>(m.LParam);
+                string _strMsg = Marshal.PtrToStringUni(_dataStruct.lpData, _dataStruct.cbData / 2);
+                OpenFileWith(_strMsg);
+            }
+            base.WndProc(ref m);
+        }
+        public void OpenFileWith(string filePath)
+        {
+            StopScript();
+            if (!justSaved)
+            {
+                result = MessageBox.Show("Content will be lost! Are you sure?", "Open", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+                    if (!filePath.EndsWith(".encrypted"))
+                    {
+                        string readText = File.ReadAllText(filePath);
+                        fastColoredTextBox1.Text = readText;
+                    }
+                    else
+                    {
+                        DecryptFile(filePath, "tybtrybrtyertu50727885");
+                        fastColoredTextBox1.Text = "Script Encrypted...";
+                    }
+                    filename = filePath;
+                    openFilePath = filePath;
+                    this.Text = "PGM: " + System.IO.Path.GetFileName(filename);
+                    fastColoredTextBoxSaved = fastColoredTextBox1.Text;
+                    justSaved = true;
+                }
+            }
+            else
+            {
+                if (!filePath.EndsWith(".encrypted"))
+                {
+                    string readText = File.ReadAllText(filePath);
+                    fastColoredTextBox1.Text = readText;
+                }
+                else
+                {
+                    DecryptFile(filePath, "tybtrybrtyertu50727885");
+                    fastColoredTextBox1.Text = "Script Encrypted...";
+                }
+                filename = filePath;
+                openFilePath = filePath;
+                this.Text = "PGM: " + System.IO.Path.GetFileName(filename);
+                fastColoredTextBoxSaved = fastColoredTextBox1.Text;
+                justSaved = true;
+            }
+        }
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             const string message = "• Input Devices : Mouse, Keyboard, XInput Controller, DirectInput Controller, Joycons as DirectInput Controller, Pro Controller as DirectInput Controller over Bluetooth, Dualshock4 Controller as DirectInput Controller, Dualsense Controller as DirectInput Controller, Wiimote and Sensor Bar and Nunchuck, Joycon left, Joycon right, Joycon Charging Grip over USB, Pro Controller over USB, Dualshock4 Controller over USB, Dualsense Controller over USB, Webcam and Led, Voice Speech to Text.\n\r\n\r• Output Devices : Keyboard, Mouse, Xbox Controller.\n\r\n\r• Pairing : Use the dedicated buttons for Bluetooth Controllers or use USB wire.\n\r\n\r• Data : Script must running to see data values changing.";
@@ -5896,33 +5956,36 @@ namespace PGM
             input.KeyboardFilterMode = KeyboardFilterMode.All;
             input.MouseFilterMode = MouseFilterMode.All;
             input.Load();
-            if (System.IO.File.Exists("tempsave"))
+            if (!onopenwith)
             {
-                using (System.IO.StreamReader file = new System.IO.StreamReader("tempsave"))
+                if (System.IO.File.Exists(Application.StartupPath + @"\tempsave"))
                 {
-                    filename = file.ReadLine();
-                    red = Convert.ToInt32(file.ReadLine());
-                    green = Convert.ToInt32(file.ReadLine());
-                    blue = Convert.ToInt32(file.ReadLine());
-                    brightness = Convert.ToInt32(file.ReadLine());
-                    radius = Convert.ToInt32(file.ReadLine());
-                }
-                if (filename != "" & System.IO.File.Exists(filename))
-                {
-                    if (!filename.EndsWith(".encrypted"))
+                    using (System.IO.StreamReader file = new System.IO.StreamReader(Application.StartupPath + @"\tempsave"))
                     {
-                        string readText = File.ReadAllText(filename);
-                        fastColoredTextBox1.Text = readText;
+                        filename = file.ReadLine();
+                        red = Convert.ToInt32(file.ReadLine());
+                        green = Convert.ToInt32(file.ReadLine());
+                        blue = Convert.ToInt32(file.ReadLine());
+                        brightness = Convert.ToInt32(file.ReadLine());
+                        radius = Convert.ToInt32(file.ReadLine());
                     }
-                    else
+                    if (filename != "" & System.IO.File.Exists(filename))
                     {
-                        DecryptFile(filename, "tybtrybrtyertu50727885");
-                        fastColoredTextBox1.Text = "Script Encrypted...";
+                        if (!filename.EndsWith(".encrypted"))
+                        {
+                            string readText = File.ReadAllText(filename);
+                            fastColoredTextBox1.Text = readText;
+                        }
+                        else
+                        {
+                            DecryptFile(filename, "tybtrybrtyertu50727885");
+                            fastColoredTextBox1.Text = "Script Encrypted...";
+                        }
+                        openFilePath = filename;
+                        this.Text = "PGM: " + System.IO.Path.GetFileName(filename);
+                        fastColoredTextBoxSaved = fastColoredTextBox1.Text;
+                        justSaved = true;
                     }
-                    openFilePath = filename;
-                    this.Text = "PGM: " + System.IO.Path.GetFileName(filename);
-                    fastColoredTextBoxSaved = fastColoredTextBox1.Text;
-                    justSaved = true;
                 }
             }
             username = Program.username;
@@ -6005,7 +6068,7 @@ namespace PGM
             DisconnectControllers();
             if (filename != "" | red != 0 | green != 205 | blue != 205 | brightness != -50 | radius != 175)
             {
-                using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter("tempsave"))
+                using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\tempsave"))
                 {
                     createdfile.WriteLine(filename);
                     createdfile.WriteLine(red);
