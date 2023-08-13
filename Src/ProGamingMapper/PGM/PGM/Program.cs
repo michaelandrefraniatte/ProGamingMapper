@@ -36,16 +36,9 @@ namespace PGM
                 TimeBeginPeriod(1);
                 NtSetTimerResolution(1, true, ref CurrentResolution);
                 SetProcessPriority();
-                if (oneinstanceonly)
-                {
-                    if (AlreadyRunning())
-                    {
-                        return;
-                    }
-                }
                 if (runelevated)
                 {
-                    if (!hasAdminRights())
+                    if (!hasAdminRights() & !AlreadyRunning())
                     {
                         RunElevated();
                         return;
@@ -75,6 +68,13 @@ namespace PGM
                 Process _otherInstance = SingleInstanceHelper.GetAlreadyRunningInstance();
                 MessageHelper.SendDataMessage(_otherInstance, args[0]);
                 return;//Exit this instance and let the existing one open the file
+            }
+            if (oneinstanceonly)
+            {
+                if (AlreadyRunning())
+                {
+                    return;
+                }
             }
             Application.Run(new Form1(args.Length > 0 ? args[0] : null));
         }
