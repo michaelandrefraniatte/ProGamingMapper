@@ -28,7 +28,7 @@ namespace PGM
         [STAThread]
         public static void Main(params string[] args)
         {
-            bool runelevated = true;
+            bool runelevated = false;
             bool oneinstanceonly = true;
             string filename = "la.txt";
             try
@@ -63,16 +63,15 @@ namespace PGM
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (SingleInstanceHelper.CheckInstancesUsingMutex() && args.Length > 0)
-            {
-                Process _otherInstance = SingleInstanceHelper.GetAlreadyRunningInstance();
-                MessageHelper.SendDataMessage(_otherInstance, args[0]);
-                return;
-            }
             if (oneinstanceonly)
             {
                 if (AlreadyRunning())
                 {
+                    if (SingleInstanceHelper.CheckInstancesUsingMutex() && args.Length > 0)
+                    {
+                        Process _otherInstance = SingleInstanceHelper.GetAlreadyRunningInstance();
+                        MessageHelper.SendDataMessage(_otherInstance, args[0]);
+                    }
                     return;
                 }
             }
