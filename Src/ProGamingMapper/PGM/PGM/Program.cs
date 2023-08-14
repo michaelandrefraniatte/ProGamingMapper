@@ -67,7 +67,7 @@ namespace PGM
             {
                 Process _otherInstance = SingleInstanceHelper.GetAlreadyRunningInstance();
                 MessageHelper.SendDataMessage(_otherInstance, args[0]);
-                return;//Exit this instance and let the existing one open the file
+                return;
             }
             if (oneinstanceonly)
             {
