@@ -8,10 +8,17 @@ using System.IO;
 using System.Management;
 using System.Security.Cryptography;
 using OpenWithSingleInstance;
+
 namespace PGM
 {
     public static class Program
     {
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod")]
         public static extern uint TimeBeginPeriod(uint ms);
         [DllImport("winmm.dll", EntryPoint = "timeEndPeriod")]
@@ -56,6 +63,26 @@ namespace PGM
                 {
                     return;
                 }
+                if (oneinstanceonly)
+                {
+                    if (AlreadyRunning())
+                    {
+                        if (File.Exists(Application.StartupPath + @"\temphandle"))
+                            using (System.IO.StreamReader file = new System.IO.StreamReader(Application.StartupPath + @"\temphandle"))
+                            {
+                                IntPtr handle = new IntPtr(int.Parse(file.ReadLine()));
+                                ShowWindow(handle, 9);
+                                IntPtr HWND = FindWindow(null, file.ReadLine());
+                                SetForegroundWindow(HWND);
+                            }
+                        if (SingleInstanceHelper.CheckInstancesUsingMutex() && args.Length > 0)
+                        {
+                            Process _otherInstance = SingleInstanceHelper.GetAlreadyRunningInstance();
+                            MessageHelper.SendDataMessage(_otherInstance, args[0]);
+                        }
+                        return;
+                    }
+                }
             }
             catch
             {
@@ -63,18 +90,6 @@ namespace PGM
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (oneinstanceonly)
-            {
-                if (AlreadyRunning())
-                {
-                    if (SingleInstanceHelper.CheckInstancesUsingMutex() && args.Length > 0)
-                    {
-                        Process _otherInstance = SingleInstanceHelper.GetAlreadyRunningInstance();
-                        MessageHelper.SendDataMessage(_otherInstance, args[0]);
-                    }
-                    return;
-                }
-            }
             Application.Run(new Form1(args.Length > 0 ? args[0] : null));
         }
         public static bool hasAdminRights()

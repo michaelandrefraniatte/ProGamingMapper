@@ -36,6 +36,12 @@ namespace PGM
                 OpenFileWith(filePath);
             }
         }
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod")]
         public static extern uint TimeBeginPeriod(uint ms);
         [DllImport("winmm.dll", EntryPoint = "timeEndPeriod")]
@@ -226,6 +232,11 @@ namespace PGM
                 this.Text = "PGM: " + System.IO.Path.GetFileName(filename);
                 fastColoredTextBoxSaved = fastColoredTextBox1.Text;
                 justSaved = true;
+            }
+            using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\temphandle"))
+            {
+                createdfile.WriteLine(this.Handle);
+                createdfile.WriteLine(this.Text);
             }
         }
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5987,6 +5998,11 @@ namespace PGM
                         justSaved = true;
                     }
                 }
+                using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\temphandle"))
+                {
+                    createdfile.WriteLine(this.Handle);
+                    createdfile.WriteLine(this.Text);
+                }
             }
             username = Program.username;
             SetExtraInputs();
@@ -6137,6 +6153,11 @@ namespace PGM
                 fastColoredTextBoxSaved = fastColoredTextBox1.Text;
                 justSaved = true;
             }
+            using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\temphandle"))
+            {
+                createdfile.WriteLine(this.Handle);
+                createdfile.WriteLine(this.Text);
+            }
         }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -6191,6 +6212,11 @@ namespace PGM
                     justSaved = true;
                 }
             }
+            using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\temphandle"))
+            {
+                createdfile.WriteLine(this.Handle);
+                createdfile.WriteLine(this.Text);
+            }
         }
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -6244,6 +6270,11 @@ namespace PGM
                     fastColoredTextBoxSaved = fastColoredTextBox1.Text;
                     justSaved = true;
                 }
+            }
+            using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\temphandle"))
+            {
+                createdfile.WriteLine(this.Handle);
+                createdfile.WriteLine(this.Text);
             }
         }
         public void StopScript()
