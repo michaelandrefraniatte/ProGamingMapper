@@ -6168,7 +6168,7 @@ namespace PGM
                 if (result == DialogResult.OK)
                 {
                     OpenFileDialog op = new OpenFileDialog();
-                    op.Filter = "All Files(*.*)|*.*";
+                    op.Filter = "Script PGM File(*.pgm)|*.pgm";
                     if (op.ShowDialog() == DialogResult.OK)
                     {
                         if (!op.FileName.EndsWith(".encrypted"))
@@ -6192,7 +6192,7 @@ namespace PGM
             else
             {
                 OpenFileDialog op = new OpenFileDialog();
-                op.Filter = "All Files(*.*)|*.*";
+                op.Filter = "Script PGM File(*.pgm)|*.pgm";
                 if (op.ShowDialog() == DialogResult.OK)
                 {
                     if (!op.FileName.EndsWith(".encrypted"))
@@ -6248,7 +6248,7 @@ namespace PGM
         {
             StopScript();
             SaveFileDialog sf = new SaveFileDialog();
-            sf.Filter = "All Files(*.*)|*.*";
+            sf.Filter = "Script PGM File(*.pgm)|*.pgm";
             if (filename != "")
                 sf.FileName = System.IO.Path.GetFileName(filename);
             if (sf.ShowDialog() == DialogResult.OK)
