@@ -201,6 +201,7 @@ namespace PGM
                 {
                     if (!filePath.EndsWith(".encrypted"))
                     {
+                        fastColoredTextBox1.Clear();
                         string readText = File.ReadAllText(filePath);
                         fastColoredTextBox1.Text = readText;
                     }
@@ -220,6 +221,7 @@ namespace PGM
             {
                 if (!filePath.EndsWith(".encrypted"))
                 {
+                    fastColoredTextBox1.Clear();
                     string readText = File.ReadAllText(filePath);
                     fastColoredTextBox1.Text = readText;
                 }
@@ -6210,6 +6212,7 @@ namespace PGM
                     {
                         if (!op.FileName.EndsWith(".encrypted"))
                         {
+                            fastColoredTextBox1.Clear();
                             string readText = File.ReadAllText(op.FileName);
                             fastColoredTextBox1.Text = readText;
                         }
@@ -6234,6 +6237,7 @@ namespace PGM
                 {
                     if (!op.FileName.EndsWith(".encrypted"))
                     {
+                        fastColoredTextBox1.Clear();
                         string readText = File.ReadAllText(op.FileName);
                         fastColoredTextBox1.Text = readText;
                     }
