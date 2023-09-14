@@ -12649,6 +12649,8 @@ namespace PGM
                 Subcommand1GripLeftController(0x06, new byte[] { 0x01 }, 1);
                 Subcommand2GripLeftController(0x40, new byte[] { 0x1 }, 1);
                 Subcommand2GripLeftController(0x3, new byte[] { 0x30 }, 1);
+                Subcommand2GripLeftController(0x40, new byte[] { 0x1 }, 1);
+                Subcommand2GripLeftController(0x3, new byte[] { 0x30 }, 1);
             }
             while (handleLeft.IsInvalid);
         }
@@ -12703,6 +12705,8 @@ namespace PGM
                 IntPtr handle = CreateFile(path, System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite, new System.IntPtr(), System.IO.FileMode.Open, EFileAttributes.Normal, new System.IntPtr());
                 handleRight = Rhid_open_path(handle);
                 Subcommand1GripRightController(0x06, new byte[] { 0x01 }, 1);
+                Subcommand2GripRightController(0x40, new byte[] { 0x1 }, 1);
+                Subcommand2GripRightController(0x3, new byte[] { 0x30 }, 1);
                 Subcommand2GripRightController(0x40, new byte[] { 0x1 }, 1);
                 Subcommand2GripRightController(0x3, new byte[] { 0x30 }, 1);
             }
