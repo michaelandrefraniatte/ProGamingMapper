@@ -186,11 +186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\micha\\Documents\\tool\\Controller\\ProGamingMapper\\Src\\controller\\controller\\controller.csproj",
+      "projectUniqueName": "C:\\Users\\micha\\Documents\\tool\\Controller\\ProGamingMapper\\controller\\controller\\controller.csproj",
       "projectName": "controller",
-      "projectPath": "C:\\Users\\micha\\Documents\\tool\\Controller\\ProGamingMapper\\Src\\controller\\controller\\controller.csproj",
+      "projectPath": "C:\\Users\\micha\\Documents\\tool\\Controller\\ProGamingMapper\\controller\\controller\\controller.csproj",
       "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\micha\\Documents\\tool\\Controller\\ProGamingMapper\\Src\\controller\\controller\\obj\\",
+      "outputPath": "C:\\Users\\micha\\Documents\\tool\\Controller\\ProGamingMapper\\controller\\controller\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

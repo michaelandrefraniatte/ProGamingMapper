@@ -209,6 +209,12 @@
     <Compile Include="DualShock4.cs" />
     <Compile Include="DualShock41.cs" />
     <Compile Include="DualShock42.cs" />
+    <Compile Include="Form11.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form11.Designer.cs">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form6.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     <EmbeddedResource Include="Form10.resx">
       <DependentUpon>Form10.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form11.resx">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +351,10 @@
     <Content Include="pgm.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\controllerds4\controllerds4\controllerds4.csproj">
+      <Project>{e2e497ee-08ac-4d36-881c-cd32f2ea5a5c}</Project>
+      <Name>controllerds4</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\controller\controller\controller.csproj">
       <Project>{990c1a76-de5c-4f56-a19b-16c49c5ed624}</Project>
       <Name>controller</Name>

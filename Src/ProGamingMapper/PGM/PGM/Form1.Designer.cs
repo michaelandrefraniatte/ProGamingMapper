@@ -69,6 +69,7 @@
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webcamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rawInputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.inputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +82,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             this.autocompleteMenu1 = new AutocompleteMenuNS.AutocompleteMenu();
-            this.rawInputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dS4OutputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
             this.SuspendLayout();
@@ -396,6 +397,7 @@
             this.toolStripSeparator3,
             this.outputsToolStripMenuItem,
             this.xboxOutputsToolStripMenuItem,
+            this.dS4OutputsToolStripMenuItem,
             this.extraOutputsToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
             this.dataToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
@@ -414,6 +416,13 @@
             this.toolStripMenuItem3.Size = new System.Drawing.Size(224, 26);
             this.toolStripMenuItem3.Text = "Classic Inputs";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // rawInputsToolStripMenuItem
+            // 
+            this.rawInputsToolStripMenuItem.Name = "rawInputsToolStripMenuItem";
+            this.rawInputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rawInputsToolStripMenuItem.Text = "Raw Inputs";
+            this.rawInputsToolStripMenuItem.Click += new System.EventHandler(this.rawInputsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -509,7 +518,6 @@
             this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.CSharp;
             this.fastColoredTextBox1.LeftBracket = '(';
@@ -537,12 +545,12 @@
             this.autocompleteMenu1.MaximumSize = new System.Drawing.Size(300, 300);
             this.autocompleteMenu1.TargetControlWrapper = null;
             // 
-            // rawInputsToolStripMenuItem
+            // dS4OutputsToolStripMenuItem
             // 
-            this.rawInputsToolStripMenuItem.Name = "rawInputsToolStripMenuItem";
-            this.rawInputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.rawInputsToolStripMenuItem.Text = "Raw Inputs";
-            this.rawInputsToolStripMenuItem.Click += new System.EventHandler(this.rawInputsToolStripMenuItem_Click);
+            this.dS4OutputsToolStripMenuItem.Name = "dS4OutputsToolStripMenuItem";
+            this.dS4OutputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dS4OutputsToolStripMenuItem.Text = "DS4 Outputs";
+            this.dS4OutputsToolStripMenuItem.Click += new System.EventHandler(this.dS4OutputsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -623,6 +631,7 @@
         private System.Windows.Forms.ToolStripMenuItem connectWiimotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disconnectsWiimotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rawInputsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dS4OutputsToolStripMenuItem;
     }
 }
 
