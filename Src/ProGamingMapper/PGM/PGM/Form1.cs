@@ -257,7 +257,7 @@ namespace PGM
         }
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            const string message = "• Input Devices : Mouse, Keyboard, XInput Controller, DirectInput Controller, Joycons as DirectInput Controller, Pro Controller as DirectInput Controller over Bluetooth, Dualshock4 Controller as DirectInput Controller, Dualsense Controller as DirectInput Controller, Wiimote and Sensor Bar and Nunchuck, Joycon left, Joycon right, Joycon Charging Grip over USB, Pro Controller over USB, Dualshock4 Controller over USB, Dualsense Controller over USB, Webcam and Led, Voice Speech to Text.\n\r\n\r• Output Devices : Keyboard, Mouse, Xbox Controller.\n\r\n\r• Pairing : Use the dedicated buttons for Bluetooth Controllers or use USB wire.\n\r\n\r• Data : Script must running to see data values changing.";
+            const string message = "• Input Devices : Mouse, Keyboard, XInput Controller, DirectInput Controller, Joycons as DirectInput Controller, Pro Controller as DirectInput Controller over Bluetooth, Dualshock4 Controller as DirectInput Controller, Dualsense Controller as DirectInput Controller, Wiimote and Sensor Bar and Nunchuck, Joycon left, Joycon right, Joycon Charging Grip over USB, Pro Controller over USB, Dualshock4 Controller over USB, Dualsense Controller over USB, Webcam and Led, Voice Speech to Text.\n\r\n\r• Output Devices : Keyboard, Mouse, Xbox Controller, DS4 Controller.\n\r\n\r• Pairing : Use the dedicated buttons for Bluetooth Controllers or use USB wire.\n\r\n\r• Data : Script must running to see data values changing.";
             const string caption = "Help";
             MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
