@@ -215,6 +215,12 @@
     <Compile Include="Form11.Designer.cs">
       <DependentUpon>Form11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form12.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form12.Designer.cs">
+      <DependentUpon>Form12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form6.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,6 +302,9 @@
     <EmbeddedResource Include="Form11.resx">
       <DependentUpon>Form11.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form12.resx">
+      <DependentUpon>Form12.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
@@ -354,6 +363,10 @@
     <ProjectReference Include="..\..\controllerds4\controllerds4\controllerds4.csproj">
       <Project>{e2e497ee-08ac-4d36-881c-cd32f2ea5a5c}</Project>
       <Name>controllerds4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\controllervjoy\controllervjoy\controllervjoy.csproj">
+      <Project>{8ba2ea59-d6d1-4982-ab54-34178f9d3b18}</Project>
+      <Name>controllervjoy</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\controller\controller\controller.csproj">
       <Project>{990c1a76-de5c-4f56-a19b-16c49c5ed624}</Project>

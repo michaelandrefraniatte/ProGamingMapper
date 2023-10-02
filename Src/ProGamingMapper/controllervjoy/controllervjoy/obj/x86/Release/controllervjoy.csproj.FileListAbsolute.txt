@@ -1,0 +1,8 @@
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\bin\x86\Release\controllervjoy.dll
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\bin\x86\Release\controllervjoy.pdb
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\bin\x86\Release\vJoyInterfaceWrap.dll
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\obj\x86\Release\controllervjoy.csproj.AssemblyReference.cache
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\obj\x86\Release\controllervjoy.csproj.CoreCompileInputs.cache
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\obj\x86\Release\controllervjoy.csproj.CopyComplete
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\obj\x86\Release\controllervjoy.dll
+C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controllervjoy\controllervjoy\obj\x86\Release\controllervjoy.pdb

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "controller", "..\controller
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controllerds4", "..\controllerds4\controllerds4\controllerds4.csproj", "{E2E497EE-08AC-4D36-881C-CD32F2EA5A5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controllervjoy", "..\controllervjoy\controllervjoy\controllervjoy.csproj", "{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{E2E497EE-08AC-4D36-881C-CD32F2EA5A5C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2E497EE-08AC-4D36-881C-CD32F2EA5A5C}.Release|x86.ActiveCfg = Release|x86
 		{E2E497EE-08AC-4D36-881C-CD32F2EA5A5C}.Release|x86.Build.0 = Release|x86
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Debug|x86.ActiveCfg = Debug|x86
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Debug|x86.Build.0 = Debug|x86
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Release|x86.ActiveCfg = Release|x86
+		{8BA2EA59-D6D1-4982-AB54-34178F9D3B18}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
