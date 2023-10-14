@@ -91,7 +91,7 @@ namespace PGM
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(args.Length > 0 ? args[0] : null));
+            Application.Run(new Loader(args));
         }
         public static bool hasAdminRights()
         {

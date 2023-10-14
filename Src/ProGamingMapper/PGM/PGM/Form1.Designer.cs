@@ -77,13 +77,13 @@
             this.outputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xboxOutputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dS4OutputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vJoyOutputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extraOutputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             this.autocompleteMenu1 = new AutocompleteMenuNS.AutocompleteMenu();
-            this.vJoyOutputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
             this.SuspendLayout();
@@ -374,7 +374,7 @@
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
             this.runToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
@@ -382,7 +382,7 @@
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
@@ -408,75 +408,82 @@
             // webcamToolStripMenuItem
             // 
             this.webcamToolStripMenuItem.Name = "webcamToolStripMenuItem";
-            this.webcamToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.webcamToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.webcamToolStripMenuItem.Text = "Webcam Inputs";
             this.webcamToolStripMenuItem.Click += new System.EventHandler(this.webcamToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(224, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem3.Text = "Classic Inputs";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // rawInputsToolStripMenuItem
             // 
             this.rawInputsToolStripMenuItem.Name = "rawInputsToolStripMenuItem";
-            this.rawInputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rawInputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.rawInputsToolStripMenuItem.Text = "Raw Inputs";
             this.rawInputsToolStripMenuItem.Click += new System.EventHandler(this.rawInputsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(224, 26);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem4.Text = "X Inputs";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(224, 26);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem5.Text = "Direct Inputs";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // inputsToolStripMenuItem
             // 
             this.inputsToolStripMenuItem.Name = "inputsToolStripMenuItem";
-            this.inputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.inputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.inputsToolStripMenuItem.Text = "Extra Inputs";
             this.inputsToolStripMenuItem.Click += new System.EventHandler(this.inputsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(191, 6);
             // 
             // outputsToolStripMenuItem
             // 
             this.outputsToolStripMenuItem.Name = "outputsToolStripMenuItem";
-            this.outputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.outputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.outputsToolStripMenuItem.Text = "Classic Outputs";
             this.outputsToolStripMenuItem.Click += new System.EventHandler(this.outputsToolStripMenuItem_Click);
             // 
             // xboxOutputsToolStripMenuItem
             // 
             this.xboxOutputsToolStripMenuItem.Name = "xboxOutputsToolStripMenuItem";
-            this.xboxOutputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.xboxOutputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.xboxOutputsToolStripMenuItem.Text = "X Outputs";
             this.xboxOutputsToolStripMenuItem.Click += new System.EventHandler(this.xboxOutputsToolStripMenuItem_Click);
             // 
             // dS4OutputsToolStripMenuItem
             // 
             this.dS4OutputsToolStripMenuItem.Name = "dS4OutputsToolStripMenuItem";
-            this.dS4OutputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dS4OutputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.dS4OutputsToolStripMenuItem.Text = "DS4 Outputs";
             this.dS4OutputsToolStripMenuItem.Click += new System.EventHandler(this.dS4OutputsToolStripMenuItem_Click);
+            // 
+            // vJoyOutputsToolStripMenuItem
+            // 
+            this.vJoyOutputsToolStripMenuItem.Name = "vJoyOutputsToolStripMenuItem";
+            this.vJoyOutputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.vJoyOutputsToolStripMenuItem.Text = "VJoy Outputs";
+            this.vJoyOutputsToolStripMenuItem.Click += new System.EventHandler(this.vJoyOutputsToolStripMenuItem_Click);
             // 
             // extraOutputsToolStripMenuItem
             // 
             this.extraOutputsToolStripMenuItem.Name = "extraOutputsToolStripMenuItem";
-            this.extraOutputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.extraOutputsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.extraOutputsToolStripMenuItem.Text = "Extra Outputs";
             this.extraOutputsToolStripMenuItem.Click += new System.EventHandler(this.extraOutputsToolStripMenuItem_Click);
             // 
@@ -554,13 +561,6 @@
             this.autocompleteMenu1.Items = new string[0];
             this.autocompleteMenu1.MaximumSize = new System.Drawing.Size(300, 300);
             this.autocompleteMenu1.TargetControlWrapper = null;
-            // 
-            // vJoyOutputsToolStripMenuItem
-            // 
-            this.vJoyOutputsToolStripMenuItem.Name = "vJoyOutputsToolStripMenuItem";
-            this.vJoyOutputsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.vJoyOutputsToolStripMenuItem.Text = "VJoy Outputs";
-            this.vJoyOutputsToolStripMenuItem.Click += new System.EventHandler(this.vJoyOutputsToolStripMenuItem_Click);
             // 
             // Form1
             // 

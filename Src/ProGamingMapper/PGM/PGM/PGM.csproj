@@ -228,6 +228,12 @@
       <DependentUpon>Form6.cs</DependentUpon>
     </Compile>
     <Compile Include="KeyboardHook.cs" />
+    <Compile Include="Loader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loader.Designer.cs">
+      <DependentUpon>Loader.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageHelper.cs" />
     <Compile Include="MouseHook.cs" />
     <Compile Include="Network.cs" />
@@ -329,6 +335,9 @@
     <EmbeddedResource Include="Form9.resx">
       <DependentUpon>Form9.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Loader.resx">
+      <DependentUpon>Loader.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -357,6 +366,7 @@
     <None Include="bin\x86\Release\Hid.Net.dll" />
     <None Include="bin\x86\Release\Microsoft.Extensions.Logging.Abstractions.dll" />
     <None Include="bin\x86\Release\System.Reactive.dll" />
+    <None Include="loader.gif" />
     <Content Include="pgm.ico" />
   </ItemGroup>
   <ItemGroup>

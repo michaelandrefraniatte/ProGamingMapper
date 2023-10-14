@@ -59,5 +59,15 @@ namespace PGM.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap loader {
+            get {
+                object obj = ResourceManager.GetObject("loader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

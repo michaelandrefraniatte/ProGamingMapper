@@ -97,3 +97,13 @@ C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controller\controller\o
 C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.csproj.CoreCompileInputs.cache
 C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.dll
 C:\Users\micha\Documents\tool\Controller\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.pdb
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\bin\Release\netstandard2.0\controller.deps.json
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\bin\Release\netstandard2.0\controller.dll
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\bin\Release\netstandard2.0\controller.pdb
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.csproj.AssemblyReference.cache
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.AssemblyInfoInputs.cache
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.AssemblyInfo.cs
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.csproj.CoreCompileInputs.cache
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.dll
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.pdb

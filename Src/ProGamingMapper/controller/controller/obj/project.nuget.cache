@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MgUUB8Ub5P7cm6qDkBlRA7AwhJNNE8kez3v8Qk5lDnKqxDI4N7sI5ChCw/ev6fcm5uEQ+Cc4ZOTYAANWAZj3PA==",
+  "dgSpecHash": "DxLchLdWXIyUsWfsPpBM71D7k5LUXf1ZEpJtqrA6GqwtfDGbHHLW/3eDLoOjgHEFcuDRDAiBj+z1C6E51kzazA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\micha\\Documents\\tool\\Controller\\ProGamingMapper\\controller\\controller\\controller.csproj",
+  "projectFilePath": "C:\\Users\\micha\\Documents\\github\\ProGamingMapper\\Src\\ProGamingMapper\\controller\\controller\\controller.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\micha\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"

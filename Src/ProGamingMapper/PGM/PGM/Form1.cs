@@ -79,6 +79,8 @@ namespace PGM
         public static Form10 form10 = new Form10();
         public static Form11 form11 = new Form11();
         public static Form12 form12 = new Form12();
+        public static string[] tempargs = { };
+        public static Loader loader = new Loader(tempargs);
         public static bool form2visible = false, form3visible = false, form4visible = false, form5visible = false, form6visible = false, form7visible = false, form8visible = false, form9visible = false, form10visible = false, form11visible = false, form12visible = false;
         public static string openFilePath = "", fastColoredTextBoxSaved = "", ps5controllervendorid, ps5controllerproductid, ps5controllerlabel, ps4controllervendorid, ps4controllerproductid, ps4controllerlabel, networkip, networkport, networklabel, ps5controller1vendorid, ps5controller1productid, ps5controller1label, ps4controller1vendorid, ps4controller1productid, ps4controller1label, ps5controller2vendorid, ps5controller2productid, ps5controller2label, ps4controller2vendorid, ps4controller2productid, ps4controller2label;
         private static bool justSaved = true, ps5controller2similar, ps4controller2similar, onopenwith = false;
@@ -6341,65 +6343,6 @@ namespace PGM
                 justSaved = false;
             ChangeScriptColors(sender);
         }
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            TimeBeginPeriod(1);
-            NtSetTimerResolution(1, true, ref CurrentResolution);
-            mouseHook.Hook += new MouseHook.MouseHookCallback(MouseHook_Hook);
-            mouseHook.Install();
-            input.KeyboardFilterMode = KeyboardFilterMode.All;
-            input.MouseFilterMode = MouseFilterMode.All;
-            input.Load();
-            if (!onopenwith)
-            {
-                if (System.IO.File.Exists(Application.StartupPath + @"\tempsave"))
-                {
-                    using (System.IO.StreamReader file = new System.IO.StreamReader(Application.StartupPath + @"\tempsave"))
-                    {
-                        filename = file.ReadLine();
-                        red = Convert.ToInt32(file.ReadLine());
-                        green = Convert.ToInt32(file.ReadLine());
-                        blue = Convert.ToInt32(file.ReadLine());
-                        brightness = Convert.ToInt32(file.ReadLine());
-                        radius = Convert.ToInt32(file.ReadLine());
-                    }
-                    if (filename != "" & System.IO.File.Exists(filename))
-                    {
-                        if (!filename.EndsWith(".encrypted"))
-                        {
-                            string readText = File.ReadAllText(filename);
-                            fastColoredTextBox1.Text = readText;
-                        }
-                        else
-                        {
-                            DecryptFile(filename, "tybtrybrtyertu50727885");
-                            fastColoredTextBox1.Text = "Script Encrypted...";
-                        }
-                        openFilePath = filename;
-                        this.Text = "PGM: " + System.IO.Path.GetFileName(filename);
-                        fastColoredTextBoxSaved = fastColoredTextBox1.Text;
-                        justSaved = true;
-                    }
-                }
-                using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\temphandle"))
-                {
-                    createdfile.WriteLine(this.Handle);
-                    createdfile.WriteLine(this.Text);
-                }
-            }
-            username = Program.username;
-            SetExtraInputs();
-            SetClassicInputs();
-            SetRawInputs();
-            SetXInputs();
-            SetDirectInputs();
-            SetClassicOutputs();
-            SetXOutputs();
-            SetDS4Outputs();
-            SetVJoyOutputs();
-            SetExtraOutputs();
-            FillAutocompletion();
-        }
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!runstopbool)
@@ -6482,6 +6425,7 @@ namespace PGM
             mouseHook.Hook -= new MouseHook.MouseHookCallback(MouseHook_Hook);
             mouseHook.Uninstall();
             input.Unload();
+            loader.CloseLoader();
         }
         [STAThread]
         private void DisconnectControllers()
@@ -6730,6 +6674,62 @@ namespace PGM
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            TimeBeginPeriod(1);
+            NtSetTimerResolution(1, true, ref CurrentResolution);
+            mouseHook.Hook += new MouseHook.MouseHookCallback(MouseHook_Hook);
+            mouseHook.Install();
+            input.KeyboardFilterMode = KeyboardFilterMode.All;
+            input.MouseFilterMode = MouseFilterMode.All;
+            input.Load();
+            if (!onopenwith)
+            {
+                if (System.IO.File.Exists(Application.StartupPath + @"\tempsave"))
+                {
+                    using (System.IO.StreamReader file = new System.IO.StreamReader(Application.StartupPath + @"\tempsave"))
+                    {
+                        filename = file.ReadLine();
+                        red = Convert.ToInt32(file.ReadLine());
+                        green = Convert.ToInt32(file.ReadLine());
+                        blue = Convert.ToInt32(file.ReadLine());
+                        brightness = Convert.ToInt32(file.ReadLine());
+                        radius = Convert.ToInt32(file.ReadLine());
+                    }
+                    if (filename != "" & System.IO.File.Exists(filename))
+                    {
+                        if (!filename.EndsWith(".encrypted"))
+                        {
+                            string readText = File.ReadAllText(filename);
+                            fastColoredTextBox1.Text = readText;
+                        }
+                        else
+                        {
+                            DecryptFile(filename, "tybtrybrtyertu50727885");
+                            fastColoredTextBox1.Text = "Script Encrypted...";
+                        }
+                        openFilePath = filename;
+                        this.Text = "PGM: " + System.IO.Path.GetFileName(filename);
+                        fastColoredTextBoxSaved = fastColoredTextBox1.Text;
+                        justSaved = true;
+                    }
+                }
+                using (System.IO.StreamWriter createdfile = new System.IO.StreamWriter(Application.StartupPath + @"\temphandle"))
+                {
+                    createdfile.WriteLine(this.Handle);
+                    createdfile.WriteLine(this.Text);
+                }
+            }
+            username = Program.username;
+            SetExtraInputs();
+            SetClassicInputs();
+            SetRawInputs();
+            SetXInputs();
+            SetDirectInputs();
+            SetClassicOutputs();
+            SetXOutputs();
+            SetDS4Outputs();
+            SetVJoyOutputs();
+            SetExtraOutputs();
+            FillAutocompletion();
             menuItem = new MenuItem("Cut");
             contextMenu.MenuItems.Add(menuItem);
             menuItem.Select += new EventHandler(changeCursor);
@@ -6743,6 +6743,10 @@ namespace PGM
             menuItem.Select += new EventHandler(changeCursor);
             menuItem.Click += new EventHandler(pasteAction);
             fastColoredTextBox1.ContextMenu = contextMenu;
+        }
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            loader.HideLoader();
         }
         private void webcamToolStripMenuItem_Click(object sender, EventArgs e)
         {
