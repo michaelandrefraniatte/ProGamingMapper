@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,12 +12,14 @@ namespace PGM
             InitializeComponent();
             tempargs = args;
         }
-        private void Loader_Load(object sender, EventArgs e)
+        private void Loader_Shown(object sender, EventArgs e)
         {
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.Image = PGM.Properties.Resources.loader;
+            this.pictureBox1.Image = Properties.Resources.loader;
+            Application.DoEvents();
+            StartMainForm();
         }
-        private void Loader_Shown(object sender, EventArgs e)
+        private void StartMainForm()
         {
             Form1 form1 = new Form1(tempargs.Length > 0 ? tempargs[0] : null);
             form1.Show();

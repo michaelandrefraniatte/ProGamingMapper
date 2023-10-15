@@ -58,8 +58,8 @@
             this.Name = "Loader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Loader";
+            this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.White;
-            this.Load += new System.EventHandler(this.Loader_Load);
             this.Shown += new System.EventHandler(this.Loader_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
