@@ -366,7 +366,6 @@
     <None Include="bin\x86\Release\Hid.Net.dll" />
     <None Include="bin\x86\Release\Microsoft.Extensions.Logging.Abstractions.dll" />
     <None Include="bin\x86\Release\System.Reactive.dll" />
-    <None Include="loader.gif" />
     <Content Include="pgm.ico" />
   </ItemGroup>
   <ItemGroup>

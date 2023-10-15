@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace PGM
         private void Loader_Shown(object sender, EventArgs e)
         {
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.Image = Properties.Resources.loader;
+            this.pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\loader.gif");
             Application.DoEvents();
             StartMainForm();
         }
