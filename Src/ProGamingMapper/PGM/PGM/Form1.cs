@@ -13463,7 +13463,7 @@ namespace PGM
             Prohid_write(handlePro, buf_Pro, new UIntPtr(2));
         }
         public const double REGISTER_IR = 0x04b00030, REGISTER_EXTENSION_INIT_1 = 0x04a400f0, REGISTER_EXTENSION_INIT_2 = 0x04a400fb, REGISTER_EXTENSION_TYPE = 0x04a400fa, REGISTER_EXTENSION_CALIBRATION = 0x04a40020, REGISTER_MOTIONPLUS_INIT = 0x04a600fe;
-        public static double irx0, iry0, irx1, iry1, irx, iry, irxc, iryc, WiimoteIRSensors0X, WiimoteIRSensors0Y, WiimoteIRSensors1X, WiimoteIRSensors1Y, WiimoteRawValuesX, WiimoteRawValuesY, WiimoteRawValuesZ, calibrationxinit, calibrationyinit, calibrationzinit, stickviewxinit, stickviewyinit, WiimoteNunchuckStateRawValuesX, WiimoteNunchuckStateRawValuesY, WiimoteNunchuckStateRawValuesZ, WiimoteNunchuckStateRawJoystickX, WiimoteNunchuckStateRawJoystickY, mousex, mousey, WiimoteIRSensors0Xcam, WiimoteIRSensors0Ycam, WiimoteIRSensors1Xcam, WiimoteIRSensors1Ycam, WiimoteIRSensorsXcam, WiimoteIRSensorsYcam, centery = 160f, WiimoteIR0notfound = 0, irx2, iry2, irx3, iry3, reconnectingwiimotecount;
+        public static double irx0, iry0, irx1, iry1, irx, iry, irxc, iryc, tempirx, tempiry, WiimoteIRSensors0X, WiimoteIRSensors0Y, WiimoteIRSensors1X, WiimoteIRSensors1Y, WiimoteRawValuesX, WiimoteRawValuesY, WiimoteRawValuesZ, calibrationxinit, calibrationyinit, calibrationzinit, stickviewxinit, stickviewyinit, WiimoteNunchuckStateRawValuesX, WiimoteNunchuckStateRawValuesY, WiimoteNunchuckStateRawValuesZ, WiimoteNunchuckStateRawJoystickX, WiimoteNunchuckStateRawJoystickY, mousex, mousey, WiimoteIRSensors0Xcam, WiimoteIRSensors0Ycam, WiimoteIRSensors1Xcam, WiimoteIRSensors1Ycam, WiimoteIRSensorsXcam, WiimoteIRSensorsYcam, centery = 160f, WiimoteIR0notfound = 0, irx2, iry2, irx3, iry3, reconnectingwiimotecount;
         public static int irmode = 1;
         public static bool reconnectingwiimotebool, WiimoteIR1foundcam, WiimoteIR0foundcam, WiimoteIR1found, WiimoteIR0found, WiimoteIRswitch, WiimoteButtonStateA, WiimoteButtonStateB, WiimoteButtonStateMinus, WiimoteButtonStateHome, WiimoteButtonStatePlus, WiimoteButtonStateOne, WiimoteButtonStateTwo, WiimoteButtonStateUp, WiimoteButtonStateDown, WiimoteButtonStateLeft, WiimoteButtonStateRight, WiimoteNunchuckStateC, WiimoteNunchuckStateZ, ISWIIMOTE;
         public static byte[] buff = new byte[] { 0x55 }, mBuff = new byte[22], aBuffer = new byte[22];
@@ -13616,8 +13616,27 @@ namespace PGM
                     irxc = (irx2 + irx3) / 512f * 1346f;
                     iryc = (iry2 + iry3) / 768f * 782f;
                 }
-                irx = irxc * (1024f / 1346f);
-                iry = iryc + centery >= 0 ? Scale(iryc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(iryc + centery, -782f + centery, 0f, -1024f, 0f);
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
+                    irx = irxc * (1024f / 1346f);
+                    iry = iryc + centery >= 0 ? Scale(iryc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(iryc + centery, -782f + centery, 0f, -1024f, 0f);
+                }
+                if (!WiimoteIR0found & !WiimoteIR1found)
+                {
+                    if (irx - tempirx >= 20f)
+                        irx = 1024f;
+                    if (irx - tempirx <= -20f)
+                        irx = -1024f;
+                    if (iry - tempiry >= 20f)
+                        iry = 1024f;
+                    if (iry - tempiry <= -20f)
+                        iry = -1024f;
+                }
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
+                    tempirx = irx;
+                    tempiry = iry;
+                }
                 WiimoteButtonStateA = (aBuffer[2] & 0x08) != 0;
                 WiimoteButtonStateB = (aBuffer[2] & 0x04) != 0;
                 WiimoteButtonStateMinus = (aBuffer[2] & 0x10) != 0;
@@ -13760,8 +13779,8 @@ namespace PGM
         public static double reconnectingwiimote1count, Wiimote1IR0notfound = 0;
         public static bool reconnectingwiimote2bool, Wiimote2IRswitch;
         public static double reconnectingwiimote2count, Wiimote2IR0notfound = 0;
-        public static double ir1x, ir1y, ir1x0, ir1y0, ir1x1, ir1y1, ir1x2, ir1y2, ir1x3, ir1y3, ir1xc, ir1yc, Wiimote1RawValuesX, Wiimote1RawValuesY, Wiimote1RawValuesZ, calibration1xinit, calibration1yinit, calibration1zinit, stickview1xinit, stickview1yinit, Wiimote1NunchuckStateRawValuesX, Wiimote1NunchuckStateRawValuesY, Wiimote1NunchuckStateRawValuesZ, Wiimote1NunchuckStateRawJoystickX, Wiimote1NunchuckStateRawJoystickY;
-        public static double ir2x, ir2y, ir2x0, ir2y0, ir2x1, ir2y1, ir2x2, ir2y2, ir2x3, ir2y3, ir2xc, ir2yc, Wiimote2RawValuesX, Wiimote2RawValuesY, Wiimote2RawValuesZ, calibration2xinit, calibration2yinit, calibration2zinit, stickview2xinit, stickview2yinit, Wiimote2NunchuckStateRawValuesX, Wiimote2NunchuckStateRawValuesY, Wiimote2NunchuckStateRawValuesZ, Wiimote2NunchuckStateRawJoystickX, Wiimote2NunchuckStateRawJoystickY;
+        public static double ir1x, ir1y, ir1x0, ir1y0, ir1x1, ir1y1, ir1x2, ir1y2, ir1x3, ir1y3, ir1xc, ir1yc, tempir1x, tempir1y, Wiimote1RawValuesX, Wiimote1RawValuesY, Wiimote1RawValuesZ, calibration1xinit, calibration1yinit, calibration1zinit, stickview1xinit, stickview1yinit, Wiimote1NunchuckStateRawValuesX, Wiimote1NunchuckStateRawValuesY, Wiimote1NunchuckStateRawValuesZ, Wiimote1NunchuckStateRawJoystickX, Wiimote1NunchuckStateRawJoystickY;
+        public static double ir2x, ir2y, ir2x0, ir2y0, ir2x1, ir2y1, ir2x2, ir2y2, ir2x3, ir2y3, ir2xc, ir2yc, tempir2x, tempir2y, Wiimote2RawValuesX, Wiimote2RawValuesY, Wiimote2RawValuesZ, calibration2xinit, calibration2yinit, calibration2zinit, stickview2xinit, stickview2yinit, Wiimote2NunchuckStateRawValuesX, Wiimote2NunchuckStateRawValuesY, Wiimote2NunchuckStateRawValuesZ, Wiimote2NunchuckStateRawJoystickX, Wiimote2NunchuckStateRawJoystickY;
         public static bool Wiimote1ButtonStateA, Wiimote1ButtonStateB, Wiimote1ButtonStateMinus, Wiimote1ButtonStateHome, Wiimote1ButtonStatePlus, Wiimote1ButtonStateOne, Wiimote1ButtonStateTwo, Wiimote1ButtonStateUp, Wiimote1ButtonStateDown, Wiimote1ButtonStateLeft, Wiimote1ButtonStateRight, Wiimote1NunchuckStateC, Wiimote1NunchuckStateZ, ISWIIMOTE1;
         public static bool Wiimote2ButtonStateA, Wiimote2ButtonStateB, Wiimote2ButtonStateMinus, Wiimote2ButtonStateHome, Wiimote2ButtonStatePlus, Wiimote2ButtonStateOne, Wiimote2ButtonStateTwo, Wiimote2ButtonStateUp, Wiimote2ButtonStateDown, Wiimote2ButtonStateLeft, Wiimote2ButtonStateRight, Wiimote2NunchuckStateC, Wiimote2NunchuckStateZ, ISWIIMOTE2;
         public static byte[] buff1 = new byte[] { 0x55 }, mBuff1 = new byte[22], aBuffer1 = new byte[22];
@@ -13925,8 +13944,27 @@ namespace PGM
                     ir1xc = (ir1x2 + ir1x3) / 512f * 1346f;
                     ir1yc = (ir1y2 + ir1y3) / 768f * 782f;
                 }
-                ir1x = ir1xc * (1024f / 1346f);
-                ir1y = ir1yc + centery >= 0 ? Scale(ir1yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir1yc + centery, -782f + centery, 0f, -1024f, 0f);
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
+                    ir1x = ir1xc * (1024f / 1346f);
+                    ir1y = ir1yc + centery >= 0 ? Scale(ir1yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir1yc + centery, -782f + centery, 0f, -1024f, 0f);
+                }
+                if (!WiimoteIR0found & !WiimoteIR1found)
+                {
+                    if (ir1x - tempir1x >= 20f)
+                        ir1x = 1024f;
+                    if (ir1x - tempir1x <= -20f)
+                        ir1x = -1024f;
+                    if (ir1y - tempir1y >= 20f)
+                        ir1y = 1024f;
+                    if (ir1y - tempir1y <= -20f)
+                        ir1y = -1024f;
+                }
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
+                    tempir1x = ir1x;
+                    tempir1y = ir1y;
+                }
                 Wiimote1ButtonStateA = (aBuffer1[2] & 0x08) != 0;
                 Wiimote1ButtonStateB = (aBuffer1[2] & 0x04) != 0;
                 Wiimote1ButtonStateMinus = (aBuffer1[2] & 0x10) != 0;
@@ -14082,8 +14120,27 @@ namespace PGM
                     ir2xc = (ir2x2 + ir2x3) / 512f * 1346f;
                     ir2yc = (ir2y2 + ir2y3) / 768f * 782f;
                 }
-                ir2x = ir2xc * (1024f / 1346f);
-                ir2y = ir2yc + centery >= 0 ? Scale(ir2yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir2yc + centery, -782f + centery, 0f, -1024f, 0f);
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
+                    ir2x = ir2xc * (1024f / 1346f);
+                    ir2y = ir2yc + centery >= 0 ? Scale(ir2yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir2yc + centery, -782f + centery, 0f, -1024f, 0f);
+                }
+                if (!WiimoteIR0found & !WiimoteIR1found)
+                {
+                    if (ir2x - tempir2x >= 20f)
+                        ir2x = 1024f;
+                    if (ir2x - tempir2x <= -20f)
+                        ir2x = -1024f;
+                    if (ir2y - tempir2y >= 20f)
+                        ir2y = 1024f;
+                    if (ir2y - tempir2y <= -20f)
+                        ir2y = -1024f;
+                }
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
+                    tempir2x = ir2x;
+                    tempir2y = ir2y;
+                }
                 Wiimote2ButtonStateA = (aBuffer2[2] & 0x08) != 0;
                 Wiimote2ButtonStateB = (aBuffer2[2] & 0x04) != 0;
                 Wiimote2ButtonStateMinus = (aBuffer2[2] & 0x10) != 0;
