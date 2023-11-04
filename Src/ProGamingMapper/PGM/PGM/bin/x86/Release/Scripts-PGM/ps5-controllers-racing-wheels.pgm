@@ -2,7 +2,7 @@ UsersAllowedList        = new string[] { "michael113b" };
 PS5ControllerDescriptor = new string[] { "54C", "CE6", "DualSense", "54C", "CE6", "DualSense" };
 EnableXC                = true;
 xcnumber                = 2;
-double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 20.0f, dzy = 0.0f;
+double dzx              = 20.0f, dzy = 0.0f;
 /* First player */
 mousex = PS5Controller1AccelY * 31.25f;
 mousey = PS5Controller1LeftStickY * 32767f;

@@ -1,8 +1,8 @@
-UsersAllowedList = new string[] { "michael113b" };
-EnableXC         = true;
-xcnumber         = 1;
-EnableDI         = true;
-double mousex    = 0f, mousey = 0f, viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, dzx = 4.0f, dzy = 4.0f;
+UsersAllowedList   = new string[] { "michael113b" };
+EnableXC           = true;
+xcnumber           = 1;
+EnableDI           = true;
+double viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, dzx = 4.0f, dzy = 4.0f;
 if (irx >= 0f)
     mousex = Scale(irx * irx * irx / 1024f / 1024f * viewpower3x + irx * irx / 1024f * viewpower2x + irx * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
 if (irx <= 0f)

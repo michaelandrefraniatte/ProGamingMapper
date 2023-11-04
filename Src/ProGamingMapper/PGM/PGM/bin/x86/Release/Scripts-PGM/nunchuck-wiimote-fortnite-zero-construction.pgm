@@ -2,7 +2,7 @@ UsersAllowedList              = new string[] { "michael113b", "mic113b" };
 EnableXC                      = true;
 xcnumber                      = 1;
 irmode                        = 1;
-double mousex                 = 0f, mousey = 0f, viewpower1x = 0.33f, viewpower2x = 0f,viewpower3x = 0.67f, viewpower1y = 0.25f, viewpower2y = 0.75f, viewpower3y = 0f, dzx = 3.0f, dzy = 3.0f;
+double viewpower1x            = 0.33f, viewpower2x = 0f,viewpower3x = 0.67f, viewpower1y = 0.25f, viewpower2y = 0.75f, viewpower3y = 0f, dzx = 3.0f, dzy = 3.0f;
 controller1_send_rightstick   = WiimoteButtonStateDown;
 controller1_send_leftstick    = WiimoteNunchuckStateZ;
 controller1_send_A            = WiimoteNunchuckStateC;

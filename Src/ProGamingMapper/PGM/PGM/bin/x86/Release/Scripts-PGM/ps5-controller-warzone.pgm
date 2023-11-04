@@ -1,10 +1,10 @@
-UsersAllowedList = new string[] { "michael113b" };
+UsersAllowedList        = new string[] { "michael113b" };
 PS5ControllerDescriptor = new string[] { "54C", "CE6", "DualSense" };
-EnableXC         = true;
-xcnumber         = 1;
-double statex    = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 15.0f, dzy = 15.0f;
-statex           = PS5ControllerGyroX * 15f;
-statey           = PS5ControllerGyroY * 15f;
+EnableXC                = true;
+xcnumber                = 1;
+double dzx              = 15.0f, dzy = 15.0f;
+statex                  = PS5ControllerGyroX * 15f;
+statey                  = PS5ControllerGyroY * 15f;
 if (statex > 0f)
     mousestatex = Scale(statex, 0f, 32767f, dzx / 100f * 32767f, 32767f);
 if (statex < 0f)

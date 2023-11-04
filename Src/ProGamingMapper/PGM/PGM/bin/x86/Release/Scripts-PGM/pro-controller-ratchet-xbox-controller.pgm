@@ -3,7 +3,7 @@ EnableXC         = true;
 EnablePI         = true;
 xcnumber         = 1;
 sleeptime        = 8;
-double dzx       = 0.0f, dzy       = 0.0f, mousex = 0f, mousey = 0f, statex = 0f, statey = 0f, mousestatex = 0f, mousestatey = 0f;
+double dzx       = 0.0f, dzy       = 0.0f;
 if (ProControllerButtonPLUS)
 {
     mousexp[0] = 0f;

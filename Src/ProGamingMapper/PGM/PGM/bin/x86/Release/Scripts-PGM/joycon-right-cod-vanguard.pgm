@@ -1,8 +1,7 @@
-UsersAllowedList             = new string[] { "michael113b" };
-EnableXC                     = true;
-xcnumber                     = 1;
-EnableJI                     = true;
-double mousex                = 0f, mousey = 0f;
+UsersAllowedList = new string[] { "michael113b" };
+EnableXC         = true;
+xcnumber         = 1;
+EnableJI         = true;
 if (JoyconRightButtonPLUS)
 {
     mousexp[0] = 0f;

@@ -2,7 +2,6 @@ UsersAllowedList              = new string[] { "michael113b" };
 EnableXC                      = true;
 xcnumber                      = 1;
 EnableDI                      = true;
-double mousex                 = 0f, mousey = 0f;
 mousex                        = -(Joystick1AxisX - 31000f) / 20f;
 mousey                        = (Joystick1AxisY - 36000f) / 20f;
 controller1_send_leftstickx   = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;

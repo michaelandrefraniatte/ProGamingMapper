@@ -1,9 +1,9 @@
-UsersAllowedList = new string[] { "michael113b" };
-EnableXC         = true;
-xcnumber         = 1;
-EnablePI         = true;
-sleeptime        = 1;
-double statex, statey, mousex, mousey, mousestatex = 0f, mousestatey = 0f, dzx = 20.0f, dzy = 0f;
+UsersAllowedList         = new string[] { "michael113b" };
+EnableXC                 = true;
+xcnumber                 = 1;
+EnablePI                 = true;
+sleeptime                = 1;
+double dzx               = 20.0f, dzy = 0f;
 ProControllerAccelCenter = ProControllerButtonPLUS;
 mousex                   = ProControllerAccelY * 31.25f;
 mousey                   = ProControllerLeftStickY * 32767f;

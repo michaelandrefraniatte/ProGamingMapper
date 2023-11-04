@@ -2,7 +2,7 @@ UsersAllowedList = new string[] { "michael113b", "mic113b" };
 EnableXC         = true;
 xcnumber         = 1;
 EnableJI         = true;
-double mousex    = 0f, mousey = 0f, dzx = 20.0f, dzy = 0.0f;
+double dzx       = 20.0f, dzy = 0.0f;
 if (JoyconRightAccelX > 0f)
     mousex = Scale(JoyconRightAccelX, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
 if (JoyconRightAccelX < 0f)

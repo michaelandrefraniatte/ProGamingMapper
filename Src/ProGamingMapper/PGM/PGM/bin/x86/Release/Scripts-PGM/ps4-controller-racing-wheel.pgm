@@ -2,7 +2,7 @@ UsersAllowedList        = new string[] { "michael113b" };
 PS4ControllerDescriptor = new string[] { "54C", "9CC", "Wireless Controller" };
 EnableXC                = true;
 xcnumber                = 1;
-double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 20.0f, dzy = 0.0f;
+double dzx              = 20.0f, dzy = 0.0f;
 mousex                  = PS4ControllerAccelY * 25f;
 mousey                  = PS4ControllerLeftStickY * 32767f;
 statex                  = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;

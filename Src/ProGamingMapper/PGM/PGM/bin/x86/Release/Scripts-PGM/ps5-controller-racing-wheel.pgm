@@ -1,12 +1,12 @@
-UsersAllowedList = new string[] { "michael113b" };
+UsersAllowedList        = new string[] { "michael113b" };
 PS5ControllerDescriptor = new string[] { "54C", "CE6", "DualSense" };
-EnableXC         = true;
-xcnumber         = 1;
-double statex    = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 20.0f, dzy = 0.0f;
-mousex = PS5ControllerAccelY * 31.25f;
-mousey = PS5ControllerLeftStickY * 32767f;
-statex = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
-statey = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
+EnableXC                = true;
+xcnumber                = 1;
+double dzx              = 20.0f, dzy = 0.0f;
+mousex                  = PS5ControllerAccelY * 31.25f;
+mousey                  = PS5ControllerLeftStickY * 32767f;
+statex                  = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
+statey                  = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
 if (statex > 0f)
     mousestatex = Scale(statex, 0f, 32767f, dzx / 100f * 32767f, 32767f);
 if (statex < 0f)

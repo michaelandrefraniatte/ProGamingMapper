@@ -2,7 +2,6 @@ UsersAllowedList        = new string[] { "michael113b" };
 PS4ControllerDescriptor = new string[] { "54C", "9CC", "Wireless Controller", "11C0", "4001", "PS4 Fun Controller" };
 EnableXC                = true;
 xcnumber                = 2;
-double mousex           = 0f, mousey = 0f,  statex           = 0f, statey = 0f;
 /* First player */
 mousex                                = PS4Controller1LeftStickX * 32767f;
 mousey                                = PS4Controller1LeftStickY * 32767f;

@@ -2,7 +2,7 @@ UsersAllowedList = new string[] { "michael113b" };
 EnableXC         = true;
 xcnumber         = 1;
 EnablePI         = true;
-double statex    = 0f, statey = 0f, mousex = 0f, mousey = 0f, mousestatex = 0f, mousestatey = 0f, dzx = 15.0f, dzy = 15.0f;
+double dzx       = 15.0f, dzy = 15.0f;
 statex           = ProControllerGyroX * 15f;
 statey           = ProControllerGyroY * 15f;
 if (statex > 0f)

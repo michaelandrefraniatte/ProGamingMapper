@@ -1,10 +1,10 @@
-UsersAllowedList = new string[] { "michael113b" };
-EnableKM         = true;
-EnableJI         = true;
-centery          = 140f;
-irmode           = 1;
-sleeptime        = 2;
-double mousex    = 0f, mousey = 0f, viewpower1x = 0.05f, viewpower2x = 0f, viewpower3x = 0.95f, viewpower1y = 0.05f, viewpower2y = 0f, viewpower3y = 0.95f, dzx = 0.0f, dzy = 0.0f;
+UsersAllowedList   = new string[] { "michael113b" };
+EnableKM           = true;
+EnableJI           = true;
+centery            = 140f;
+irmode             = 1;
+sleeptime          = 2;
+double viewpower1x = 0.05f, viewpower2x = 0f, viewpower3x = 0.95f, viewpower1y = 0.05f, viewpower2y = 0f, viewpower3y = 0.95f, dzx = 0.0f, dzy = 0.0f;
 valchanged(0, JoyconLeftButtonCAPTURE);
 if (wd[0] == 1 & !getstate[0]) 
 {

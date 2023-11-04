@@ -2,7 +2,6 @@ UsersAllowedList              = new string[] { "michael113b" };
 EnableXC                      = true;
 xcnumber                      = 1;
 EnableJI                      = true;
-double mousex                 = 0f, mousey = 0f;
 mousex                        = JoyconRightStickX * 1024f;
 mousey                        = JoyconRightStickY * 1024f;
 controller1_send_rightstickx  = Math.Abs(-mousex * 32767f / 1024f) <= 32767f ? -mousex * 32767f / 1024f : Math.Sign(-mousex) * 32767f;

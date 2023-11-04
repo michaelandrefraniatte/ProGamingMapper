@@ -1,7 +1,7 @@
 UsersAllowedList = new string[] { "michael113b" };
 EnableXC         = true;
 xcnumber         = 1;
-double mousex    = 0f, mousey = 0f, dzx = 20.0f, dzy = 0.0f;
+double dzx       = 20.0f, dzy = 0.0f;
 if (WiimoteRawValuesY > 0f)
     mousex = Scale(WiimoteRawValuesY * 45f, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
 if (WiimoteRawValuesY < 0f)

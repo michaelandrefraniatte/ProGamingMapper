@@ -1,9 +1,9 @@
-UsersAllowedList = new string[] { "michael113b" };
-EnableKM         = true;
-EnableDI         = true;
-centery          = 140f;
-irmode           = 1;
-double mousex    = 0f, mousey = 0f, viewpower1x = 0.08f, viewpower2x = 0f, viewpower3x = 0.92f, viewpower1y = 0.08f, viewpower2y = 0f, viewpower3y = 0.92f, dzx = 0.0f, dzy = 0.0f;
+UsersAllowedList   = new string[] { "michael113b" };
+EnableKM           = true;
+EnableDI           = true;
+centery            = 140f;
+irmode             = 1;
+double viewpower1x = 0.08f, viewpower2x = 0f, viewpower3x = 0.92f, viewpower1y = 0.08f, viewpower2y = 0f, viewpower3y = 0.92f, dzx = 0.0f, dzy = 0.0f;
 valchanged(0, Joystick1Buttons13);
 if (wd[0] == 1 & !getstate[0]) 
 {

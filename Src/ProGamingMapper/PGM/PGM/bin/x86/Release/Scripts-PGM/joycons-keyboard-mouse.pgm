@@ -3,7 +3,7 @@ EnableKM                = true;
 EnableJI                = true;
 KeyboardMouseDriverType = "kmevent";
 sleeptime               = 21;
-double statex           = 0f, statey = 0f, mousex = 0f, mousey = 0f, viewpower1x = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower05x = 0f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, viewpower05y = 0f, dzx = 25.0f, dzy = 25.0f, limit = 127f;
+double viewpower1x      = 0.25f, viewpower2x = 0f, viewpower3x = 0.75f, viewpower05x = 0f, viewpower1y = 0.25f, viewpower2y = 0f, viewpower3y = 0.75f, viewpower05y = 0f, dzx = 25.0f, dzy = 25.0f, limit = 127f;
 valchanged(0, JoyconLeftButtonCAPTURE);
 if (wd[0] == 1 & !getstate[0]) 
 {
