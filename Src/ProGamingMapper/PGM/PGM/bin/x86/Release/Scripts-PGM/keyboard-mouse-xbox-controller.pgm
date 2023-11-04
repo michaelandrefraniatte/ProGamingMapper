@@ -2,7 +2,20 @@ UsersAllowedList = new string[] { "michael113b" };
 EnableXC         = true;
 EnableCI         = true;
 xcnumber         = 1;
-double statex    = 0f, statey = 0f, mousex = 0f, mousey = 0f, viewpower1x = 1f, viewpower2x = 0f, viewpower3x = 0f, viewpower05x = 0f, viewpower1y = 1f, viewpower2y = 0f, viewpower3y = 0f, viewpower05y = 0f, dzx = 0f, dzy = 0f;
+statex           = 0f;
+statey           = 0f; 
+mousex           = 0f; 
+mousey           = 0f; 
+viewpower1x      = 1f; 
+viewpower2x      = 0f; 
+viewpower3x      = 0f; 
+viewpower05x     = 0f; 
+viewpower1y      = 1f; 
+viewpower2y      = 0f; 
+viewpower3y      = 0f; 
+viewpower05y     = 0f; 
+dzx              = 0f; 
+dzy              = 0f;
 valchanged(0, Key_ADD);
 if (wd[0] == 1 & !getstate[0]) 
 {
