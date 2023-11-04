@@ -3,21 +3,21 @@ EnableKM                = true;
 EnableXI                = true;
 KeyboardMouseDriverType = "kmevent";
 sleeptime               = 21;
-double stickmousestatex = 0f, stickmousestatey = 0f, stickstatex, stickstatey, viewpower1x = 0f, viewpower2x = 1f, viewpower3x = 0f, viewpower1y = 0.25f, viewpower2y = 0.75f, viewpower3y = 0f, dzx = 0f, dzy = 0f, mousedzx = 10f, mousedzy = 10f, limit = 32767f;      
+double viewpower1x      = 0f, viewpower2x = 1f, viewpower3x = 0f, viewpower1y = 0.25f, viewpower2y = 0.75f, viewpower3y = 0f, dzx = 0f, dzy = 0f, mousedzx = 10f, mousedzy = 10f, limit = 32767f;      
 mousex                  = -Controller1ThumbRightX / 32767f * 1024f;
 mousey                  = -Controller1ThumbRightY / 32767f * 1024f;
-stickstatex             = Math.Abs(mousex) <= 1024f ? mousex : Math.Sign(mousex) * 1024f;
-stickstatey             = Math.Abs(mousey) <= 1024f ? mousey : Math.Sign(mousey) * 1024f;
-if (stickstatex >= 0f)
-    stickmousestatex = Scale(stickstatex * stickstatex * stickstatex / 1024f / 1024f * viewpower3x + stickstatex * stickstatex / 1024f * viewpower2x + stickstatex * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
-if (stickstatex <= 0f)
-    stickmousestatex = Scale(-(-stickstatex * -stickstatex * -stickstatex) / 1024f / 1024f * viewpower3x - (-stickstatex * -stickstatex) / 1024f * viewpower2x - (-stickstatex) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
-if (stickstatey >= 0f)
-    stickmousestatey = Scale(stickstatey * stickstatey * stickstatey / 1024f / 1024f * viewpower3y + stickstatey * stickstatey / 1024f * viewpower2y + stickstatey * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
-if (stickstatey <= 0f)
-    stickmousestatey = Scale(-(-stickstatey * -stickstatey * -stickstatey) / 1024f / 1024f * viewpower3y - (-stickstatey * -stickstatey) / 1024f * viewpower2y - (-stickstatey) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
-mousex = stickmousestatex * 32767f / 1024f;
-mousey = stickmousestatey * 32767f / 1024f;
+statestickx             = Math.Abs(mousex) <= 1024f ? mousex : Math.Sign(mousex) * 1024f;
+statesticky             = Math.Abs(mousey) <= 1024f ? mousey : Math.Sign(mousey) * 1024f;
+if (statestickx >= 0f)
+    mousestatestickx = Scale(statestickx * statestickx * statestickx / 1024f / 1024f * viewpower3x + statestickx * statestickx / 1024f * viewpower2x + statestickx * viewpower1x, 0f, 1024f, (dzx / 100f) * 1024f, 1024f);
+if (statestickx <= 0f)
+    mousestatestickx = Scale(-(-statestickx * -statestickx * -statestickx) / 1024f / 1024f * viewpower3x - (-statestickx * -statestickx) / 1024f * viewpower2x - (-statestickx) * viewpower1x, -1024f, 0f, -1024f, -(dzx / 100f) * 1024f);
+if (statesticky >= 0f)
+    mousestatesticky = Scale(statesticky * statesticky * statesticky / 1024f / 1024f * viewpower3y + statesticky * statesticky / 1024f * viewpower2y + statesticky * viewpower1y, 0f, 1024f, (dzy / 100f) * 1024f, 1024f);
+if (statesticky <= 0f)
+    mousestatesticky = Scale(-(-statesticky * -statesticky * -statesticky) / 1024f / 1024f * viewpower3y - (-statesticky * -statesticky) / 1024f * viewpower2y - (-statesticky) * viewpower1y, -1024f, 0f, -1024f, -(dzy / 100f) * 1024f);
+mousex = mousestatestickx * 32767f / 1024f;
+mousey = mousestatesticky * 32767f / 1024f;
 statex = Math.Abs(mousex) <= 32767f ? mousex : Math.Sign(mousex) * 32767f;
 statey = Math.Abs(mousey) <= 32767f ? mousey : Math.Sign(mousey) * 32767f;
 if (statex >= (mousedzx / 100f) * limit & statex <= limit)
