@@ -8057,6 +8057,7 @@ namespace PGM
                         }
                         Thread.Sleep(sleeptime);
                         Mouse1AxisZ = 0;
+                        Mouse2AxisZ = 0;
                         unloadxc = false;
                         unloadkm = false;
                         unloadint = false;
