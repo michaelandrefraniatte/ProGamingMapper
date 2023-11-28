@@ -7769,7 +7769,7 @@ namespace PGM
                                         if (keyboard_1_id != 0 | mouse_1_id != 0 | keyboard_2_id != 0 | mouse_2_id != 0)
                                             unloadint = true;
                                     }
-                                    reconnectingwiimotecount = -150;
+                                    reconnectingwiimotecount = -150f / sleeptime;
                                 }
                                 else
                                     reconnectingwiimotecount = 0;
@@ -7820,7 +7820,7 @@ namespace PGM
                                         if (keyboard_1_id != 0 | mouse_1_id != 0 | keyboard_2_id != 0 | mouse_2_id != 0)
                                             unloadint = true;
                                     }
-                                    reconnectingwiimote1count = -150;
+                                    reconnectingwiimote1count = -150f / sleeptime;
                                 }
                                 else
                                     reconnectingwiimote1count = 0;
@@ -7867,7 +7867,7 @@ namespace PGM
                                         if (keyboard_1_id != 0 | mouse_1_id != 0 | keyboard_2_id != 0 | mouse_2_id != 0)
                                             unloadint = true;
                                     }
-                                    reconnectingwiimote2count = -150;
+                                    reconnectingwiimote2count = -150f / sleeptime;
                                 }
                                 else
                                     reconnectingwiimote2count = 0;
@@ -13734,13 +13734,13 @@ namespace PGM
                 }
                 if (!WiimoteIR0found & !WiimoteIR1found)
                 {
-                    if (irx - tempirx >= 20f)
+                    if (irx - tempirx >= 1f)
                         irx = 1024f;
-                    if (irx - tempirx <= -20f)
+                    if (irx - tempirx <= -1f)
                         irx = -1024f;
-                    if (iry - tempiry >= 20f)
+                    if (iry - tempiry >= 1f)
                         iry = 1024f;
-                    if (iry - tempiry <= -20f)
+                    if (iry - tempiry <= -1f)
                         iry = -1024f;
                 }
                 if (WiimoteIR0found | WiimoteIR1found)
@@ -14062,13 +14062,13 @@ namespace PGM
                 }
                 if (!WiimoteIR0found & !WiimoteIR1found)
                 {
-                    if (ir1x - tempir1x >= 20f)
+                    if (ir1x - tempir1x >= 1f)
                         ir1x = 1024f;
-                    if (ir1x - tempir1x <= -20f)
+                    if (ir1x - tempir1x <= -1f)
                         ir1x = -1024f;
-                    if (ir1y - tempir1y >= 20f)
+                    if (ir1y - tempir1y >= 1f)
                         ir1y = 1024f;
-                    if (ir1y - tempir1y <= -20f)
+                    if (ir1y - tempir1y <= -1f)
                         ir1y = -1024f;
                 }
                 if (WiimoteIR0found | WiimoteIR1found)
@@ -14238,13 +14238,13 @@ namespace PGM
                 }
                 if (!WiimoteIR0found & !WiimoteIR1found)
                 {
-                    if (ir2x - tempir2x >= 20f)
+                    if (ir2x - tempir2x >= 1f)
                         ir2x = 1024f;
-                    if (ir2x - tempir2x <= -20f)
+                    if (ir2x - tempir2x <= -1f)
                         ir2x = -1024f;
-                    if (ir2y - tempir2y >= 20f)
+                    if (ir2y - tempir2y >= 1f)
                         ir2y = 1024f;
-                    if (ir2y - tempir2y <= -20f)
+                    if (ir2y - tempir2y <= -1f)
                         ir2y = -1024f;
                 }
                 if (WiimoteIR0found | WiimoteIR1found)
