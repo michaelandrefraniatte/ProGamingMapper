@@ -13758,13 +13758,10 @@ namespace PGM
                 {
                     tempirx = irx;
                     tempiry = iry;
-                }
-                if (WiimoteIR0found | WiimoteIR1found)
-                {
                     irx = irxc * (1024f / 1346f);
                     iry = iryc + centery >= 0 ? Scale(iryc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(iryc + centery, -782f + centery, 0f, -1024f, 0f);
                 }
-                if (!WiimoteIR0found & !WiimoteIR1found)
+                else
                 {
                     if (irx - tempirx >= 1f)
                         irx = 1024f;
@@ -14086,13 +14083,10 @@ namespace PGM
                 {
                     tempir1x = ir1x;
                     tempir1y = ir1y;
-                }
-                if (WiimoteIR0found | WiimoteIR1found)
-                {
                     ir1x = ir1xc * (1024f / 1346f);
                     ir1y = ir1yc + centery >= 0 ? Scale(ir1yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir1yc + centery, -782f + centery, 0f, -1024f, 0f);
                 }
-                if (!WiimoteIR0found & !WiimoteIR1found)
+                else
                 {
                     if (ir1x - tempir1x >= 1f)
                         ir1x = 1024f;
@@ -14262,13 +14256,10 @@ namespace PGM
                 {
                     tempir2x = ir2x;
                     tempir2y = ir2y;
-                }
-                if (WiimoteIR0found | WiimoteIR1found)
-                {
                     ir2x = ir2xc * (1024f / 1346f);
                     ir2y = ir2yc + centery >= 0 ? Scale(ir2yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir2yc + centery, -782f + centery, 0f, -1024f, 0f);
                 }
-                if (!WiimoteIR0found & !WiimoteIR1found)
+                else
                 {
                     if (ir2x - tempir2x >= 1f)
                         ir2x = 1024f;
