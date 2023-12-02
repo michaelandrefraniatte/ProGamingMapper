@@ -13756,6 +13756,11 @@ namespace PGM
                 }
                 if (WiimoteIR0found | WiimoteIR1found)
                 {
+                    tempirx = irx;
+                    tempiry = iry;
+                }
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
                     irx = irxc * (1024f / 1346f);
                     iry = iryc + centery >= 0 ? Scale(iryc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(iryc + centery, -782f + centery, 0f, -1024f, 0f);
                 }
@@ -13769,11 +13774,6 @@ namespace PGM
                         iry = 1024f;
                     if (iry - tempiry <= -1f)
                         iry = -1024f;
-                }
-                if (WiimoteIR0found | WiimoteIR1found)
-                {
-                    tempirx = irx;
-                    tempiry = iry;
                 }
                 WiimoteButtonStateA = (aBuffer[2] & 0x08) != 0;
                 WiimoteButtonStateB = (aBuffer[2] & 0x04) != 0;
@@ -13884,7 +13884,7 @@ namespace PGM
                 ReadData(handle, (int)REGISTER_EXTENSION_CALIBRATION, 32);
             }
             while (handle.IsInvalid);
-            mStream = new FileStream(handle, FileAccess.ReadWrite, 22, true);
+            mStream = new FileStream(handle, FileAccess.Read, 22, true);
         }
         public static void ReadData(SafeFileHandle _hFile, int address, short size)
         {
@@ -14084,6 +14084,11 @@ namespace PGM
                 }
                 if (WiimoteIR0found | WiimoteIR1found)
                 {
+                    tempir1x = ir1x;
+                    tempir1y = ir1y;
+                }
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
                     ir1x = ir1xc * (1024f / 1346f);
                     ir1y = ir1yc + centery >= 0 ? Scale(ir1yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir1yc + centery, -782f + centery, 0f, -1024f, 0f);
                 }
@@ -14097,11 +14102,6 @@ namespace PGM
                         ir1y = 1024f;
                     if (ir1y - tempir1y <= -1f)
                         ir1y = -1024f;
-                }
-                if (WiimoteIR0found | WiimoteIR1found)
-                {
-                    tempir1x = ir1x;
-                    tempir1y = ir1y;
                 }
                 Wiimote1ButtonStateA = (aBuffer1[2] & 0x08) != 0;
                 Wiimote1ButtonStateB = (aBuffer1[2] & 0x04) != 0;
@@ -14260,6 +14260,11 @@ namespace PGM
                 }
                 if (WiimoteIR0found | WiimoteIR1found)
                 {
+                    tempir2x = ir2x;
+                    tempir2y = ir2y;
+                }
+                if (WiimoteIR0found | WiimoteIR1found)
+                {
                     ir2x = ir2xc * (1024f / 1346f);
                     ir2y = ir2yc + centery >= 0 ? Scale(ir2yc + centery, 0f, 782f + centery, 0f, 1024f) : Scale(ir2yc + centery, -782f + centery, 0f, -1024f, 0f);
                 }
@@ -14273,11 +14278,6 @@ namespace PGM
                         ir2y = 1024f;
                     if (ir2y - tempir2y <= -1f)
                         ir2y = -1024f;
-                }
-                if (WiimoteIR0found | WiimoteIR1found)
-                {
-                    tempir2x = ir2x;
-                    tempir2y = ir2y;
                 }
                 Wiimote2ButtonStateA = (aBuffer2[2] & 0x08) != 0;
                 Wiimote2ButtonStateB = (aBuffer2[2] & 0x04) != 0;
@@ -14362,7 +14362,7 @@ namespace PGM
                 Read1Data(handle1, (int)REGISTER_EXTENSION_CALIBRATION, 32);
             }
             while (handle1.IsInvalid);
-            mStream1 = new FileStream(handle1, FileAccess.ReadWrite, 22, true);
+            mStream1 = new FileStream(handle1, FileAccess.Read, 22, true);
         }
         public static void Read1Data(SafeFileHandle _hFile, int address, short size)
         {
@@ -14406,7 +14406,7 @@ namespace PGM
                 Read2Data(handle2, (int)REGISTER_EXTENSION_CALIBRATION, 32);
             }
             while (handle2.IsInvalid);
-            mStream2 = new FileStream(handle2, FileAccess.ReadWrite, 22, true);
+            mStream2 = new FileStream(handle2, FileAccess.Read, 22, true);
         }
         public static void Read2Data(SafeFileHandle _hFile, int address, short size)
         {
