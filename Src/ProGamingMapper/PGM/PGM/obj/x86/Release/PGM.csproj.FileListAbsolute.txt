@@ -495,3 +495,4 @@ C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\obj\
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\obj\x86\Release\PGM.exe
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\obj\x86\Release\PGM.pdb
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\obj\x86\Release\PGM.Loader.resources
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\obj\x86\Release\PGM.ReplaceForm.resources

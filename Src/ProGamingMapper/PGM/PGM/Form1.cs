@@ -23,6 +23,7 @@ using Vector3 = System.Numerics.Vector3;
 using System.Reactive.Linq;
 using OpenWithSingleInstance;
 using DualSenseAPI;
+using System.Runtime.CompilerServices;
 
 namespace PGM
 {
@@ -79,9 +80,10 @@ namespace PGM
         public static Form10 form10 = new Form10();
         public static Form11 form11 = new Form11();
         public static Form12 form12 = new Form12();
+        public static ReplaceForm replaceform;
         public static string[] tempargs = { };
         public static Loader loader = new Loader(tempargs);
-        public static bool form2visible = false, form3visible = false, form4visible = false, form5visible = false, form6visible = false, form7visible = false, form8visible = false, form9visible = false, form10visible = false, form11visible = false, form12visible = false;
+        public static bool form2visible = false, form3visible = false, form4visible = false, form5visible = false, form6visible = false, form7visible = false, form8visible = false, form9visible = false, form10visible = false, form11visible = false, form12visible = false, replaceformvisible = false;
         public static string openFilePath = "", fastColoredTextBoxSaved = "", ps5controllervendorid, ps5controllerproductid, ps5controllerlabel, ps4controllervendorid, ps4controllerproductid, ps4controllerlabel, networkip, networkport, networklabel, ps5controller1vendorid, ps5controller1productid, ps5controller1label, ps4controller1vendorid, ps4controller1productid, ps4controller1label, ps5controller2vendorid, ps5controller2productid, ps5controller2label, ps4controller2vendorid, ps4controller2productid, ps4controller2label;
         private static bool justSaved = true, ps5controller2similar, ps4controller2similar, onopenwith = false;
         private static DialogResult result;
@@ -6786,7 +6788,7 @@ namespace PGM
             mouseHook.Install();
             input.KeyboardFilterMode = KeyboardFilterMode.All;
             input.MouseFilterMode = MouseFilterMode.All;
-            input.Load();
+            input.Load(); 
             if (!onopenwith)
             {
                 if (System.IO.File.Exists(Application.StartupPath + @"\tempsave"))
@@ -6849,6 +6851,7 @@ namespace PGM
             menuItem.Select += new EventHandler(changeCursor);
             menuItem.Click += new EventHandler(pasteAction);
             fastColoredTextBox1.ContextMenu = contextMenu;
+            replaceform = new ReplaceForm(this.fastColoredTextBox1);
         }
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -7089,6 +7092,30 @@ namespace PGM
                     try
                     {
                         form12.Hide();
+                    }
+                    catch { }
+                }
+            }
+        }
+        private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!replaceformvisible)
+            {
+                replaceformvisible = true;
+                try
+                {
+                    replaceform.Visible = true;
+                }
+                catch { }
+            }
+            else
+            {
+                if (replaceformvisible)
+                {
+                    replaceformvisible = false;
+                    try
+                    {
+                        replaceform.Hide();
                     }
                     catch { }
                 }
