@@ -465,7 +465,6 @@ C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\x86\Release\controllerds4.dll
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\x86\Release\controllervjoy.dll
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\x86\Release\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\x86\Release\System.Threading.AccessControl.dll
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\x86\Release\System.Threading.Tasks.Extensions.dll
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\x86\Release\Nefarius.ViGEm.Client.dll
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGM\PGM\bin\x86\Release\vJoyInterfaceWrap.dll

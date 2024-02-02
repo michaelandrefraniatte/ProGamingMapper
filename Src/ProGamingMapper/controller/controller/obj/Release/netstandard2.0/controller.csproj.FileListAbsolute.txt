@@ -107,3 +107,4 @@ C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\c
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.csproj.CoreCompileInputs.cache
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.dll
 C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.pdb
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\controller\controller\obj\Release\netstandard2.0\controller.sourcelink.json
