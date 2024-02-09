@@ -73,3 +73,17 @@ C:\Users\micha\Documents\tool\Controller\ProGamingMapper\Src\PGMHost\PGMHost\obj
 C:\Users\micha\Documents\tool\Controller\ProGamingMapper\Src\PGMHost\PGMHost\obj\x86\Release\PGMHost.csproj.CopyComplete
 C:\Users\micha\Documents\tool\Controller\ProGamingMapper\Src\PGMHost\PGMHost\obj\x86\Release\PGMHost.exe
 C:\Users\micha\Documents\tool\Controller\ProGamingMapper\Src\PGMHost\PGMHost\obj\x86\Release\PGMHost.pdb
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.csproj.AssemblyReference.cache
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.Form1.resources
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.Properties.Resources.resources
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.csproj.GenerateResource.cache
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.csproj.CoreCompileInputs.cache
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.exe
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.pdb
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\bin\x86\Release\PGMHost.exe.config
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\bin\x86\Release\PGMHost.exe
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\bin\x86\Release\PGMHost.pdb
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\bin\x86\Release\controller.dll
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\bin\x86\Release\controller.pdb
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\bin\x86\Release\websocket-sharp.xml
+C:\Users\micha\Documents\github\ProGamingMapper\Src\ProGamingMapper\PGMHost\PGMHost\obj\x86\Release\PGMHost.csproj.CopyComplete
